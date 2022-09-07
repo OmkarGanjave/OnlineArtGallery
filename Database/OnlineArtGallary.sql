@@ -2,7 +2,7 @@
 --
 -- Host: localhost    Database: onlineartgallary
 -- ------------------------------------------------------
--- Server version	8.0.29
+-- Server version	8.0.30
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -44,6 +44,35 @@ CREATE TABLE `artist` (
 LOCK TABLES `artist` WRITE;
 /*!40000 ALTER TABLE `artist` DISABLE KEYS */;
 /*!40000 ALTER TABLE `artist` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `cart`
+--
+
+DROP TABLE IF EXISTS `cart`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `cart` (
+  `cartId` int NOT NULL AUTO_INCREMENT,
+  `cartCustomerId` int NOT NULL,
+  `cartProductId` int NOT NULL,
+  `productQty` int NOT NULL,
+  PRIMARY KEY (`cartId`),
+  KEY `customerId_idx` (`cartCustomerId`),
+  KEY `productID_idx` (`cartProductId`),
+  CONSTRAINT `cartCustomerId` FOREIGN KEY (`cartCustomerId`) REFERENCES `customer` (`customerId`),
+  CONSTRAINT `cartProductId` FOREIGN KEY (`cartProductId`) REFERENCES `product` (`productId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `cart`
+--
+
+LOCK TABLES `cart` WRITE;
+/*!40000 ALTER TABLE `cart` DISABLE KEYS */;
+/*!40000 ALTER TABLE `cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -97,6 +126,37 @@ CREATE TABLE `customer` (
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `order`
+--
+
+DROP TABLE IF EXISTS `order`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `order` (
+  `orderId` int NOT NULL AUTO_INCREMENT,
+  `customerId` int NOT NULL,
+  `productId` int NOT NULL,
+  `productQty` int NOT NULL,
+  `bookedDate` date NOT NULL,
+  `totalPrice` decimal(10,2) NOT NULL,
+  PRIMARY KEY (`orderId`),
+  KEY `customerId_idx` (`customerId`),
+  KEY `productId_idx` (`productId`),
+  CONSTRAINT `customerId` FOREIGN KEY (`customerId`) REFERENCES `customer` (`customerId`),
+  CONSTRAINT `productId` FOREIGN KEY (`productId`) REFERENCES `product` (`productId`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `order`
+--
+
+LOCK TABLES `order` WRITE;
+/*!40000 ALTER TABLE `order` DISABLE KEYS */;
+/*!40000 ALTER TABLE `order` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -165,4 +225,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-07 11:22:17
+-- Dump completed on 2022-09-07 11:55:19
