@@ -24,7 +24,7 @@ DROP TABLE IF EXISTS `artist`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `artist` (
   `artistId` int NOT NULL AUTO_INCREMENT,
-  `artistUserId` int NOT NULL,
+  `artistUserId` varchar(15) NOT NULL,
   `firstName` varchar(15) NOT NULL,
   `lastName` varchar(15) NOT NULL,
   `emailId` varchar(40) NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE `artist` (
   `address` varchar(100) NOT NULL,
   PRIMARY KEY (`artistId`),
   KEY `artistUserId_idx` (`artistUserId`),
-  CONSTRAINT `artistUserId` FOREIGN KEY (`artistUserId`) REFERENCES `user` (`userId`)
+  CONSTRAINT `artistUserId` FOREIGN KEY (`artistUserId`) REFERENCES `user` (`userId`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -107,16 +107,16 @@ DROP TABLE IF EXISTS `customer`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `customer` (
   `customerId` int NOT NULL AUTO_INCREMENT,
-  `userId` int NOT NULL,
+  `userId` varchar(15) NOT NULL,
   `firstName` varchar(15) NOT NULL,
   `lastName` varchar(15) NOT NULL,
   `emailId` varchar(40) NOT NULL,
   `contactNo` varchar(10) NOT NULL,
   `address` varchar(100) NOT NULL,
   PRIMARY KEY (`customerId`),
-  KEY `userId_idx` (`userId`),
-  CONSTRAINT `userId` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `useId_idx` (`userId`),
+  CONSTRAINT `useId` FOREIGN KEY (`userId`) REFERENCES `user` (`userId`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -125,6 +125,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
+INSERT INTO `customer` VALUES (1,'Ajay06','Ajay','kashid','ajay@gmail.com','9130209725','Nevasa');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,7 +200,7 @@ DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
-  `userId` int NOT NULL AUTO_INCREMENT,
+  `userId` varchar(15) NOT NULL,
   `password` varchar(15) NOT NULL,
   `role` varchar(10) NOT NULL,
   `status` tinyint NOT NULL,
@@ -213,6 +214,7 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
+INSERT INTO `user` VALUES ('Ajay06','Ajay@06','Customer',1),('Ashwini53','Ashwini@53','Admin',1),('Omkar57','Omkar@57','Artist',1),('Pooja19','Pooja@19','Admin',1),('Prajwal64','Prajwal@64','Artist',1),('Ram01','Ram@01','Customer',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -225,4 +227,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-09-07 11:55:19
+-- Dump completed on 2022-09-08 10:39:26
