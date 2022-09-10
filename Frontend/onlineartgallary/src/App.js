@@ -2,6 +2,8 @@ import logo from './logo.svg';
 import './App.css';
 import Register from './Artist/Register';
 
+import Login from './Artist/login';
+
 function App() {
   return (
     <div className="App">
@@ -21,6 +23,8 @@ function App() {
       </header> */}
 
       <Register/>
+
+      {/* <Login/> */}
     </div>
   );
 }

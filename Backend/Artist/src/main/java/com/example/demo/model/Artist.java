@@ -7,7 +7,8 @@ import javax.persistence.*;
 public class Artist {
 	
 	@Id
-	private String artistUserId;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private int artistId;
 	@Column
 	private String firstName;
 	@Column
@@ -18,90 +19,68 @@ public class Artist {
 	private String contactNo;
 	@Column
 	private String address;
-	@Column
-	private String password;
-	@Column
-	private String role;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="loginId")	//fk name
+	private User loginId;
 	
 	public Artist() {
 		super();
 	}
-
-	public Artist(String artistUserId, String firstName, String lastName, String emailId, String contactNo,
-			String address, String password, String role) {
+	public Artist(String firstName, String lastName, String emailId, String contactNo, String address, User loginId) {
 		super();
-		this.artistUserId = artistUserId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.emailId = emailId;
 		this.contactNo = contactNo;
 		this.address = address;
-		this.password = password;
-		this.role = role;
+		this.loginId = loginId;
 	}
-
-	public String getArtistUserId() {
-		return artistUserId;
+	public int getArtistId() {
+		return artistId;
 	}
-
-	public void setArtistUserId(String artistUserId) {
-		this.artistUserId = artistUserId;
+	public void setArtistId(int artistId) {
+		this.artistId = artistId;
 	}
-
 	public String getFirstName() {
 		return firstName;
 	}
-
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
 	public String getLastName() {
 		return lastName;
 	}
-
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-
 	public String getEmailId() {
 		return emailId;
 	}
-
 	public void setEmailId(String emailId) {
 		this.emailId = emailId;
 	}
-
 	public String getContactNo() {
 		return contactNo;
 	}
-
 	public void setContactNo(String contactNo) {
 		this.contactNo = contactNo;
 	}
-
 	public String getAddress() {
 		return address;
 	}
-
 	public void setAddress(String address) {
 		this.address = address;
 	}
-
-	public String getPassword() {
-		return password;
+	public User getLoginId() {
+		return loginId;
 	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	public void setLoginId(User loginId) {
+		this.loginId = loginId;
 	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
+	
+	
+	
+	
 	
 }

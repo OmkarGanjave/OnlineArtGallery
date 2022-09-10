@@ -11,29 +11,12 @@ import com.example.demo.repository.ArtistRepository;
 @Service
 public class ArtistService {
 	@Autowired
-	ArtistRepository artistservice;
+	ArtistRepository artistrepo;
 	
 	public Artist regArtist(Artist artist) 
 	{
-		return artistservice.save(artist);
+		return artistrepo.save(artist);
 	}
 	
-	public boolean loginArtist(String artistUserId,String password) 
-	{
-		boolean flag = false;
-		List<Artist> artistList = artistservice.findAll();
-		
-		for(Artist art : artistList) 
-		{
-			if(artistUserId.equals(art.getArtistUserId()) && password.equals(art.getPassword())) 
-			{
-				System.out.println(art.getArtistUserId()+" "+art.getPassword());
-				flag = true;
-				break;
-			}
-			
-		}
-		
-		return flag;
-	}
+	
 }
