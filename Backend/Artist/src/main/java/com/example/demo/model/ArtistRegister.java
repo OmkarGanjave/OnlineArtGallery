@@ -1,8 +1,11 @@
 package com.example.demo.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
+@JsonFormat(shape = JsonFormat.Shape.ARRAY)
+@JsonPropertyOrder({ "firstName", "lastName", "emailId" , "contactNo" , "address" , "userId" , "password" , "role" , "status"})
 public class ArtistRegister {
-	
 	String firstName;
 	
 	String lastName;
@@ -150,6 +153,5 @@ public class ArtistRegister {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	
 	
 }

@@ -1,6 +1,5 @@
 package com.example.demo.service;
 
-
 import java.util.List;
 import java.util.Optional;
 
@@ -12,7 +11,6 @@ import com.example.demo.repository.UserRepository;
 
 @Service
 public class UserService {
-
 	@Autowired
 	private UserRepository userepo;
 	
@@ -21,23 +19,27 @@ public class UserService {
 		 return userepo.save(artist);
 	}
 	
-//	public User checkLogin(String uid,String pwd)
+//	public Object checkLogin(String uid,String pwd) 
 //	{
-//		User u = null;
 //		List<Object[]> ulist = userepo.checkLogin(uid, pwd);
-//		if(ulist.size() == 1) 
+//		
+//		User u = null;
+//		if(ulist.size() == 1)
 //		{
-//			System.out.println(ulist.get(0)[0]+" "+ulist.get(0)[1]);
-//			
-//			Optional<User> ou = userepo.findById((int)ulist.get(0)[1]);
-//			try {
-//			u=ou.get();
-//			}
-//			catch (Exception e) {
-//				u = null;
+//			if(ulist.get(0)[0].equals("Artist")) 
+//			{
+//				Optional<User> ou =  userepo.findById((int)ulist.get(0)[1]);
+//				
+//				try 
+//				{
+//					u = ou.get();
+//				}
+//				catch (Exception e) {
+//					// TODO: handle exception
+//					u = null;
+//				}
 //			}
 //		}
 //		return u;
 //	}
-	
 }
