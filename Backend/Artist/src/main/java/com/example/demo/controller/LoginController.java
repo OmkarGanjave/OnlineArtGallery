@@ -1,7 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,20 +7,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import com.example.demo.model.User;
-import com.example.demo.repository.UserRepository;
-import com.example.demo.service.UserService;
+import com.example.demo.model.Login;
+import com.example.demo.service.LoginService;
 
 @CrossOrigin(origins = "http://localhost:3000")
 @RestController
-public class UserController {
+public class LoginController {
+
 	@Autowired
-	private UserService userService;
+	private LoginService lservice;
 	
-	@GetMapping("/userproduct")
-	public List<User> getAll()
+	@PostMapping("/login")
+	public Object checkLogin(@RequestBody Login log ) 
 	{
-		return userService.getUser();
-	};
+		//System.out.println(log.getUser_id()+"hear 1"+log.getPassword());
+		return lservice.checkLogin(log.getUser_id(), log.getPassword());
+	}
 }

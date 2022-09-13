@@ -19,27 +19,9 @@ public class UserService {
 		 return userepo.save(artist);
 	}
 	
-//	public Object checkLogin(String uid,String pwd) 
-//	{
-//		List<Object[]> ulist = userepo.checkLogin(uid, pwd);
-//		
-//		User u = null;
-//		if(ulist.size() == 1)
-//		{
-//			if(ulist.get(0)[0].equals("Artist")) 
-//			{
-//				Optional<User> ou =  userepo.findById((int)ulist.get(0)[1]);
-//				
-//				try 
-//				{
-//					u = ou.get();
-//				}
-//				catch (Exception e) {
-//					// TODO: handle exception
-//					u = null;
-//				}
-//			}
-//		}
-//		return u;
-//	}
+	public List<User> getUser() 
+	{
+		return userepo.findAll();
+	}
+	
 }

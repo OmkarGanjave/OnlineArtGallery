@@ -1,55 +1,41 @@
 package com.example.demo.model;
 
-import java.util.Set;
-
 import javax.persistence.*;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="user")
-public class User {
+public class Login {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int loginid;
-	
-	@Column(name="user_id")
-	private String userId;
 	@Column
 	private String password;
 	@Column
 	private String role;
 	@Column
-	private  int  status;
-	
-	
-	
-	public User() {
+	private int status;
+	@Column(name="user_id")
+	private String user_id;
+	public Login() {
 		super();
 	}
 	
-	public User(String userId, String password, String role, int status) {
+	
+	public Login(int loginid, String password, String role, int status, String user_id) {
 		super();
-		this.userId = userId;
+		this.loginid = loginid;
 		this.password = password;
 		this.role = role;
-		this.status = 1;
+		this.status = status;
+		this.user_id = user_id;
 	}
-	
-	
-	
-	
+
+
 	public int getLoginid() {
 		return loginid;
 	}
 	public void setLoginid(int loginid) {
 		this.loginid = loginid;
-	}
-	public String getUserId() {
-		return userId;
-	}
-	public void setUserId(String userId) {
-		this.userId = userId;
 	}
 	public String getPassword() {
 		return password;
@@ -69,7 +55,12 @@ public class User {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-
+	public String getUser_id() {
+		return user_id;
+	}
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
 	
 	
 }
