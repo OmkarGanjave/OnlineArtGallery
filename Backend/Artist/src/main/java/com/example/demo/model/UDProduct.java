@@ -18,35 +18,36 @@ public class UDProduct {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int pid;
+	private int productId;
 	@Column
 	private int artistId;
 	@Column
 	private int categoryId;
 	@Column
 	private String productName;
+	
 	@Column
-	private String productDesc;
+	private String productDiscription;
+	
 	@Column
 	private double price;
 	public UDProduct() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public UDProduct(int pid, int artistId, int categoryId, String productName, String productDesc, double price) {
+	public UDProduct(int artistId, int categoryId, String productName, String productDiscription, double price) {
 		super();
-		this.pid = pid;
 		this.artistId = artistId;
 		this.categoryId = categoryId;
 		this.productName = productName;
-		this.productDesc = productDesc;
+		this.productDiscription = productDiscription;
 		this.price = price;
 	}
-	public int getPid() {
-		return pid;
+	public int getProductId() {
+		return productId;
 	}
-	public void setPid(int pid) {
-		this.pid = pid;
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 	public int getArtistId() {
 		return artistId;
@@ -66,11 +67,11 @@ public class UDProduct {
 	public void setProductName(String productName) {
 		this.productName = productName;
 	}
-	public String getProductDesc() {
-		return productDesc;
+	public String getProductDiscription() {
+		return productDiscription;
 	}
-	public void setProductDesc(String productDesc) {
-		this.productDesc = productDesc;
+	public void setProductDiscription(String productDiscription) {
+		this.productDiscription = productDiscription;
 	}
 	public double getPrice() {
 		return price;
@@ -78,6 +79,9 @@ public class UDProduct {
 	public void setPrice(double price) {
 		this.price = price;
 	}
+	
+	
+	
 	
 	
 	

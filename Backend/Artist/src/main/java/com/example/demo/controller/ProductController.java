@@ -26,14 +26,16 @@ public class ProductController {
 
 	@Autowired
 	private ProductService pservice;
+	
 	@GetMapping("/product")
 	public List<Product> getAll()
 	{
 		return pservice.getAll();
 	}
 	
+	
 	@PostMapping("/addproduct")
-	public Product addProduct(@RequestPart("product") AddProduct pro, @RequestPart("file") MultipartFile file) 
+	public int addProduct(@RequestPart("product") AddProduct pro, @RequestPart("file") MultipartFile file) 
 	{
 		
 		int psave = pservice.addProduct(pro);
@@ -44,12 +46,12 @@ public class ProductController {
 			try {
 			byte[] data = file.getBytes();
 			
-			Path path = Paths.get("images//"+psave.+"_1.jpg");
+			Path path = Paths.get("images//"+pro.getArtistId()+"_1.jpg");
 			
 			Files.write(path, data);
 			}
 			catch (Exception e) {
-				// TODO: handle exception
+			
 				flag = false;
 			}
 		}
@@ -59,7 +61,7 @@ public class ProductController {
 		}
 		else 
 		{
-			return null;
+			return 0;
 		}
 	} 
 	
@@ -69,11 +71,7 @@ public class ProductController {
 		return pservice.searchProduct(artistId);
 	}
 	
-	@GetMapping("/deleteproduct/{productId}")
-	public boolean deleteProduct(@PathVariable("productId") int productId)
-	{
-		return pservice.deleteProduct(productId);
-	}
+	
 	
 
 }

@@ -1,8 +1,14 @@
+import { Navigate, useNavigate} from 'react-router-dom';
+
 import axios from "axios";
 import {  useState  } from "react";
 let Login = () => {
 
+    
+    let nav = useNavigate();
+
     const[resData,setResdata] = useState([]);
+    const[err,setErr] = useState("");
 
     const[user,setArtist] = useState({
         user_id:"",
@@ -21,8 +27,27 @@ let Login = () => {
     var sandData = (e) => {
         e.preventDefault();
 
-        axios.post("http://localhost:8080/login",user).then(response=>setResdata(response.data)).catch(error=>console.log(error));
-        console.log(resData);
+        axios.post("http://localhost:8080/login",user)
+        .then(response=>setResdata(response.data))
+        .catch(error=>{
+                    if(error)
+                    {
+                        setErr("LOGIN FAILED");
+                    }
+                    else
+                    {
+                         if(resData.role == "Artist")
+                         {
+                            localStorage.setItem("user",resData);
+                            
+                            nav('/artisthome');
+                            
+                         }
+                    }
+                    });
+        ///console.log(resData);
+        
+        
     }
 
     return(
@@ -48,7 +73,7 @@ let Login = () => {
             </form>
             <br/><br/>
             
-            <h4>{resData.role}</h4>
+            <h4>{err}</h4>
         </div>
     );
 }

@@ -21,11 +21,22 @@ public class ProductService {
 		return prepo.findAll();
 	}
 	
-	public int addProduct(AddProduct addproduct) 
+	public int addProduct(AddProduct addpro) 
 	{
-		return 0;
+		// loginId
+		List<Object[]> loginId = prepo.getLoginId(addpro.getArtistId());
+		
+		// artistId
+		List<Object[]> artistId = prepo.getArtistId((int)loginId.get(0)[0]);
+		
+		// categoryId
+		List<Object[]> categotyId = prepo.getcategortyId(addpro.getCategoryName());
+		
+		
+		return prepo.addProduct(addpro.getProductName(), addpro.getProductDiscription(), addpro.getPrice(),(int) artistId.get(0)[0],(int) categotyId.get(0)[0]);
 	}
 	
+	//serach product's
 	public List<Product> searchProduct(String artistId)
 	{
 		List<Object[]> loginId = prepo.getLoginId(artistId);
@@ -35,19 +46,7 @@ public class ProductService {
 		return prepo.getProductById((int)artist.get(0)[0]);
 	}
 	
-	//delete product
-	public boolean deleteProduct(int productId)
-	{
-		boolean flag=true;
-		try {
-		prepo.deleteById(productId); 
-		}
-		catch(Exception e)
-		{
-			flag=false;
-		}
-		return flag;
-	}	
+		
 		
 	
 }

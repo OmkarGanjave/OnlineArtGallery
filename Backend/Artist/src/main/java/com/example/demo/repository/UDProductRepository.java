@@ -14,19 +14,24 @@ import com.example.demo.model.UDProduct;
 public interface UDProductRepository extends JpaRepository<UDProduct,Integer> {
 
 	@Modifying
-	@Query(value="update product set price=?1 where pid =?2",nativeQuery = true)
+	@Query(value="update product set price=?1 where product_id =?2",nativeQuery = true)
 	public int updatePrice(double price,int productId); 
 	
 	@Modifying
-	@Query(value="update product set category_id=?1 where pid =?2",nativeQuery = true)
+	@Query(value="update product set category_id=?1 where product_id =?2",nativeQuery = true)
 	public int updateCategory(int categoryId,int productId); 
 	
 	@Modifying
-	@Query(value="update product set product_name=?1 where pid =?2",nativeQuery = true)
+	@Query(value="update product set product_name=?1 where product_id =?2",nativeQuery = true)
 	public int updateProductName(String productName,int productId); 
 	
 	@Modifying
-	@Query(value="update product set product_desc=?1 where pid =?2",nativeQuery = true)
+	@Query(value="update product set product_discription=?1 where product_id =?2",nativeQuery = true)
 	public int updateproductDesc(String productDesc,int productId); 
 	
+	
+	// delete product
+	@Modifying
+	@Query(value="delete from product where product_id = ?1",nativeQuery = true)
+	public int deleteByproductId(int productId);
 }

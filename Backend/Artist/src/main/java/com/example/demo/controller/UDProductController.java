@@ -13,12 +13,6 @@ public class UDProductController {
 	@Autowired
 	UDProductService uservice;
 	
-	@GetMapping("/deleteudproduct/{productId}")
-	public boolean deleteProduct(@PathVariable("productId") int productId)
-	{
-		return uservice.deleteProduct(productId);
-	}
-	
 	@GetMapping("/updateudproductprice/{price}/{productId}")
 	public int updatePrice(@PathVariable("price") double price,@PathVariable("productId") int productId)
 	{
@@ -29,7 +23,7 @@ public class UDProductController {
 	@GetMapping("/updateudproductcategory/{categoryId}/{productId}")
 	public int updateCategory(@PathVariable("categoryId") int categoryId,@PathVariable("productId") int productId)
 	{
-		return uservice.updatePrice(categoryId, productId);
+		return uservice.updateCategory(categoryId, productId);
 	}
 	
 	@GetMapping("/updateudproductname/{productName}/{productId}")
@@ -42,5 +36,13 @@ public class UDProductController {
 	public int updateProductDesc(@PathVariable("productDesc") String productDesc,@PathVariable("productId") int productId)
 	{
 		return uservice.updateproductDesc(productDesc, productId);
+	}
+	
+	
+	//delete
+	@GetMapping("/deleteproduct/{productId}")
+	public boolean deleteProduct(@PathVariable("productId") int productId)
+	{
+		return uservice.deleteProduct(productId);
 	}
 }

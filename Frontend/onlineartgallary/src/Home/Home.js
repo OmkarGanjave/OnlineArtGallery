@@ -5,8 +5,12 @@ let Home = () => {
         <div>
            <h1>Home Page</h1>
         <br/>
-        <button onClick={()=>{nav('/login')}}>Login</button>
+            <button class="btn btn-primary" onClick={()=>{nav('/login')}}>Login</button>
+            <br/><br/>
+            <button class="btn btn-primary" onClick={()=>{nav('/register')}}>Register</button>
         </div>
     )
 
 }
+
+export default Home;

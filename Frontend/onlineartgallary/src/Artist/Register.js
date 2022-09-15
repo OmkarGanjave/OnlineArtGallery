@@ -1,6 +1,149 @@
 import axios from "axios";
 import { useReducer, useState  } from "react";
+
+// const init = {
+//     firstName:{value:0, hasError: true,touched: false, error:""},
+//     lastName:{value:0, hasError: true,touched: false, error:""},
+//     emailId:{value:0, hasError: true,touched: false, error:""},
+//     contactNo:{value:0, hasError: true,touched: false, error:""},
+//     address:{value:0, hasError: true,touched: false, error:""},
+//     userId:{value:0, hasError: true,touched: false, error:""},
+//     password:{value:0, hasError: true,touched: false, error:""},
+//     role:{value:0, hasError: true,touched: false, error:""},
+//     status:{value:0, hasError: true,touched: false, error:""},
+//     isFormValid: false
+// }
+
+// const reducer = (state,action) => {
+    
+//     switch(action.type){
+//         case 'update' : {
+//             const {name,value,hasError, error, touched, isFormValid} = action.data;
+//             return { 
+//                 ...state,
+//                 [name]: { ...state[name],value, hasError, error, touched},
+//                 isFormValid
+//             }   
+//         }
+        
+//     }
+// }
+
+// const validateData = (name,value) => {
+//     let hasError = false, error= "";
+//     switch(name){
+//         case "firstName" :
+//             let regex1 = /^[A-Z][a-z]{2,15}$/;
+//             if(!regex1.test(value))
+//             {
+//                 hasError = true;
+//                 error = "*First name - first letter should be capital"
+//             }
+//         break;
+
+//         case "lastName" :
+//             let regex2 = /^[A-Z][a-z]{2,15}$/;
+//             if(!regex2.test(value))
+//             {
+//                 hasError = true;
+//                 error = "*Last name - first letter should be capital"
+//             }
+//         break;
+
+//         case "contactNo" :
+//             let regex3 = /^[0-9]{10}$/;
+//             if(!regex3.test(value))
+//             {
+//                 hasError = true;
+//                 error = "*Contact number should be 10 digits"
+//             }
+//         break;
+
+//         case "emailId" :
+//             let regex4 =  /^[a-zA-Z0-9]+@[a-zA-Z0-9.]+$/;
+//             if(!regex4.test(value))
+//             {
+//                 hasError = true;
+//                 error = "*Invailed email id "
+//             }
+//         break;
+
+//         case "address" :
+//             let regex5 =  /^[0-9a-zA-Z\s,]{2,10}$/;
+//             if(!regex5.test(value))
+//             {
+//                 hasError = true;
+//                 error = "*Invailed address"
+//             }
+//         break;
+
+//         case "userId" :
+//             let regex6 =  /^[a-zA-Z0-9]{3,8}[a-zA-Z0-9]$/;
+//             if(!regex6.test(value))
+//             {
+//                 hasError = true;
+//                 error = "*Invailed user id"
+//             }
+//         break;
+
+//         case "password" :
+//             let regex7 =  /^[a-zA-Z0-9]{3,8}[a-zA-Z0-9]$/;
+//             if(!regex6.test(value))
+//             {
+//                 hasError = true;
+//                 error = "*Invailed user id"
+//             }
+//         break;
+                 
+
+//     }
+//     return {hasError, error}
+
+// } 
+
 let Register = () => {
+    // const [flag,setFalg] = useState(false);
+    // const [state,dispatch] = useReducer(reducer, init);
+
+    // const onInChange = (name,value,dispatch) => {
+        
+    //     const {hasError, error} = validateData(name,value); 
+
+    //     let isFormValid = true;
+    //     for(const key in state)
+    //     {
+    //         let item = state[key];
+            
+    //         if(item.hasError)
+    //         {
+    //             isFormValid = false;
+    //             break;
+    //         }
+    //     } 
+       
+    //     dispatch({type: 'update', data: {name,value,hasError,error, touched: true, isFormValid }})
+
+    // }
+
+    // const onFocusOut = (name, value, dispatch) => {
+    //     const { hasError, error } = validateData(name, value)
+    //     let isFormValid = true
+    //     for (const key in state) {
+    //       const item = state[key]
+    //       if (key === name && hasError) {
+    //         isFormValid = false
+    //         break
+    //       } else if (key !== name && item.hasError) {
+    //         isFormValid = false
+    //         break
+    //       }
+    //     }
+    //     dispatch({
+    //       type: "update",
+    //       data: { name, value, hasError, error, touched: true, isFormValid },
+    //     })
+    //   }
+
 
     const[resData,setResdata] = useState([]);
 
@@ -48,7 +191,9 @@ let Register = () => {
                    
                     <input type="text" name="firstName" class="form-control" placeholder="First Name"
                     onChange={(e)=>onInputChange(e)}
+                     
                     />
+                    
 
                 </div>
                 <div class="col">
@@ -112,11 +257,7 @@ let Register = () => {
             </div>
             </form>
 
-            {/* <br/><br/>
-            <h2> Artist ID : {artist.userId} Artist pass : {artist.password} Artist firstName : {artist.firstName} Artist lastName : {artist.lastName}</h2>
-            <br/><br/>
-            <h2> Artist Email : {artist.emailId} Artist Contact : {artist.contactNo} Artist Address : {artist.address} Artist role :{artist.role}</h2>
-            <br/><br/> */}
+           
              <h4>{resData.emailId}</h4>
         </div>     
         

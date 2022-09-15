@@ -11,18 +11,6 @@ public class UDProductService {
 	@Autowired
 	UDProductRepository urepo;
 	
-	public boolean deleteProduct(int productId)
-	{
-		boolean flag=true;
-		try {
-		urepo.deleteById(productId); 
-		}
-		catch(Exception e)
-		{
-			flag=false;
-		}
-		return flag;
-	}
 	
 	public int updatePrice(double price,int productId)
 	{
@@ -42,4 +30,27 @@ public class UDProductService {
 	{
 	return urepo.updateproductDesc(productDesc, productId);	
 	}
+	
+	//delete
+	//delete product
+		public boolean deleteProduct(int productId)
+		{
+			boolean flag=false;
+			int res = 0;
+			try {
+			res = urepo.deleteByproductId(productId);
+			}
+			catch(Exception e)
+			{
+				flag=false;
+			}
+			if(res == 1) 
+			{
+				flag = true;
+			}
+			else {
+				flag = false;
+			}
+			return flag;
+		}
 }
