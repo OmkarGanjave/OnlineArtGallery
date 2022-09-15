@@ -4,6 +4,8 @@
 
 package com.example.demo.model;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -22,12 +25,16 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int productId;
+	
+	@JsonIgnoreProperties("product")
+	@OneToMany(mappedBy = "productId", cascade = CascadeType.ALL)
+	private Set<CartDetails> p;
+	
 	@Column
 	private String productName;
 	@Column
 	private String productDiscription;
-	@Column
-	private String productImage;
+	
 	@Column
 	private double price;
 	
@@ -41,11 +48,13 @@ public class Product {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product( String productName, String productDiscription, String productImage, double price,Category category) {
+	public Product(int productId, Set<CartDetails> p, String productName, String productDiscription, double price,
+			Category category) {
 		super();
+		this.productId = productId;
+		this.p = p;
 		this.productName = productName;
 		this.productDiscription = productDiscription;
-		this.productImage = productImage;
 		this.price = price;
 		this.category = category;
 	}
@@ -56,6 +65,18 @@ public class Product {
 
 	public void setProductId(int productId) {
 		this.productId = productId;
+	}
+
+	public Set<CartDetails> getP() {
+		return p;
+	}
+
+	public void setP(Set<CartDetails> p) {
+		for(CartDetails product : p)
+		{
+			product.setProductId(this);
+		}
+		this.p = p;
 	}
 
 	public String getProductName() {
@@ -72,14 +93,6 @@ public class Product {
 
 	public void setProductDiscription(String productDiscription) {
 		this.productDiscription = productDiscription;
-	}
-
-	public String getProductImage() {
-		return productImage;
-	}
-
-	public void setProductImage(String productImage) {
-		this.productImage = productImage;
 	}
 
 	public double getPrice() {
@@ -100,9 +113,10 @@ public class Product {
 
 	@Override
 	public String toString() {
-		return "Product [productId=" + productId + ", productName=" + productName + ", productDiscription="
-				+ productDiscription + ", productImage=" + productImage + ", price=" + price + ", category=" + category
-				+ "]";
+		return "Product [productId=" + productId + ", p=" + p + ", productName=" + productName + ", productDiscription="
+				+ productDiscription + ", price=" + price + ", category=" + category + "]";
 	}
+
+
 
 }

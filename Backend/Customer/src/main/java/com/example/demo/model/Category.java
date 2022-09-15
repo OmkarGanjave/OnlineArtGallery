@@ -28,18 +28,12 @@ public class Category {
 	private String categoryName;
 	
 	@JsonIgnoreProperties("category")
-	@OneToMany( mappedBy = "category")
-	Set<Product> products;
+	@OneToMany( mappedBy = "category",cascade = CascadeType.ALL)
+	private Set<Product> products;
 	
 	public Category() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-	public Category(int categoryId, String categoryName) {
-		super();
-		this.categoryId = categoryId;
-		this.categoryName = categoryName;
 	}
 
 	public Category(int categoryId, String categoryName, Set<Product> products) {

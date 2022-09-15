@@ -18,7 +18,7 @@ public class LoginService {
 	
 	public Login checkLogin(String uid,String pwd) 
 	{
-//		System.out.println("uid	"+uid+"pwd	"+pwd);
+
 		
 		Login u = loginRepository.findByUid(uid, pwd);
 		
@@ -29,7 +29,7 @@ public class LoginService {
 			
 		return null;
 		
-		//System.out.println(u.getLoginid()+"\t"+u.getRole()+"\t"+u.getUser_id());
+	
 		
 		
 	}

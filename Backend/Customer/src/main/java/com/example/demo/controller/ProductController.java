@@ -31,6 +31,11 @@ public class ProductController {
 				
 	}
 	
+	@PostMapping("/addproduct")
+	public Product addProduct(@RequestBody Product product)
+	{
+		return ps.addProduct(product);
+	}
  
 	
 }
