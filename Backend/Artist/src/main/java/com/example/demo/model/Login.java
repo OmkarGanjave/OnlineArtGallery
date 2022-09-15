@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Login {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int loginid;
+	private int loginId;
 	@Column
 	private String password;
 	@Column
@@ -21,9 +21,9 @@ public class Login {
 	}
 	
 	
-	public Login(int loginid, String password, String role, int status, String user_id) {
+	public Login(int loginId, String password, String role, int status, String user_id) {
 		super();
-		this.loginid = loginid;
+		this.loginId = loginId;
 		this.password = password;
 		this.role = role;
 		this.status = status;
@@ -31,12 +31,18 @@ public class Login {
 	}
 
 
-	public int getLoginid() {
-		return loginid;
+	
+	
+	public int getLoginId() {
+		return loginId;
 	}
-	public void setLoginid(int loginid) {
-		this.loginid = loginid;
+
+
+	public void setLoginId(int loginId) {
+		this.loginId = loginId;
 	}
+
+
 	public String getPassword() {
 		return password;
 	}

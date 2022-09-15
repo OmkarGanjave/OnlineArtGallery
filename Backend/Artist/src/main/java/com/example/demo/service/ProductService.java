@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.AddProduct;
 import com.example.demo.model.Product;
 import com.example.demo.repository.ProductRepository;
 
@@ -14,14 +15,15 @@ public class ProductService {
 	@Autowired
 	private ProductRepository prepo;
 	
+	
 	public List<Product> getAll() 
 	{
 		return prepo.findAll();
 	}
 	
-	public Product addProduct(Product pro) 
+	public int addProduct(AddProduct addproduct) 
 	{
-		return prepo.save(pro);
+		return 0;
 	}
 	
 	public List<Product> searchProduct(String artistId)
@@ -32,4 +34,20 @@ public class ProductService {
 		
 		return prepo.getProductById((int)artist.get(0)[0]);
 	}
+	
+	//delete product
+	public boolean deleteProduct(int productId)
+	{
+		boolean flag=true;
+		try {
+		prepo.deleteById(productId); 
+		}
+		catch(Exception e)
+		{
+			flag=false;
+		}
+		return flag;
+	}	
+		
+	
 }

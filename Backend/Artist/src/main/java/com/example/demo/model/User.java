@@ -11,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int loginid;
+	private int loginId;
 	
 	@Column(name="user_id")
 	private String userId;
@@ -35,16 +35,16 @@ public class User {
 		this.role = role;
 		this.status = 1;
 	}
-	
-	
-	
-	
-	public int getLoginid() {
-		return loginid;
+
+
+	public int getLoginId() {
+		return loginId;
 	}
-	public void setLoginid(int loginid) {
-		this.loginid = loginid;
+
+	public void setLoginId(int loginId) {
+		this.loginId = loginId;
 	}
+
 	public String getUserId() {
 		return userId;
 	}

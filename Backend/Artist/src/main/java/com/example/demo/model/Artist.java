@@ -22,6 +22,8 @@ public class Artist {
 	private String emailId;
 	@Column
 	private String address;
+	@Column
+	private double rating;
 	
 	
 	@OneToOne(cascade = CascadeType.ALL)
@@ -34,6 +36,7 @@ public class Artist {
 	
 	public Artist() {
 		super();
+		this.rating=0;
 	}
 
 	
@@ -45,6 +48,7 @@ public class Artist {
 		this.emailId = emailId;
 		this.address = address;
 		this.loginId = loginId;
+		this.rating=0;
 	}
 
 	
@@ -60,12 +64,23 @@ public class Artist {
 		this.address = address;
 		this.loginId = loginId;
 		this.plist = plist;
+		this.rating=0;
 	}
 
 
 	public int getArtistId() {
 		return artistId;
 	}
+
+	public double getRating() {
+		return rating;
+	}
+
+
+	public void setRating(double rating) {
+		this.rating = rating;
+	}
+
 
 	public void setArtistId(int artistId) {
 		this.artistId = artistId;

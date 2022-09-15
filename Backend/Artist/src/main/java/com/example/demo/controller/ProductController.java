@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.model.AddProduct;
 import com.example.demo.model.Category;
 import com.example.demo.model.Product;
 import com.example.demo.service.ProductService;
@@ -32,10 +33,10 @@ public class ProductController {
 	}
 	
 	@PostMapping("/addproduct")
-	public Product addProduct(@RequestPart("product") Product pro, @RequestPart("file") MultipartFile file) 
+	public Product addProduct(@RequestPart("product") AddProduct pro, @RequestPart("file") MultipartFile file) 
 	{
 		
-		Product psave = pservice.addProduct(pro);
+		int psave = pservice.addProduct(pro);
 		
 		boolean flag = true;
 		
@@ -43,7 +44,7 @@ public class ProductController {
 			try {
 			byte[] data = file.getBytes();
 			
-			Path path = Paths.get("images//"+psave.getPid()+"_1.jpg");
+			Path path = Paths.get("images//"+psave.+"_1.jpg");
 			
 			Files.write(path, data);
 			}
@@ -67,4 +68,12 @@ public class ProductController {
 	{
 		return pservice.searchProduct(artistId);
 	}
+	
+	@GetMapping("/deleteproduct/{productId}")
+	public boolean deleteProduct(@PathVariable("productId") int productId)
+	{
+		return pservice.deleteProduct(productId);
+	}
+	
+
 }

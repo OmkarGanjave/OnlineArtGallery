@@ -9,7 +9,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int pid;
+	@Column(name = "productId")
+	private int productId;
 	
 	@JsonIgnoreProperties("plist")
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -23,8 +24,8 @@ public class Product {
 	
 	@Column
 	private String productName;
-	@Column
-	private String productDesc;
+	@Column(name="productDiscription")
+	private String productDiscription;
 	@Column
 	private double price;
 	
@@ -36,25 +37,26 @@ public class Product {
 
 	public Product(int pid, Artist artist, Category category, String productName, String productDesc, double price) {
 		super();
-		this.pid = pid;
+		this.productId = pid;
 		this.artist = artist;
 		this.category = category;
 		this.productName = productName;
-		this.productDesc = productDesc;
+		this.productDiscription = productDesc;
 		this.price = price;
 	}
 
 
-
-	public int getPid() {
-		return pid;
+	public int getProductId() {
+		return productId;
 	}
 
-	public void setPid(int pid) {
-		this.pid = pid;
+
+
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 
-	
+
 
 	public Artist getArtist() {
 		return artist;
@@ -84,13 +86,19 @@ public class Product {
 		this.productName = productName;
 	}
 
-	public String getProductDesc() {
-		return productDesc;
+	
+
+	public String getProductDiscription() {
+		return productDiscription;
 	}
 
-	public void setProductDesc(String productDesc) {
-		this.productDesc = productDesc;
+
+
+	public void setProductDiscription(String productDiscription) {
+		this.productDiscription = productDiscription;
 	}
+
+
 
 	public double getPrice() {
 		return price;

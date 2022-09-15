@@ -10,12 +10,14 @@ import com.example.demo.model.Product;
 @Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
 
-	@Query(value="select loginid from user where user_id = ?1", nativeQuery = true)
+	@Query(value="select login_id from user where user_id = ?1", nativeQuery = true)
 	public List<Object[]> getLoginId(String userID);
 	
 	@Query(value="select artist_id from artist where login_id = ?1", nativeQuery = true)
 	public List<Object[]> getArtistId(int loginId);
 	
-	@Query(value="select * from artgallary.product where artist_id = ?1", nativeQuery = true)
+	@Query(value="select * from product where artist_id = ?1", nativeQuery = true)
 	public List<Product> getProductById(int artistId);
+	
+	
 }
