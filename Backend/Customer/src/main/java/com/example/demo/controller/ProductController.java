@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.model.Order;
 import com.example.demo.model.Product;
 import com.example.demo.service.ProductService;
 
@@ -31,11 +32,10 @@ public class ProductController {
 				
 	}
 	
-	@PostMapping("/addproduct")
-	public Product addProduct(@RequestBody Product product)
+	@PostMapping("/saveproduct")
+	public Product saveProduct(@RequestBody Product p)
 	{
-		return ps.addProduct(product);
+		return ps.save(p);
 	}
- 
 	
 }

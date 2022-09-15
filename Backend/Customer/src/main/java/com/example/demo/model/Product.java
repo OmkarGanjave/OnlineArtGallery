@@ -13,8 +13,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -25,16 +26,12 @@ public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int productId;
-	
-	@JsonIgnoreProperties("product")
-	@OneToMany(mappedBy = "productId", cascade = CascadeType.ALL)
-	private Set<CartDetails> p;
-	
 	@Column
 	private String productName;
 	@Column
-	private String productDiscription;
-	
+	private String productDiscription ;
+	@Column
+	private String productImage;
 	@Column
 	private double price;
 	
@@ -43,20 +40,40 @@ public class Product {
 	@JoinColumn(name="categoryId")
 	Category category;
 
+	@ManyToMany(cascade = {CascadeType.MERGE,CascadeType.PERSIST})
+	@JoinTable(name="order_product",
+				joinColumns = @JoinColumn(name="product_id"),
+				inverseJoinColumns = @JoinColumn(name="order_id"))
+	
+	Set<Order > order; 
+	
 	public Product() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public Product(int productId, Set<CartDetails> p, String productName, String productDiscription, double price,
-			Category category) {
+	public Product( String productName, String productDiscription, String productImage, double price,Category category) {
 		super();
-		this.productId = productId;
-		this.p = p;
 		this.productName = productName;
-		this.productDiscription = productDiscription;
+		this.productDiscription =productDiscription;
+		this.productImage = productImage;
 		this.price = price;
 		this.category = category;
+	}
+	
+	public Product(String productName, String productDiscription, String productImage, double price, Set<Order> order) {
+		super();
+		this.productName = productName;
+		this.productDiscription = productDiscription;
+		this.productImage = productImage;
+		this.price = price;
+		this.order = order;
+	}
+	
+
+	public Product(int productId) {
+		super();
+		this.productId = productId;
 	}
 
 	public int getProductId() {
@@ -67,18 +84,6 @@ public class Product {
 		this.productId = productId;
 	}
 
-	public Set<CartDetails> getP() {
-		return p;
-	}
-
-	public void setP(Set<CartDetails> p) {
-		for(CartDetails product : p)
-		{
-			product.setProductId(this);
-		}
-		this.p = p;
-	}
-
 	public String getProductName() {
 		return productName;
 	}
@@ -87,12 +92,13 @@ public class Product {
 		this.productName = productName;
 	}
 
-	public String getProductDiscription() {
-		return productDiscription;
+	
+	public String getProductImage() {
+		return productImage;
 	}
 
-	public void setProductDiscription(String productDiscription) {
-		this.productDiscription = productDiscription;
+	public void setProductImage(String productImage) {
+		this.productImage = productImage;
 	}
 
 	public double getPrice() {
@@ -110,13 +116,28 @@ public class Product {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+	
+	public String getProductDiscription() {
+		return productDiscription;
+	}
+
+	public void setProductDiscription(String productDiscription) {
+		this.productDiscription = productDiscription;
+	}
+
+	public Set<Order> getOrder() {
+		return order;
+	}
+
+	public void setOrder(Set<Order> order) {
+		this.order = order;
+	}
 
 	@Override
 	public String toString() {
-		return "Product [productId=" + productId + ", p=" + p + ", productName=" + productName + ", productDiscription="
-				+ productDiscription + ", price=" + price + ", category=" + category + "]";
+		return "Product [productId=" + productId + ", productName=" + productName + ", productDiscription="
+				+ productDiscription+ ", productImage=" + productImage + ", price=" + price + ", category=" + category
+				+ "]";
 	}
-
-
 
 }
