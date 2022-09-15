@@ -29,5 +29,9 @@ public class CategoryService {
 	{
 		return catrepo.findAll();
 	}
-
+/*	
+	public List<Product> getAllProducts(int cid)
+	{
+		return 
+	}*/
 }

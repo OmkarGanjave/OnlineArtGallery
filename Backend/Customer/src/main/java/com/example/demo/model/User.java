@@ -32,8 +32,8 @@ public class User {
 		super();
 		this.userId = userId;
 		this.role = role;
+		this.status = 1;
 		this.password = password;
-		this.status=1;
 	}
 
 	public User(int loginId, String userId, String role, String password) {
