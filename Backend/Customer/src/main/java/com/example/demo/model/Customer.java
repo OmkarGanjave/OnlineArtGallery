@@ -1,5 +1,7 @@
 package com.example.demo.model;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -7,8 +9,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name="customer")
@@ -30,15 +35,52 @@ public class Customer {
 	@JoinColumn
 	User loginId;
 
+	@JsonIgnoreProperties("customer")
+	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
+	//@Column - not associated
+	Set<Order> order;
+	
+	
 	public Customer() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
+
+	public Customer(int customerId, String firstName, String lastName, String emailId, String contactNo, String address,
+			User loginId, Set<Order> order) {
+		super();
+		this.customerId = customerId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.emailId = emailId;
+		this.contactNo = contactNo;
+		this.address = address;
+		this.loginId = loginId;
+		this.order = order;
+	}
+	
+	
+	
 
 
+	public Customer(String firstName, String lastName, String emailId, String contactNo, String address, User loginId,
+			Set<Order> order) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.emailId = emailId;
+		this.contactNo = contactNo;
+		this.address = address;
+		this.loginId = loginId;
+		this.order = order;
+	}
 
-	public Customer( String firstName, String lastName, String emailId, String contactNo, String address,
-			User loginId) {
+	
+
+
+	public Customer(String firstName, String lastName, String emailId, String contactNo, String address, User loginId) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -50,6 +92,12 @@ public class Customer {
 
 
 
+	public Customer(int customerId) {
+		super();
+		this.customerId = customerId;
+	}
+
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -88,6 +136,22 @@ public class Customer {
 
 	public void setAddress(String address) {
 		this.address = address;
+	}
+
+
+
+	public Set<Order> getOrder() {
+		return order;
+	}
+
+
+
+	public void setOrder(Set<Order> order) {
+	for(Order o : order) 
+		{
+			o.setCustomer(this);;
+		}
+		this.order = order;
 	}
 
 	

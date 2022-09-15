@@ -24,10 +24,7 @@ public class ProductService {
 		return productrepo.findById(pid).get();
 	}
 	
-	public Product addProduct(Product product)
-	{
-		return productrepo.save(product);
-	}
+	
 	
 
 }

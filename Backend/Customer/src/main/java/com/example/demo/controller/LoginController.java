@@ -20,7 +20,7 @@ public class LoginController {
 	@PostMapping("/login")
 	public Object checkLogin(@RequestBody Login log ) 
 	{
-		System.out.println(log.getUserId()+"hear 1"+log.getPassword());
+		//System.out.println(log.getUser_id()+"hear 1"+log.getPassword());
 		return lservice.checkLogin(log.getUserId(), log.getPassword());
 	}
 }
