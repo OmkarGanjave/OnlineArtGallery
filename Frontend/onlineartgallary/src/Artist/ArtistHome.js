@@ -7,6 +7,8 @@ let Artisthome = () => {
            <h1>Artisthome</h1>
         <br/>
             <button class="btn btn-primary" onClick={()=>{nav('/addproduct')}}>AddProduct</button>
+            <br/><br/>
+            <button class="btn btn-primary" onClick={()=>{nav('/searchproduct')}}>Show Product's</button> 
         </div>
     )
 

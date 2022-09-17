@@ -1,5 +1,6 @@
 
-import { useState } from "react";
+import axios from "axios";
+import { useState,useEffect } from "react";
 
 let  AddProduct = () => {
 
@@ -35,15 +36,21 @@ let  AddProduct = () => {
         console.log(file);
 
         const formaData = new FormData();
-        formaData.append(product);
-        formaData.append(file);
+        formaData.append('product',product);
+        formaData.append('file',file);
 
-        console.log(formaData.file);
+        console.log(formaData);
 
 
         
-        let res = fetch("http://localhost:8080/addproduct",{method:'POST',body:formaData});
-        
+        let res = fetch("http://localhost:8080/addproduct",{method:'POST',body:formaData,
+        headers: {
+            'Content-Type': 'multipart/form-data,image/jpeg'
+          },
+        });
+
+        // let res = axios.post("http://localhost:8080/addproduct",formaData);
+
         if(res == 1)
         {
             console.log("Product Added !");
