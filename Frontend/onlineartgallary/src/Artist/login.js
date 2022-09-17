@@ -28,22 +28,35 @@ let Login = () => {
         e.preventDefault();
 
         axios.post("http://localhost:8080/login",user)
-        .then(response=>setResdata(response.data))
+        .then(response=>{
+
+            setResdata(response.data);
+
+            console.log(response.data);
+
+            if(response.data.role == "Artist")
+            {
+            localStorage.setItem("user",JSON.stringify(response.data));
+            
+            nav('/artisthome');
+            
+            }
+            else if(response.data.role == "Customer")
+            {
+                localStorage.setItem("user",response.data);
+            
+                nav('/customerhome');
+            }
+            
+
+        })
         .catch(error=>{
                     if(error)
                     {
+                        console.log("error");
                         setErr("LOGIN FAILED");
                     }
-                    else
-                    {
-                         if(resData.role == "Artist")
-                         {
-                            localStorage.setItem("user",resData);
-                            
-                            nav('/artisthome');
-                            
-                         }
-                    }
+                    
                     });
         ///console.log(resData);
         
@@ -51,25 +64,35 @@ let Login = () => {
     }
 
     return(
+        
+       
         <div class="container mt-3">
             <h2>Login</h2>
             <br/>
             <form>
                 <div class="row">
-                    <input type="text" name="user_id" class="form-control"
-                    placeholder="LOGIN ID"
-                    onChange={(e)=>onInputChange(e)}
-                    />
+                    <div className="col-md-3">
+                        <input type="text" name="user_id" class="form-control"
+                        placeholder="LOGIN ID"
+                        onChange={(e)=>onInputChange(e)}
+                        />
+                    </div>
                 </div>
                 <br/><br/>
                 <div class="row">
-                <input type="password" name="password" class="form-control"
-                placeholder="PASSWORD"
-                onChange={(e)=>onInputChange(e)}
-                />
+                    <div className="col-md-3">
+                        <input type="password" name="password" class="form-control"
+                        placeholder="PASSWORD"
+                        onChange={(e)=>onInputChange(e)}
+                        />
+                    </div>
                 </div>
-            <br/>
-                <button type="submit"  class="btn btn-primary" onClick={(v)=>{sandData(v)}}>Login</button>
+            <br/><br/>
+            <div class="row">
+                    <div className="col-md-3">
+                        <button type="submit"  class="btn btn-primary mt-4" onClick={(v)=>{sandData(v)}}>Login</button>
+                </div>
+            </div>
             </form>
             <br/><br/>
             

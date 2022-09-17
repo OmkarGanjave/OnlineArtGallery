@@ -1,15 +1,14 @@
 import {useNavigate} from 'react-router-dom'
-let Artisthome = () => {
+let Customerhome = () => {
     let nav = useNavigate();
-
     return(
         <div>
            <h1>Artisthome</h1>
         <br/>
-            <button class="btn btn-primary" onClick={()=>{nav('/addproduct')}}>AddProduct</button>
+            <button class="btn btn-primary" onClick={()=>{nav('/')}}>Home</button>
         </div>
     )
 
 }
 
-export default Artisthome;
+export default Customerhome;

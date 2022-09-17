@@ -8,6 +8,8 @@ import ContactUs from './Home/ContactUs';
 import AboutUs from './Home/AboutUs';
 import Artisthome from './Artist/ArtistHome';
 import AddProduct from './Artist/AddProduct';
+
+import Customerhome from './Cutomer/CustomerHome';
 function App() {
   return (
     <div className="App">
@@ -27,6 +29,10 @@ function App() {
           </li>
         </ul>
 
+        <Link to="/artisthome"></Link>
+        <Link to="/customerhome"></Link>
+
+
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/contactus" element={<ContactUs/>}/>
@@ -37,6 +43,8 @@ function App() {
 
           <Route path="/artisthome" element={<Artisthome/>}/>
           <Route path="/addproduct" element={<AddProduct/>}/>
+
+          <Route path="/customerhome" element={<Customerhome/>}/>
           
         </Routes>
     </div>
