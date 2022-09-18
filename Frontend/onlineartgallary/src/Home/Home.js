@@ -2,12 +2,21 @@ import {useNavigate} from 'react-router-dom'
 let Home = () => {
     let nav = useNavigate();
     return(
-        <div>
-           <h1>Home Page</h1>
-        <br/>
-            <button class="btn btn-primary" onClick={()=>{nav('/login')}}>Login</button>
-            <br/><br/>
-            <button class="btn btn-primary" onClick={()=>{nav('/register')}}>Register</button>
+      
+        <div className='container-fluid'>
+        <nav className="nav navbar-expand-lg navbar-light bg-light">
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <h5>Online Art Gallary</h5>
+            </div>
+          </div>
+          <li className="nav-item">
+            <button class="btn btn-outline-success btn-sm" onClick={()=>{nav('/login')}}>Login</button>
+          </li>
+          <li className="nav-item">
+            <button class="btn btn-outline-success btn-sm" onClick={()=>{nav('/register')}}>Register</button>
+          </li> 
+        </nav> 
         </div>
     )
 
