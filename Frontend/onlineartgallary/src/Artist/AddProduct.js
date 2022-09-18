@@ -43,13 +43,13 @@ let  AddProduct = () => {
 
 
         
-        let res = fetch("http://localhost:8080/addproduct",{method:'POST',body:formaData,
-        headers: {
-            'Content-Type': 'multipart/form-data,image/jpeg'
-          },
-        });
+        // let res = fetch("http://localhost:8080/addproduct",{method:'POST',body:formaData,
+        // headers: {
+        //     'Content-Type': 'multipart/form-data,image/jpeg'
+        //   },
+        // });
 
-        // let res = axios.post("http://localhost:8080/addproduct",formaData);
+        let res = axios.post("http://localhost:8080/addproduct",formaData);
 
         if(res == 1)
         {

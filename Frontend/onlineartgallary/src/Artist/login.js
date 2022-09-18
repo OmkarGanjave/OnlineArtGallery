@@ -4,6 +4,16 @@ import axios from "axios";
 import {  useState  } from "react";
 let Login = () => {
 
+    const myStyle={
+        backgroundImage: 
+        "url('https://media.istockphoto.com/illustrations/blur-gradient-sky-background-illustration-id889535070?k=20&m=889535070&s=612x612&w=0&h=mvu4HFuCUhSz4PbgP46qzbGOoUtBAu_M9ioXXHzdnu8=')",
+        width:'62255px',
+        height:'1000px',
+        marginTop:'0px',
+        // fontSize:'50px',
+        // backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+    };
     
     let nav = useNavigate();
 
@@ -66,7 +76,7 @@ let Login = () => {
     return(
         
        
-        <div class="container mt-3">
+        <div class="container mt-3" style={myStyle}>
             <h2>Login</h2>
             <br/>
             <form>
