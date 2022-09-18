@@ -13,6 +13,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -31,11 +32,14 @@ public class Customer {
 	private String contactNo;
 	@Column
 	private String address;
+	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn
+	@JoinColumn(name="login_id")
 	User loginId;
 	
-
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "customerID")
+	private Cart cart;
+	
 	@JsonIgnoreProperties("customer")
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	//@Column - not associated
@@ -89,6 +93,17 @@ public class Customer {
 		this.contactNo = contactNo;
 		this.address = address;
 		this.loginId = loginId;
+	}
+
+	@JsonIgnore
+	public int getCustomerId() {
+		return customerId;
+	}
+
+
+
+	public void setCustomerId(int customerId) {
+		this.customerId = customerId;
 	}
 
 
@@ -153,6 +168,18 @@ public class Customer {
 			o.setCustomer(this);;
 		}
 		this.order = order;
+	}
+
+
+
+	public Cart getCart() {
+		return cart;
+	}
+
+
+
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
 
 	

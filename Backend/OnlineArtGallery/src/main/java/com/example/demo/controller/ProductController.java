@@ -28,6 +28,8 @@ public class ProductController {
 	@Autowired
 	private ProductService pservice;
 	
+
+	//----------------------------------Customer-----------------------------------
 	@GetMapping("/getallproducts")
 	public List<Product> getAll()
 	{
@@ -41,13 +43,13 @@ public class ProductController {
 				
 	}
 	
-	@PostMapping("/saveproduct")
-	public Product saveProduct(@RequestBody Product p)
-	{
-		return pservice.save(p);
-	}
+//	@PostMapping("/saveproduct")
+//	public Product saveProduct(@RequestBody Product p)
+//	{
+//		return pservice.save(p);
+//	}
 	
-	
+	//----------------------------------Artist-----------------------------------
 	@PostMapping("/addproduct")
 	public int addProduct(@RequestPart("product") AddProduct pro, @RequestPart("file") MultipartFile file) 
 	{

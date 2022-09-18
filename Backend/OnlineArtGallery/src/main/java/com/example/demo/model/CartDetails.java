@@ -14,6 +14,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -23,34 +24,28 @@ public class CartDetails {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cartDetailsId;
 	
-	@JsonIgnoreProperties("c")
+	@JsonIgnoreProperties("cart")
+//	@JsonIgnore
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "cartId")
-	private Cart cartId;
+	private Cart cart;
 	
-	@JsonIgnoreProperties("p")
+//	@JsonIgnoreProperties("p")
+	
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "productId")
-	private Product productId;
+	private Product product;
 
 	public CartDetails() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public CartDetails(int cartDetailsId, Cart cartId, Product productId) {
-		super();
-		this.cartDetailsId = cartDetailsId;
-		this.cartId = cartId;
-		this.productId = productId;
-		
-	}
 
-	
 	public CartDetails(Cart cartId, Product productId) {
 		super();
-		this.cartId = cartId;
-		this.productId = productId;
+		this.cart = cart;
+		this.product = productId;
 	}
 
 	public int getCartDetailsId() {
@@ -61,26 +56,28 @@ public class CartDetails {
 		this.cartDetailsId = cartDetailsId;
 	}
 
-	public Cart getCartId() {
-		return cartId;
+	
+
+	@JsonIgnore
+	public Cart getCart() {
+		return cart;
 	}
 
-	public void setCartId(Cart cartId) {
-		this.cartId = cartId;
+	
+	public void setCart(Cart cart) {
+		this.cart = cart;
 	}
 
-	public Product getProductId() {
-		return productId;
+	
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setProductId(Product productId) {
-		this.productId = productId;
+	public void setProduct(Product productId) {
+		this.product = productId;
 	}
 
-	@Override
-	public String toString() {
-		return "CartDetails [cartDetailsId=" + cartDetailsId + ", cartId=" + cartId + ", productId=" + productId + "]";
-	}
+	
 
 	
 

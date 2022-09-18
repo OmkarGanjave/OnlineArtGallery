@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
@@ -22,9 +23,9 @@ public class Product {
 	@Column
 	private double price;
 	
-	@JsonIgnoreProperties("product")
-	@OneToMany(mappedBy = "productId", cascade = CascadeType.ALL)
-	private Set<CartDetails> p;
+//	@JsonIgnoreProperties("product")
+//	@OneToMany(mappedBy = "productId", cascade = CascadeType.ALL)
+//	private Set<CartDetails> products;
 	
 	@JsonIgnoreProperties("products")//@JsonIgnoreProperties("products")   -----in customer product
 	@ManyToOne(cascade = CascadeType.ALL)
@@ -49,17 +50,19 @@ public class Product {
 		this.productDiscription = productDiscription;
 		this.price = price;
 	}
-	public Product(int productId, Set<CartDetails> p, String productName, String productDiscription, double price,
-			Category category) {
-		super();
-		this.productId = productId;
-		this.p = p;
-		this.productName = productName;
-		this.productDiscription = productDiscription;
-		this.price = price;
-		this.category = category;
-	}
+	
+//	public Product(int productId, Set<CartDetails> p, String productName, String productDiscription, double price,
+//			Category category) {
+//		super();
+//		this.productId = productId;
+//		this.products = p;
+//		this.productName = productName;
+//		this.productDiscription = productDiscription;
+//		this.price = price;
+//		this.category = category;
+//	}
 
+	@JsonIgnore
 	public int getProductId() {
 		return productId;
 	}
@@ -109,17 +112,17 @@ public class Product {
 	}
 
 	
-	public Set<CartDetails> getP() {
-		return p;
-	}
-
-	public void setP(Set<CartDetails> p) {
-		for(CartDetails product : p)
-		{
-			product.setProductId(this);
-		}
-		this.p = p;
-	}
+//	public Set<CartDetails> getP() {
+//		return products;
+//	}
+//
+//	public void setP(Set<CartDetails> p) {
+//		for(CartDetails product : p)
+//		{
+//			product.setProductId(this);
+//		}
+//		this.products = p;
+//	}
 	
 	
 }

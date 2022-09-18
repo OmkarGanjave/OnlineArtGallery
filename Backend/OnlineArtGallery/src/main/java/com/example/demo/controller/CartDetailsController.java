@@ -32,6 +32,7 @@ public class CartDetailsController {
 	{
 		return cartDetailsService.getAll();
 	}
+	
 //	@PostMapping("/SaveCartDetails")
 //	public CartDetails saveCartDetails(@RequestParam("customerId") int customerId, @RequestParam("productId") int productId) 
 //	{

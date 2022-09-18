@@ -24,6 +24,7 @@ public class CartService {
 		
 		return cartrepo.addToCart((int)customerId.get(0)[0]);
 	}
+	
 	public List<Cart> getAll()
 	{
 		return cartrepo.findAll();
@@ -34,8 +35,9 @@ public class CartService {
 	 return	cartrepo.findById(customerId).get();
 		
 	}
-	// checks if cart is present for customer or not and retutn cartId 
-	//if cart is present or null if no cart is present 
+	
+////	 checks if cart is present for customer or not and retutn cartId 
+////	if cart is present or null if no cart is present 
 //	public int checkCartStatus(int customerId)
 //	{
 //		

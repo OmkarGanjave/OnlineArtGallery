@@ -17,8 +17,6 @@ public class CustomerService {
 	{
 		return custRepo.save(cust);
 	}
-	
-	
 
 	public List<Customer> getAll()
 	{
@@ -26,4 +24,8 @@ public class CustomerService {
 	}
 	
 	
+	public Customer getCustomerById(int loginid) 
+	{
+		return custRepo.findById(loginid).get();
+	}
 }

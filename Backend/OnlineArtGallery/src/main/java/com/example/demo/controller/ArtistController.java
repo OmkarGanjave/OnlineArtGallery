@@ -29,7 +29,7 @@ public class ArtistController {
 	public Artist regArtist(@RequestBody ArtistRegister artist) 
 	{
 		
-		User artistUser = new User(artist.getUserId(), artist.getPassword(), artist.getRole());
+		User artistUser = new User(artist.getUserId(), artist.getRole(), artist.getPassword());
 		
 		userservice.add(artistUser);
 		

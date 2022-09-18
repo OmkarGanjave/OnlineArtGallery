@@ -32,9 +32,9 @@ public class Cart {
 	private Customer customerID;
 	
 	
-	@JsonIgnoreProperties("cart")
-	@OneToMany(mappedBy = "cartId", cascade = CascadeType.ALL)
-	private Set<CartDetails> c;
+	@JsonIgnoreProperties("cartdetails")
+	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
+	private List<CartDetails> cartdetails;
 	
 
 	
@@ -42,35 +42,40 @@ public class Cart {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Cart(int cartId, Customer customerID, Set<CartDetails> c) {
+	
+	public Cart( Customer customerID, List<CartDetails> cartdetails) {
 		super();
-		this.cartId=cartId;
 		this.customerID = customerID;
-		this.c = c;
+		this.cartdetails = cartdetails;
 		
 	}
+	
 	public int getCartId() {
 		return cartId;
 	}
+	
 	public void setCartId(int cartId) {
 		this.cartId = cartId;
 	}
+	
 	public Customer getCustomerID() {
 		return customerID;
 	}
+	
 	public void setCustomerID(Customer customerID) {
 		this.customerID = customerID;
 	}
-	public Set<CartDetails> getC() {
-		return c;
+	
+	public List<CartDetails> getCartdetails() {
+		return cartdetails;
 	}
-	public void setC(Set<CartDetails> c) {
-		for(CartDetails cart : c) 
-		{
-			cart.setCartId(this);
-		}
-		this.c = c;
+	
+	public void setCartdetails(List<CartDetails> cartdetails) {
+		// for loop
+		this.cartdetails = cartdetails;
 	}
+	
+	
 	
 
 	

@@ -13,7 +13,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int loginId;
-	@Column
+	@Column(name="user_id")
 	private String userId;
 	@Column
 	private String role;
