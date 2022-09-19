@@ -30,4 +30,8 @@ public class CategoryService {
 		return catrepo.findAll();
 	}
 
+	public Category getCategoryByName(String categoryName) 
+	{
+		return catrepo.getCategoryByNAme(categoryName);
+	}
 }

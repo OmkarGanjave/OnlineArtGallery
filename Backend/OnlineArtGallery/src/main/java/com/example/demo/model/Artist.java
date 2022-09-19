@@ -147,6 +147,14 @@ public class Artist {
 		}
 		this.plist = plist;
 	}
+
+
+	@Override
+	public String toString() {
+		return "Artist [artistId=" + artistId + ", firstName=" + firstName + ", LastName=" + LastName + ", contactNo="
+				+ contactNo + ", emailId=" + emailId + ", address=" + address + ", rating=" + rating + ", loginId="
+				+ loginId + ", plist=" + plist + "]";
+	}
 	
 	
 	
