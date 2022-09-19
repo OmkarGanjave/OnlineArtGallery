@@ -155,7 +155,7 @@ let Register = () => {
         address:"",
         userId:"",
         password:"",
-        role:"Artist",
+        role:"",
         status:1
     });
 
@@ -222,7 +222,6 @@ let Register = () => {
             <br/><br/>
             <div class="row">
                 <div class="col">
-                    
                     <input type="text" name="address" class="form-control" placeholder="Address"
                     onChange={(e)=>onInputChange(e)}
                     />
@@ -234,13 +233,11 @@ let Register = () => {
             <br/><br/>
             <div class="row">
                 <div class="col">
-                    
                     <input type="text" name="userId" class="form-control" placeholder="User ID"
                     onChange={(e)=>onInputChange(e)}
                     />
                 </div>
                 <div class="col">
-                   
                     <input type="text" name="password" class="form-control" placeholder="Password"
                     onChange={(e)=>onInputChange(e)}
                     />

@@ -76,7 +76,7 @@ let Login = () => {
     return(
         
        
-        <div class="container mt-3" style={myStyle}>
+        <div class="container mt-3" >
             <h2>Login</h2>
             <br/>
             <form>

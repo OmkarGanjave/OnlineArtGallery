@@ -26,7 +26,7 @@ let Home = () => {
             <button class="btn btn-outline-success btn-sm" onClick={()=>{nav('/register')}}>Register</button>
           </li> 
         </nav> 
-        <div className='container-fluid' style={myStyle}>
+        <div className='container-fluid' >
             <h1>Online Art Gallary</h1>
 
         </div>
