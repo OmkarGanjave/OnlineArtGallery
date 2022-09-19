@@ -41,7 +41,7 @@ public class OrderService {
 		return orderRepo.getOrderById((int)customer.get(0)[0]);
 	}
 	
-	public Order save(Order o)
+	public Order saveOrder(Order o)
 	{
 		return orderRepo.save(o);
 	}

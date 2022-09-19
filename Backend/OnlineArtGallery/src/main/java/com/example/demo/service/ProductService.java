@@ -21,20 +21,22 @@ public class ProductService {
 		return productrepo.findAll();
 	}
 	
-	public int addProduct(AddProduct addpro) 
-	{
-		// loginId
-		List<Object[]> loginId = productrepo.getLoginId(addpro.getArtistId());
-		
-		// artistId
-		List<Object[]> artistId = productrepo.getArtistId((int)loginId.get(0)[0]);
-		
-		// categoryId
-		List<Object[]> categotyId = productrepo.getcategortyId(addpro.getCategoryName());
-		
-		
-		return productrepo.addProduct(addpro.getProductName(), addpro.getProductDiscription(), addpro.getPrice(),(int) artistId.get(0)[0],(int) categotyId.get(0)[0]);
-	}
+//	public int addProduct(AddProduct addpro) 
+//	{
+//		// loginId
+////		List<Object[]> loginId = productrepo.getLoginId(addpro.getLoginId());
+//		
+//		// artistId
+//		List<Object[]> artistId = productrepo.getArtistId(addpro.getLoginId());
+//		
+//		System.out.println("Artist Id :- "+(int) artistId.get(0)[0]);
+//		
+//		// categoryId
+//		List<Object[]> categotyId = productrepo.getcategortyId(addpro.getCategoryName());
+//		System.out.println("Category Id :- "+(int) categotyId.get(0)[0]);
+//		
+//		return productrepo.addProduct(addpro.getProductName(), addpro.getProductDiscription(), addpro.getPrice(),(int) artistId.get(0)[0],(int) categotyId.get(0)[0]);
+//	}
 	
 	//serach product's
 	public List<Product> searchProduct(String artistId)

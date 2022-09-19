@@ -39,11 +39,11 @@ public class OrderController {
 		return os.getOrderById(orderId);
 	}
 	
-	@PostMapping("/saveorder")
-	public Order saveOrder(@RequestBody Order o)
-	{
-		return os.save(o);
-	}
+//	@PostMapping("/saveorder")
+//	public Order saveOrder(@RequestBody Order o)
+//	{
+//		return os.save(o);
+//	}
 
 	
 }

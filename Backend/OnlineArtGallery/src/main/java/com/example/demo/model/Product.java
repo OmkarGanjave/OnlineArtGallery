@@ -62,7 +62,7 @@ public class Product {
 //		this.category = category;
 //	}
 
-	@JsonIgnore
+//	@JsonIgnore
 	public int getProductId() {
 		return productId;
 	}
@@ -111,6 +111,14 @@ public class Product {
 		this.price = price;
 	}
 
+	@Override
+	public String toString() {
+		return "Product [productId=" + productId + ", productName=" + productName + ", productDiscription="
+				+ productDiscription + ", price=" + price + "]";
+	}
+
+	
+
 	
 //	public Set<CartDetails> getP() {
 //		return products;
@@ -123,6 +131,7 @@ public class Product {
 //		}
 //		this.products = p;
 //	}
+	
 	
 	
 }

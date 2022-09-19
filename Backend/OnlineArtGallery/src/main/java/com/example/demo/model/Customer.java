@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -43,7 +44,7 @@ public class Customer {
 	@JsonIgnoreProperties("customer")
 	@OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
 	//@Column - not associated
-	Set<Order> order;
+	List<Order> order;
 	
 	
 	public Customer() {
@@ -53,34 +54,34 @@ public class Customer {
 	
 	
 
-	public Customer(int customerId, String firstName, String lastName, String emailId, String contactNo, String address,
-			User loginId, Set<Order> order) {
-		super();
-		this.customerId = customerId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.emailId = emailId;
-		this.contactNo = contactNo;
-		this.address = address;
-		this.loginId = loginId;
-		this.order = order;
-	}
+//	public Customer(int customerId, String firstName, String lastName, String emailId, String contactNo, String address,
+//			User loginId, Set<Order> order) {
+//		super();
+//		this.customerId = customerId;
+//		this.firstName = firstName;
+//		this.lastName = lastName;
+//		this.emailId = emailId;
+//		this.contactNo = contactNo;
+//		this.address = address;
+//		this.loginId = loginId;
+//		this.order = order;
+//	}
 	
 	
 	
 
 
-	public Customer(String firstName, String lastName, String emailId, String contactNo, String address, User loginId,
-			Set<Order> order) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.emailId = emailId;
-		this.contactNo = contactNo;
-		this.address = address;
-		this.loginId = loginId;
-		this.order = order;
-	}
+//	public Customer(String firstName, String lastName, String emailId, String contactNo, String address, User loginId,
+//			Set<Order> order) {
+//		super();
+//		this.firstName = firstName;
+//		this.lastName = lastName;
+//		this.emailId = emailId;
+//		this.contactNo = contactNo;
+//		this.address = address;
+//		this.loginId = loginId;
+//		this.order = order;
+//	}
 
 	
 
@@ -155,18 +156,13 @@ public class Customer {
 	}
 
 
-
-	public Set<Order> getOrder() {
+	public List<Order> getOrder() {
 		return order;
 	}
 
 
 
-	public void setOrder(Set<Order> order) {
-	for(Order o : order) 
-		{
-			o.setCustomer(this);;
-		}
+	public void setOrder(List<Order> order) {
 		this.order = order;
 	}
 

@@ -25,5 +25,13 @@ public class ArtistService {
 		return artistrepo.findAll();
 	}
 	
+	public Artist getArtistById(int loginId) 
+	{
+		return artistrepo.findById(loginId).get();
+	}
 	
+	public Artist getArtist(int loginId) 
+	{
+		return artistrepo.getArtist(loginId);
+	}
 }
