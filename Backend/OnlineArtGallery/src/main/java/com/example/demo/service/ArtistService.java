@@ -25,13 +25,19 @@ public class ArtistService {
 		return artistrepo.findAll();
 	}
 	
-	public Artist getArtistById(int loginId) 
+	public Artist getArtistById(int artistId) 
 	{
-		return artistrepo.findById(loginId).get();
+		return artistrepo.findById(artistId).get();
 	}
 	
 	public Artist getArtist(int loginId) 
 	{
 		return artistrepo.getArtist(loginId);
+	}
+	
+	//save artist
+	public Artist saveArtist(Artist artist) 
+	{
+		return artistrepo.save(artist);
 	}
 }

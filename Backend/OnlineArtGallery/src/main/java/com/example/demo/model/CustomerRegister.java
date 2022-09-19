@@ -8,6 +8,7 @@ public class CustomerRegister {
 	private String emailId;
 	private String contactNo;
 	private String address;
+	private String role;
 	public CustomerRegister() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -64,6 +65,12 @@ public class CustomerRegister {
 	}
 	public void setContactNo(String contactNo) {
 		this.contactNo = contactNo;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 }

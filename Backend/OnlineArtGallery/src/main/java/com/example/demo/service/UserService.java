@@ -24,6 +24,16 @@ public class UserService {
 		return userepo.findAll();
 	}
 	
+	public User saveUser(User u) 
+	{
+		return userepo.save(u);
+	}
+	
+	public User getUserById(int loginId) 
+	{
+		return userepo.findById(loginId).get();
+	}
+	
 	
 	
 }

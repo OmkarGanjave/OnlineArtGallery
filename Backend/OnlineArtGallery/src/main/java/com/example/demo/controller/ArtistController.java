@@ -110,5 +110,6 @@ public class ArtistController {
 			return 0;
 		}
 	}
+	
 
 }

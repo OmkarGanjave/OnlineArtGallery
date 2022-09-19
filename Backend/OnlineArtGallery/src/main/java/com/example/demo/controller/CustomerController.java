@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.model.Artist;
 import com.example.demo.model.Cart;
 import com.example.demo.model.CartDetails;
 import com.example.demo.model.Customer;
@@ -19,6 +20,8 @@ import com.example.demo.model.Order;
 import com.example.demo.model.OrderProduct;
 import com.example.demo.model.Product;
 import com.example.demo.model.User;
+import com.example.demo.service.AdminService;
+import com.example.demo.service.ArtistService;
 import com.example.demo.service.CartDetailsService;
 import com.example.demo.service.CartService;
 import com.example.demo.service.CustomerService;
@@ -48,10 +51,16 @@ public class CustomerController {
 		@Autowired
 		OrderService oserv;
 		
+		@Autowired
+		ArtistService artistserv;
+		
+		@Autowired
+		private AdminService adminserv;
+		
 		@PostMapping("/register")
 		public Customer saveCustomer(@RequestBody CustomerRegister cr) 
 		{
-			User user=new User(cr.getUserId(),"customer",cr.getPassword());
+			User user=new User(cr.getUserId(),cr.getRole(),cr.getPassword());
 			User inserted=us.add(user);
 			Customer customer=new Customer( cr.getFirstName(), cr.getLastName(),cr.getEmailId(),cr.getContactNo(),cr.getAddress(), inserted);
 			return cs.saveCustomer(customer);
@@ -67,14 +76,16 @@ public class CustomerController {
 		@GetMapping("/addTocart/{loginid}/{productid}")
 		public Cart addCart(@PathVariable("loginid") int loginid,@PathVariable("productid") int productId)
 		{
-			System.out.println("login id :- "+loginid+"\tpid :- "+productId);
+			//System.out.println("login id :- "+loginid+"\tpid :- "+productId);
+			// get customer from loginId
+			Customer customer = cs.getCustomer(loginid);
 			
 			// get product
 			Product product = pservice.getProduct(productId);
 			
 			// get customer
-			Customer customer = cs.getCustomerById(loginid);
-			
+//			Customer customer = cs.getCustomerById(loginid);
+//			
 			// get cart
 			Cart cart = customer.getCart();
 			
@@ -171,6 +182,53 @@ public class CustomerController {
 			// order --> toatl_price , customerId
 		}
 		
+		
+		//artist Rating
+		@GetMapping("/rating/{productId}/{rating}")
+		public boolean artistRating(@PathVariable("productId") int productId,@PathVariable("rating") double rating) 
+		{
+			boolean flag = true;
+			
+			// pid --> product
+			Product product = pservice.getProduct(productId);
+			
+			//System.out.println("Artist :- "+product.getArtist().getArtistId());
+			
+			//System.out.println("rating :- "+rating);
+			
+			// get artist
+			Artist artist =  artistserv.getArtistById(product.getArtist().getArtistId());
+			
+			System.out.println(artist.getFirstName()+"\t"+artist.getLastName());
+			
+			artist.setRating(rating);
+			
+			System.out.println("Artist rating :- "+artist.getRating());
+			
+			Artist savedArtist = artistserv.saveArtist(artist);
+			
+			return flag;
+		}
+		
+		// search product categorywise
+		@GetMapping("/categoryproduct/{categoryName}")
+		public List<Product> getProdcutByCategory(@PathVariable("categoryName") String categotyName)
+		{
+			List<Product> categoryWiseProduct = new ArrayList<Product>();
+			
+			// active artist products 
+			List<Product> plist = adminserv.allProducts();
+			
+			for (Product product : plist) 
+			{
+				if(product.getCategory().getCategoryName().equals(categotyName)) 
+				{
+					categoryWiseProduct.add(product);
+				}
+			}
+			
+			return categoryWiseProduct;
+		}
 		
 	}
 

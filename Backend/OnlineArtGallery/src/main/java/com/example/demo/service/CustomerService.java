@@ -23,9 +23,17 @@ public class CustomerService {
 		return custRepo.findAll();
 	}
 	
-	
-	public Customer getCustomerById(int loginid) 
+	//
+	public Customer getCustomer(int loginId) 
 	{
-		return custRepo.findById(loginid).get();
+		return custRepo.getCustomer(loginId);
 	}
+	
+	//
+	public Customer getCustomerById(int customerId) 
+	{
+		return custRepo.findById(customerId).get();
+	}
+	
+	
 }
