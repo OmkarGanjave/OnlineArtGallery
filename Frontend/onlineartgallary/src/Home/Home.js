@@ -1,38 +1,80 @@
+import { useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom'
-let Home = () => {
-    let nav = useNavigate();
-    const myStyle={
-      backgroundImage: 
-      "url('https://www.wallpaperup.com/uploads/wallpapers/2016/10/20/1027710/5ed1f59b81d2dde9d3c6ea07550304eb-1000.jpg')",
-      width:'1225px',
-      height:'1000px',
-      marginTop:'0px',
-      // fontSize:'50px',
-      // backgroundSize: 'cover',
-      backgroundRepeat: 'no-repeat',
-  };
-    return(
-        <div className='container-fluid'>
-        <nav className="nav navbar-expand-lg navbar-light bg-light">
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <h5>Online Art Gallary</h5>
-            </div>
-          </div>
-          <li className="nav-item">
-            <button class="btn btn-outline-success btn-sm" onClick={()=>{nav('/login')}}>Login</button>
-          </li>
-          <li className="nav-item">
-            <button class="btn btn-outline-success btn-sm" onClick={()=>{nav('/register')}}>Register</button>
-          </li> 
-        </nav> 
-        <div className='container-fluid' >
-            <h1>Online Art Gallary</h1>
+import Header from './Header';
 
+let Home = () => {
+
+    let nav = useNavigate();
+
+    const[allProducts,setProduct] = useState([]);
+
+    useEffect(()=>{
+      fetch("http://localhost:8080/allproducts")
+      .then(resp => resp.json())
+      .then(data=>setProduct(data))
+      // console.log(allProducts);
+      console.log(allProducts)
+    },[])
+
+    
+
+    function importAll(r) 
+    {
+        // array 
+        let images = {};
+        r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+        return images;
+    }
+
+    const images = importAll(require.context('F:/cdac2022/Frontend/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
+
+    return(
+      
+        <div className='container-fluid'  >
+          
+          <div className='container'>
+            <h1>Online Art Gallary</h1>
+            <br/>
+            <div className="row">
+            {
+              allProducts.map((v)=>{
+                      var pid = v.productId;
+                      var imgName = v.artist.artistId+'_'+pid;
+                      // console.log(imgName);
+                return(
+                      
+                  <div className="col-sm-4">
+                    <div className="card" style={{width:"250px"}}>
+                    <img src={images[imgName+'.jpg']} width="250" height="250"/>
+                    <div className="card-body">
+                      <p><b>{v.productName}</b></p>
+                      <br/>
+                      <p><b>Product Details :-</b> {v.productDiscription}</p>
+                      <br/>
+                      <p><b>Product Price :-</b> {v.price} </p>
+                      <button class="btn btn-success" onClick={()=>{nav('/login')}}>Add to Cart</button>
+                    </div>
+                    </div>
+                    <br/><br/>
+                    
+                  </div>
+                )
+                
+              })
+            }
+            </div>
+            </div>
         </div>
-        </div>
+       
     )
 
 }
+
+
+
+
+  
+  
+
 
 export default Home;

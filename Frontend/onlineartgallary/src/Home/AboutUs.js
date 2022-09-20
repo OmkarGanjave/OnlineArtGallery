@@ -1,10 +1,12 @@
+import Header from "./Header";
 
 let AboutUs = () => {
     
     return(
-        <div>
-           <h1>About Us</h1>
-        <br/>
+        <div className='container-fluid'>
+            
+            <br/>
+           <h1>Online Art Gallary</h1>
         
         </div>
     )

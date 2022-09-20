@@ -1,20 +1,10 @@
 import { Navigate, useNavigate} from 'react-router-dom';
-
+import Header from 'F:/cdac2022/Frontend/onlineartgallary/src/Home/Header.js';
 import axios from "axios";
 import {  useState  } from "react";
 let Login = () => {
 
-    const myStyle={
-        backgroundImage: 
-        "url('https://media.istockphoto.com/illustrations/blur-gradient-sky-background-illustration-id889535070?k=20&m=889535070&s=612x612&w=0&h=mvu4HFuCUhSz4PbgP46qzbGOoUtBAu_M9ioXXHzdnu8=')",
-        width:'62255px',
-        height:'1000px',
-        marginTop:'0px',
-        // fontSize:'50px',
-        // backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-    };
-    
+   
     let nav = useNavigate();
 
     const[resData,setResdata] = useState([]);
@@ -48,7 +38,7 @@ let Login = () => {
             {
             localStorage.setItem("user",JSON.stringify(response.data));
             
-            nav('/artisthome');
+            nav('/searchproduct');
             
             }
             else if(response.data.role == "Customer")
@@ -76,14 +66,17 @@ let Login = () => {
     return(
         
        
-        <div class="container mt-3" >
+        <div className="container-fluid" >
+            
+            <br/>
+            <div className="container" >
             <h2>Login</h2>
             <br/>
             <form>
                 <div class="row">
                     <div className="col-md-3">
                         <input type="text" name="user_id" class="form-control"
-                        placeholder="LOGIN ID"
+                        placeholder="USER ID"
                         onChange={(e)=>onInputChange(e)}
                         />
                     </div>
@@ -107,6 +100,7 @@ let Login = () => {
             <br/><br/>
             
             <h4>{err}</h4>
+            </div>
         </div>
     );
 }

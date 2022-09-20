@@ -1,13 +1,29 @@
-
+import {Link,Route,Routes} from 'react-router-dom';
 import axios from "axios";
 import { useState,useEffect } from "react";
 
+import { Navigate, useNavigate} from 'react-router-dom';
+
 let  AddProduct = () => {
+
+    const[category,setCategory] = useState([]);
+
+    useEffect(()=>{
+      fetch("http://localhost:8080/getcategories")
+      .then(resp => resp.json())
+      .then(data=>setCategory(data))
+      // console.log(allProducts);
+      console.log(category)
+    },[])
+
+    let nav = useNavigate();
 
     let user =JSON.parse(localStorage.getItem('user'));
 
+    const[addedProduct,setAddedProduct] = useState([]);
+
     const[product,setProduct] = useState({  
-        artistId:user.user_id,
+        loginId:user.loginId,
         productName:"",
         productDiscription:"",
         price:0,
@@ -22,43 +38,38 @@ let  AddProduct = () => {
         categoryName,
         } = product;
 
-    const[file,setFile]=useState([]);
+    const[artistid,setArtistid] = useState();
+    const[productid,setProductid] = useState();
 
     const onInputChange = (e) => {
         setProduct({...product,[e.target.name]:e.target.value});
-        setFile({...file,[e.target.name]:e.target.files[0]});
+        //setFile({...file,[e.target.name]:e.target.files[0]});
     }; 
 
     var addProduct = (e) => {
         e.preventDefault();
         
         console.log(product);
-        console.log(file);
 
-        const formaData = new FormData();
-        formaData.append('product',product);
-        formaData.append('file',file);
+        axios.post("http://localhost:8080/addProduct",product)
+        .then(response=>{setAddedProduct(response.data)
 
-        console.log(formaData);
+            alert("Product detials uploaded successfully.")
 
+            console.log(response.data.productId)
+            setProductid(response.data.productId)
 
+            localStorage.setItem("productId",JSON.stringify(response.data.productId));
+
+            console.log(response.data.loginId)
+            //setArtistid(response.data.loginId)
+            
+            //localStorage.setItem("artistId",JSON.stringify(response.data.loginId));
+
+            nav('/uploadImage');
+        })
+        .catch(error=>console.log(error));
         
-        // let res = fetch("http://localhost:8080/addproduct",{method:'POST',body:formaData,
-        // headers: {
-        //     'Content-Type': 'multipart/form-data,image/jpeg'
-        //   },
-        // });
-
-        let res = axios.post("http://localhost:8080/addproduct",formaData);
-
-        if(res == 1)
-        {
-            console.log("Product Added !");
-        }
-        else
-        {
-            console.log("Product not Added !");
-        }
 
     }
 
@@ -69,17 +80,23 @@ let  AddProduct = () => {
            <h2>Add Product</h2>
             <br/>
                 <form>
-                    <div class="row">
+                    <div className='row'>
                         <div class="col-sm-6 offset-sm-3">
                             <input type="text" name="productName" class="form-control" placeholder="Product Name"
                             onChange={(e)=>onInputChange(e)}
                         />   
                         </div>
                         <br/><br/>
-                        <div class="col-sm-6 offset-sm-3">
+                        <div className="col-sm-6 offset-sm-3">
+                           {/* <select name="categoryName" id="categoryName" className='dropdown'>
+                                <option value="painting">painting</option>
+                                <option value="sclupture">sclupture</option>
+                                <option value="sketche">sketche</option>
+                            </select> */}
                             <input type="text" name="categoryName" class="form-control" placeholder="Product category"
                             onChange={(e)=>onInputChange(e)}
                         />   
+                        
                         </div>
                     <br/><br/>
                         <div class="col-sm-6 offset-sm-3">
@@ -88,7 +105,7 @@ let  AddProduct = () => {
                         />   
                         </div>
                         <br/><br/>
-                        <div class="col-sm-6 offset-sm-3">
+                        <div className="col-sm-6 offset-sm-3">
                             <input type="number" name="price" class="form-control" placeholder="Product price"
                            onChange={(e)=>onInputChange(e)}
                         />   
@@ -96,14 +113,12 @@ let  AddProduct = () => {
                     </div>
                     <br/>
                         <div class="col-sm-2 offset-sm-3">
-                            <input type="file" name="file" class="form-control"
-                            enctype="multipart/form-data"
-                            onChange={(e)=>setFile(e.target.files[0])}
-                            /> 
                             <br/>
                             <button type="submit" class="btn btn-primary mt-4" onClick={(v)=>{addProduct(v)}}> AddProduct </button> 
                          </div>
                 </form>
+              
+                
         </div>
     );
 } 

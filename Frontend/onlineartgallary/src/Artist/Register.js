@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useReducer, useState  } from "react";
-
+import Header from 'F:/cdac2022/Frontend/onlineartgallary/src/Home/Header.js';
 // const init = {
 //     firstName:{value:0, hasError: true,touched: false, error:""},
 //     lastName:{value:0, hasError: true,touched: false, error:""},
@@ -177,26 +177,30 @@ let Register = () => {
     var sandData = (e) => {
         e.preventDefault();
 
-        axios.post("http://localhost:8080/reg",artist).then(response=>setResdata(response.data)).catch(error=>console.log(error));
+        axios.post("http://localhost:8080/reg",artist)
+        .then(response=>setResdata(response.data))
+        .catch(error=>console.log(error));
         console.log(resData);
     }
 
     return(
-        <div class="container mt-3">
-            <h2>Artist Register</h2>
+
+        <div className="container-fluid" >
+            
+            <br/>
+            <div className="container">
+            <h2>Registeration</h2>
             <br/>
             <form>
-            <div class="row">
-                <div class="col">
+            <div className="row">
+                <div className="col">
                    
                     <input type="text" name="firstName" class="form-control" placeholder="First Name"
                     onChange={(e)=>onInputChange(e)}
                      
                     />
-                    
-
                 </div>
-                <div class="col">
+                <div className="col">
                    
                     <input type="text" name="lastName" class="form-control" placeholder="Last Name"
                     onChange={(e)=>onInputChange(e)}
@@ -205,48 +209,47 @@ let Register = () => {
                 </div>
             </div>
             <br/><br/>
-            <div class="row">
-                <div class="col">
-                    
-                    <input type="text" name="emailId" class="form-control" placeholder="Email Address"
-                    onChange={(e)=>onInputChange(e)}
-                    />
+            <div className="row">
+                <div className="col">
+
+                    <input type="text" name="emailId" className="form-control" placeholder="Email Address"
+                    onChange={(e)=>onInputChange(e)}/>
                 </div>
-                <div class="col">
-                   
-                    <input type="text" name="contactNo" class="form-control" placeholder="Contact Number"
+                
+                <div classNames="col">
+                    <input type="text" name="contactNo" className="form-control" placeholder="Contact Number"
                     onChange={(e)=>onInputChange(e)}
                     />
                 </div>
             </div>
             <br/><br/>
-            <div class="row">
-                <div class="col">
-                    <input type="text" name="address" class="form-control" placeholder="Address"
+            <div className="row">
+                <div className="col">
+                    <input type="text" name="address" className="form-control" placeholder="Address"
                     onChange={(e)=>onInputChange(e)}
                     />
                 </div>
-                <div class="col">
+                <div className="col">
                     
                 </div>
             </div>
             <br/><br/>
-            <div class="row">
-                <div class="col">
+            <div className="row">
+                <div className="col">
                     <input type="text" name="userId" class="form-control" placeholder="User ID"
                     onChange={(e)=>onInputChange(e)}
                     />
                 </div>
-                <div class="col">
+                <div className="col">
                     <input type="text" name="password" class="form-control" placeholder="Password"
                     onChange={(e)=>onInputChange(e)}
                     />
                 </div>
             </div>
             <br/><br/>
-            <div class="row">
-            <div class="col">
-                <button type="submit"  class="btn btn-primary" onClick={(v)=>{sandData(v)}}>Register</button>
+            <div className="row">
+            <div className="col">
+                <button type="submit"  className="btn btn-primary" onClick={(v)=>{sandData(v)}}>Register</button>
                 </div>
                 <div class="col">
                 <button type="reset" className="btn btn-primary" >Clear</button>
@@ -256,6 +259,7 @@ let Register = () => {
 
            
              <h4>{resData.emailId}</h4>
+             </div>
         </div>     
         
             

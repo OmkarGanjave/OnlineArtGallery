@@ -12,10 +12,13 @@ import SearchProduct from './Artist/SearchProduct';
 
 import Customerhome from './Cutomer/CustomerHome';
 import Navigates from './Navigates';
+import Header from './Home/Header';
 function App() {
   return (
     <div className="App">
+      <Header/>
         <Navigates/>
+        
     </div>
   );
 }
