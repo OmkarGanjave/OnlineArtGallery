@@ -6,19 +6,19 @@ import { Navigate, useNavigate} from 'react-router-dom';
 
 let  AddProduct = () => {
 
-    const[category,setCategory] = useState([]);
+    //const[category,setCategory] = useState([]);
 
-    useEffect(()=>{
-      fetch("http://localhost:8080/getcategories")
-      .then(resp => resp.json())
-      .then(data=>setCategory(data))
-      // console.log(allProducts);
-      console.log(category)
-    },[])
+    // useEffect(()=>{
+    //   fetch("http://localhost:8080/getcategories")
+    //   .then(resp => resp.json())
+    //   .then(data=>setCategory(data))
+    //   // console.log(allProducts);
+    //   console.log(category)
+    // },[])
 
     let nav = useNavigate();
 
-    let user =JSON.parse(localStorage.getItem('user'));
+    let user =JSON.parse(localStorage.getItem('artist'));
 
     const[addedProduct,setAddedProduct] = useState([]);
 
@@ -61,7 +61,7 @@ let  AddProduct = () => {
 
             localStorage.setItem("productId",JSON.stringify(response.data.productId));
 
-            console.log(response.data.loginId)
+            // console.log(response.data.loginId)
             //setArtistid(response.data.loginId)
             
             //localStorage.setItem("artistId",JSON.stringify(response.data.loginId));

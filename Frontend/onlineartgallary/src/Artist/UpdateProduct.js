@@ -47,28 +47,20 @@ let UpdateProduct=()=>{
     e.preventDefault();
     console.log("Update Product"+product.productName);
     let updateProduct = {
+
         productId:product1.productId,
         artistId:product1.artist.artistId,
         productName:product.productName,
         productDiscription:product.productDiscription,
         price:product.price,
         categoryName:product.categoryName
+
     }
     console.log("final product detils fro updatetion ");
     console.log(updateProduct);
 
     // update url
     var url = "http://localhost:8080/updateproduct";
-
-    // info about requset
-    // const reqData = {
-    //     method: "post",
-    //     // Headers:
-    //     // {
-    //     //     "content-type":"application/json"
-    //     // },
-    //     body:updateProduct 
-    // }
 
     axios.post(url,updateProduct)
         .then(response=>{
@@ -90,6 +82,8 @@ let UpdateProduct=()=>{
     
 
     var imageNAme = product1.artist.artistId+"_"+product1.productId;
+    console.log("Image Name = "+imageNAme)
+    
     return (
         <div className='container'>
             <br/>

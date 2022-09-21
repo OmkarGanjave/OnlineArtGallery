@@ -1,7 +1,6 @@
 import { useEffect,user, useState } from "react";
 import {useNavigate} from 'react-router-dom'
-import Header from "../Home/Header";
-import Header2 from "../Home/ArtistHeader";
+
 let SearchProduct = () => {
 
     let nav = useNavigate();
@@ -14,35 +13,69 @@ let SearchProduct = () => {
         return images;
     }
 
-    const images = importAll(require.context('E:/CDAC/WP Programming/React Programming/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
+    const images = importAll(require.context('F:/cdac2022/Frontend/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
 
-    let user =JSON.parse(localStorage.getItem('user'));
+    let user =JSON.parse(localStorage.getItem('artist'));
 
     const[res,setResdata]=useState([]);
     const[artistId,setArtistid]=useState();
 
     useEffect(()=>{
-        fetch("http://localhost:8080/searchproduct/"+user.user_id).then(resp => resp.json())
+        console.log(user.user_id);
+        var url = "http://localhost:8080/searchproduct/"+user.user_id;
+        console.log(url);
+        fetch(url).then(resp => resp.json())
         .then(data =>{
             
             setResdata(data)
             setArtistid(data[0].artist.artistId)
-            console.log(data[0].artist.artistId)    
+            // console.log(data[0].artist.artistId)    
         })
        
         // console.log(res.artist.loginId.loginId);
     },[]);
     
+    const[product,setProduct] = useState({  
+        userId:user.user_id,
+            productId:0,
+            productName:"",
+            productDiscription:"",
+            price:0,
+            categoryName:" ",
+            });
+    
+            const{  
+               customerId,
+                productId,
+                productName,
+                productDiscription,
+                price,
+                categoryName,
+                } = product;
+    
+                const onInputChange = (e) => {
+                    setProduct({...product,[e.target.name]:e.target.value});
+                    
+                };
 
+    let updateProduct=(e)=>{
+        //let pid=product.productId;
+       
+        localStorage.setItem('product',JSON.stringify(e));
+
+        console.log(e);
+        console.log(e.productId);
+        nav('/updateproduct');
+    }
     
     return(
         <div className="container">
-            <Header2/>
+            
             <br/><br/>
            {/* <h4>{user.user_id}</h4> */}
            <h3><b> Products </b></h3>
             
-            {/* <button class="btn btn-primary" onClick={()=>{nav('/addproduct')}}>AddProduct</button> */}
+            <button class="btn btn-primary" onClick={()=>{nav('/addproduct')}}>AddProduct</button>
             <br/><br/>
             <div className="row">
             
@@ -60,6 +93,7 @@ let SearchProduct = () => {
                     res.map((v)=>{
                         var pid = v.productId;
                         var imgName = artistId+'_'+pid;
+                        // console.log(imgName);
                         return(
                                 <div className="col-sm-4">
                         <div className="card" style={{width:"250px"}}>
@@ -70,7 +104,7 @@ let SearchProduct = () => {
                         <p><b>Product Details :-</b>{v.productDiscription}</p>
                         <br/>
                         <p><b>Product Price :-</b>{v.price} </p>
-                        <button className="btn btn-primary btn-sm" >Update</button>
+                        <button className="btn btn-primary btn-sm" onClick={()=>{updateProduct(v)}}>Update</button>
 
                         <button className="btn btn-secondary btn-sm" >Delete</button>
                         </div>
@@ -79,17 +113,7 @@ let SearchProduct = () => {
                         
                     
                              <br/><br/>
-                            {/* <tr>
-                                <td>
-                                <img src={images[imgName+'.jpg']} width="200" height="150"/></td>
-                                <td>{v.productId}</td>
-                                <td>{v.productName}</td>
-                                <td>{v.productDiscription}</td>
-                                <td>{v.category.categoryName}</td>
-                                <td>{v.price}</td>
-                                <td><button className="btn btn-primary btn-sm" >Update</button></td>
-                                <td><button className="btn btn-secondary btn-sm" >Delete</button></td>
-                        </tr> */}
+                            
                         </div>
                         )
                     })

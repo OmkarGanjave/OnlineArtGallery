@@ -1,14 +1,4 @@
-// function importAll(r) 
-// {
-//     // array 
-//     let images = {};
-//     r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
-//     return images;
-// }
-  
-//   const images = importAll(require.context('./images', false, /\.(png|jpe?g|svg)$/));
-  
-//   <img src={images['1_4.jpg']} />
+
 
 import { Navigate, useNavigate} from 'react-router-dom';
 import { useState } from "react";
@@ -17,7 +7,7 @@ let UploadImage = ()=>{
 
     let nav = useNavigate();
 
-    let user =JSON.parse(localStorage.getItem('user'));
+    let user =JSON.parse(localStorage.getItem('artist'));
     let productId = JSON.parse(localStorage.getItem('productId'));
 
     const[file,setPicture] = useState([]);
@@ -26,10 +16,11 @@ let UploadImage = ()=>{
     const submitData = (e) => {
         e.preventDefault();
         
-        let userId = user.loginId;
+        
+        let artistId = user.loginId;
 
-        console.log(userId);
-        console.log(productId);
+        console.log(user.loginId);
+        console.log(productId.productId);
 
         var fd = new FormData();
         //fd.append("name", name);
@@ -46,7 +37,7 @@ let UploadImage = ()=>{
             body: fd
         }
         
-        let url = "http://localhost:8080/addimage/"+userId+"/"+productId;
+        let url = "http://localhost:8080/addimage/"+artistId+"/"+productId;
 
         console.log(url);
 

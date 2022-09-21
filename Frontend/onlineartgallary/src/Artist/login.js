@@ -37,9 +37,9 @@ let Login = () => {
             if(response.data.role == "Artist")
             {
 
-            localStorage.setItem("user",JSON.stringify(response.data));
-            
-            nav('/searchproduct');
+                localStorage.setItem("artist",JSON.stringify(response.data));
+
+                nav('/searchproduct');
 
           
             

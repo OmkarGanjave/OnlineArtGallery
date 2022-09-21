@@ -6,21 +6,26 @@ let UpdateImage = ()=>{
 
     let nav = useNavigate();
 
-    let user =JSON.parse(localStorage.getItem('user'));
+    let user =JSON.parse(localStorage.getItem('artist'));
 
     let product1 =JSON.parse(localStorage.getItem('product'));
 
     const[file,setPicture] = useState([]);
 
-    // console.log("pid"+product1.productId);
-    // console.log("artist id"+product1.artist.artistId);
+     console.log("pid"+product1.productId);
+    console.log("artist id"+user.loginId);
 
-    const submitData = (e) => {
+    const submitData = (e) => 
+    {
         e.preventDefault();
         
         
+        // let artistId = user.loginId;
 
-        // console.log(product1.productId);
+        // console.log("artist id for update"+user.loginId);
+        // console.log("pid for update"+product1.productId);
+
+        console.log(product1.productId);
         // console.log(product1.artist.artistId);
 
         var fd = new FormData();
@@ -38,7 +43,7 @@ let UpdateImage = ()=>{
             body: fd
         }
         
-        let url = "http://localhost:8080/addimage/"+product1.artist.artistId+"/"+product1.productId
+        let url = "http://localhost:8080/addimage/"+user.loginId+"/"+product1.productId;
         console.log(url);
 
         fetch(url,reqData)
