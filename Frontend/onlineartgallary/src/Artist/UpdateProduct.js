@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect,useState } from "react";
 import {useNavigate} from "react-router-dom";
 
@@ -5,16 +6,27 @@ let UpdateProduct=()=>{
 
     
     let nav = useNavigate();
+
     let product1 =JSON.parse(localStorage.getItem('product'));
    // const[productid,setProductid] = useState();
    
+   function importAll(r) 
+   {
+       // array 
+       let images = {};
+       r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+       return images;
+   }
+
+   const images = importAll(require.context('F:/cdac2022/Frontend/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
+
     const[product,setProduct] = useState({  
 
         productId:0,
         productName:"",
         productDiscription:"",
         price:0,
-        categoryName:" ",
+        categoryName:"",
         });
 
         const{  
@@ -30,50 +42,109 @@ let UpdateProduct=()=>{
                 
             }; 
     
-   let update=()=>{
-       
-   }
-   
-   
-    //  useEffect(()=>{
-    //     fetch("http://localhost:8080/getproduct/"+product.productId).then(resp => resp.json()).then(data => setResdata(data))
-    //     //console.log(res);
-    //  },[]);
+   let update=(e)=>
+   {
+    e.preventDefault();
+    console.log("Update Product"+product.productName);
+    let updateProduct = {
+        productId:product1.productId,
+        artistId:product1.artist.artistId,
+        productName:product.productName,
+        productDiscription:product.productDiscription,
+        price:product.price,
+        categoryName:product.categoryName
+    }
+    console.log("final product detils fro updatetion ");
+    console.log(updateProduct);
 
+    // update url
+    var url = "http://localhost:8080/updateproduct";
+
+    // info about requset
+    // const reqData = {
+    //     method: "post",
+    //     // Headers:
+    //     // {
+    //     //     "content-type":"application/json"
+    //     // },
+    //     body:updateProduct 
+    // }
+
+    axios.post(url,updateProduct)
+        .then(response=>{
+            console.log(response.data);
+
+            if(response.data != null)
+            {
+                alert("Product details updated succesfully !!! ")
+                nav('/searchproduct');
+            }
+            else
+            {
+                alert("Product details updated succesfully !!! ")
+                nav('/updateproduct');
+            }
+        })
+   
+    }
+    
+
+    var imageNAme = product1.artist.artistId+"_"+product1.productId;
     return (
-
-        <div className="container">
-        <form action="" method="get" >
-           
+        <div className='container'>
+            <br/>
+        <div className='row'>
+        {/* <div className="col-sm-4">   
+                {/* <img src={images[imageNAme+'.jpg']} width="350" height="450"/> 
+            </div> */}
+            <div className="col-sm-4">  
+            <a href="/updateImage"> 
+                <img src={images[imageNAme+'.jpg']} width="350" height="450"/>
+            </a>
+            </div>
+        <div class="col-sm-4 ">
+        <form >
             <div className="mt-3 mb-3">
-                <label htmlFor="productId" className="form-label">Product ID : </label>
-                <input type="text" readOnly className="form-control-plaintext" id="productId" defaultValue={product.productId} />
+                <label for="productId" className="form-label">Product ID : </label>
+                <input type="text" readOnly className="form-control-plaintext" id="productId" Value={product1.productId} 
+                onChange={(e)=>onInputChange(e)}
+                />
             </div>
 
             <div className="mt-3 mb-3">
-                <label htmlFor="productName" className="form-label"> productName: : </label>
-                <input type="text" name="productName" id="productName" className="form-control" defaultValue={product.productName} />
+                <label for="productName" className="form-label"> productName: : </label>
+                <input type="text" name="productName" id="productName" className="form-control" Value={product1.productName} 
+                onChange={(e)=>onInputChange(e)}
+                />
             </div>
             
             <div className="mt-3 mb-3">
-                <label htmlFor="productDiscription" className="form-label"> productDiscription : </label>
-                <input type="text" name="productDiscription" id="productDiscription" className="form-control" defaultValue={product.productDiscription}/>
+                <label for="productDiscription" className="form-label"> productDiscription : </label>
+                <input type="text" name="productDiscription" id="productDiscription" className="form-control" Value={product1.productDiscription}
+                onChange={(e)=>onInputChange(e)}
+                />
             </div>
            
             <div className="mt-3 mb-3">
-                <label htmlFor="price" className="form-label"> productDiscription : </label>
-                <input type="text" name="price" id="price" className="form-control"defaultValue={product.price} />
+                <label for="price" className="form-label"> product price : </label>
+                <input type="text" name="price" id="price" className="form-control" Value={product1.price}
+                onChange={(e)=>onInputChange(e)}
+                 />
             </div>
 
             <div className="mt-3 mb-3">
-                <label htmlFor="categoryName" className="form-label">categoryName : </label>
-                <input type="text" readOnly name="categoryName" id="categoryName" className="form-control"defaultValue={product.categoryName} />
+                <label for="categoryName" className="form-label">categoryName : </label>
+                <input type="text"  name="categoryName" id="categoryName" className="form-control" Value={product1.category.categoryName} 
+                onChange={(e)=>onInputChange(e)}
+                />
             </div>
 
             <div>
-                <button className="btn btn-primary w-100" onClick={(e)=>update(e)} >update</button>
+                <button className="btn btn-primary" onClick={(e)=>update(e)} >update</button>
             </div>
         </form>
+        </div>
+    </div>
     </div>
     );
 }

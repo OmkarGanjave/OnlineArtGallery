@@ -2,23 +2,26 @@
 import { Navigate, useNavigate} from 'react-router-dom';
 import { useState } from "react";
 
-let UploadImage = ()=>{
+let UpdateImage = ()=>{
 
     let nav = useNavigate();
 
     let user =JSON.parse(localStorage.getItem('user'));
-    let productId = JSON.parse(localStorage.getItem('productId'));
+
+    let product1 =JSON.parse(localStorage.getItem('product'));
 
     const[file,setPicture] = useState([]);
 
+    // console.log("pid"+product1.productId);
+    // console.log("artist id"+product1.artist.artistId);
 
     const submitData = (e) => {
         e.preventDefault();
         
-        let userId = user.loginId;
+        
 
-        console.log(userId);
-        console.log(productId);
+        // console.log(product1.productId);
+        // console.log(product1.artist.artistId);
 
         var fd = new FormData();
         //fd.append("name", name);
@@ -35,8 +38,7 @@ let UploadImage = ()=>{
             body: fd
         }
         
-        let url = "http://localhost:8080/addimage/"+userId+"/"+productId;
-
+        let url = "http://localhost:8080/addimage/"+product1.artist.artistId+"/"+product1.productId
         console.log(url);
 
         fetch(url,reqData)
@@ -46,12 +48,12 @@ let UploadImage = ()=>{
             
         if(data == 1)
         {
-            alert("Product Image uploaded successfully.")
-            nav('/searchproduct');
+            alert("Product Image updated successfully.")
+            nav('/updateproduct');
         }
         else
         {
-            alert("failed to upload Product Image Try again...")
+            alert("failed to update Product Image Try again...")
             nav('/uploadImage');
         }
 
@@ -63,7 +65,7 @@ let UploadImage = ()=>{
         <div className="container">
             <div className="row">
                 <div className="col-sm-6 offset-sm-3">
-                            Upload image : 
+                            Update image : 
                             <input type="file" name="file" 
                             class="form-control"
                             onChange={(e)=>setPicture(e.target.files[0])} /> 
@@ -79,4 +81,4 @@ let UploadImage = ()=>{
     )
 }
 
-export default UploadImage;
+export default UpdateImage;

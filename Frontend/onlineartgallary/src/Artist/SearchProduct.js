@@ -14,7 +14,7 @@ let SearchProduct = () => {
         return images;
     }
 
-    const images = importAll(require.context('C:/Users/omkar/OneDrive/Documents/OMKAR/C-DAC/March2022/Project/Online Art Gallary/ProjectOnlineArtGallery/OnlineArtGallery/Frontend/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
+    const images = importAll(require.context('F:/cdac2022/Frontend/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
 
     let user =JSON.parse(localStorage.getItem('user'));
 
@@ -22,7 +22,8 @@ let SearchProduct = () => {
     const[artistId,setArtistid]=useState();
 
     useEffect(()=>{
-        fetch("http://localhost:8080/searchproduct/"+user.user_id).then(resp => resp.json())
+        fetch("http://localhost:8080/searchproduct/"+user.user_id)
+        .then(resp => resp.json())
         .then(data =>{
             
             setResdata(data)
@@ -76,12 +77,14 @@ const[product,setProduct] = useState({
     
     return(
         <div className="container">
-            <Header2/>
+            
             <br/><br/>
            {/* <h4>{user.user_id}</h4> */}
            <h3><b> Products </b></h3>
             
-            {/* <button class="btn btn-primary" onClick={()=>{nav('/addproduct')}}>AddProduct</button> */}
+            <button class="btn btn-primary" onClick={()=>{nav('/addproduct')}}>AddProduct</button>
+            <br/><br/>
+            <button class="btn btn-primary" onClick={()=>{nav('/persnoalnfo')}}>Persnoal Information</button>
             <br/><br/>
             <div className="row">
             
@@ -111,24 +114,37 @@ const[product,setProduct] = useState({
                         <p><b>Product Price :-</b>{v.price} </p>
                         <button className="btn btn-primary btn-sm" onClick={()=>{updateProduct(v)}} >Update</button>
 
-                        <button className="btn btn-secondary btn-sm" >Delete</button>
+                        <button className="btn btn-secondary btn-sm" 
+                        onClick={()=>{
+                            console.log("selected product is for deletion "+v.productId);
+
+                            var url = "http://localhost:8080/deleteproduct/"+v.productId;
+
+                            console.log(url);
+
+                            fetch(url).then(resp => resp.json())
+                            .then(data =>{
+                                
+                                if(data == true)
+                                {
+                                    alert("Product deleted succesfully !!! ");
+                                    nav('/searchproduct');
+                                }    
+                                else
+                                {
+                                    alert("Failed to Product deleted Try again !!! ");
+                                    nav('/searchproduct');
+                                }
+                            })
+                        }}
+                        >Delete</button>
                         </div>
                         </div>
                         <br/><br/>
                         
                     
                              <br/><br/>
-                            {/* <tr>
-                                <td>
-                                <img src={images[imgName+'.jpg']} width="200" height="150"/></td>
-                                <td>{v.productId}</td>
-                                <td>{v.productName}</td>
-                                <td>{v.productDiscription}</td>
-                                <td>{v.category.categoryName}</td>
-                                <td>{v.price}</td>
-                                <td><button className="btn btn-primary btn-sm" >Update</button></td>
-                                <td><button className="btn btn-secondary btn-sm" >Delete</button></td>
-                        </tr> */}
+                            
                         </div>
                         )
                     })
