@@ -12,7 +12,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n       \"userId\":\"Ashwini53\",\r\n       \"password\":\"Ashwini@53\",\r\n        \"firstName\": \"Ashwini\",\r\n        \"lastName\": \"Pawar\",\r\n        \"emailId\": \"ap53@gmail.com\",\r\n        \"contactNo\": \"9876593210\",\r\n        \"address\": \"pune\"\r\n}",
+					"raw": "{\r\n       \"userId\":\"Pooja19\",\r\n       \"password\":\"Pooja@19\",\r\n        \"firstName\": \"Pooja\",\r\n        \"lastName\": \"Bolkar\",\r\n        \"emailId\": \"pb19@gmail.com\",\r\n        \"contactNo\": \"9321098765\",\r\n        \"address\": \"pune\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -68,7 +68,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"firstName\":\"Prajwal\",\r\n    \"lastName\":\"patil\",\r\n    \"emailId\":\"pvp@gmail.com\",\r\n    \"contactNo\":\"9532598541\",\r\n    \"address\":\"Kolhapur\",\r\n    \"userId\":\"pvp2896\",\r\n    \"password\":\"pvp@2896\",\r\n    \"role\":\"Artist\"\r\n}",
+					"raw": "{\r\n    \"firstName\":\"Omkar\",\r\n    \"lastName\":\"Ganjave\",\r\n    \"emailId\":\"og@gmail.com\",\r\n    \"contactNo\":\"9854195325\",\r\n    \"address\":\"Kolhapur\",\r\n    \"userId\":\"og57\",\r\n    \"password\":\"og@57\",\r\n    \"role\":\"Artist\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -96,7 +96,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"user_id\":\"pvp2896\",\r\n    \"password\":\"pvp@2896\"\r\n}",
+					"raw": "{\r\n    \"user_id\":\"og57\",\r\n    \"password\":\"og@57\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -146,7 +146,7 @@
 			"response": []
 		},
 		{
-			"name": "add product",
+			"name": "add product Image",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -156,25 +156,30 @@
 						{
 							"key": "file",
 							"type": "file",
-							"src": "/F:/cdac2022/Web Programming/Day11/Assignments/6.jpg"
+							"src": "/F:/cdac2022/Project/OnlineArtGallery/OnlineArtGallery/Dummy  Data/Scluptures/Kalam_Bronze_02_720x.webp"
 						},
 						{
-							"key": "product",
-							"value": "{\n\"artistId\":\"pvp2896\",\n\"categoryName\":\"sclupture\",    \n\"productName\":\"sclupture 1\",\n    \"productDiscription\":\"This is sclupture 1\",\n    \"price\":\"850\"\n}",
+							"key": "loginId",
+							"value": "2",
 							"contentType": "application/json",
+							"type": "default"
+						},
+						{
+							"key": "productId",
+							"value": "4",
 							"type": "default"
 						}
 					]
 				},
 				"url": {
-					"raw": "http://localhost:8080/addproduct",
+					"raw": "http://localhost:8080/addimage",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"addproduct"
+						"addimage"
 					]
 				}
 			},
@@ -245,16 +250,195 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/addTocart/3/3",
+					"raw": "http://localhost:8080/addTocart?loginid=3&productid=1",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"addTocart",
-						"3",
+						"addTocart"
+					],
+					"query": [
+						{
+							"key": "loginid",
+							"value": "3"
+						},
+						{
+							"key": "productid",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "place order",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/placeorder/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"placeorder",
 						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rating",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/rating/3/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"rating",
+						"3",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add category",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"categoryName\":\"sketch\"\r\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/addcategory",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"addcategory"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "account management",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/manageaccount/2/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"manageaccount",
+						"2",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get active artist product's (Home Page)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/allproducts",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"allproducts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get products cateogry wise",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/categoryproduct/painting",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"categoryproduct",
+						"painting"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rating review",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/reviewRating",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"reviewRating"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "add Product Info",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"loginId\":\"2\",\r\n\"categoryName\":\"sclupture\",    \r\n\"productName\":\"sclupture 1\",\r\n    \"productDiscription\":\"This is sclupture 1\",\r\n    \"price\":\"450\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/addProduct",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"addProduct"
 					]
 				}
 			},

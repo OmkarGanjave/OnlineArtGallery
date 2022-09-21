@@ -8,12 +8,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.model.AddImage;
 import com.example.demo.model.AddProduct;
 import com.example.demo.model.Artist;
 import com.example.demo.model.ArtistRegister;
@@ -59,19 +62,47 @@ public class ArtistController {
 		return artistservice.getAll();
 	}
 	
-	// add product
-	@PostMapping("/addproduct")
-	public int addProduct(@RequestPart("product") AddProduct pro,@RequestPart("file") MultipartFile file)
+	//add product info
+	@PostMapping("/addProduct")
+	public Product addProduct(@RequestBody AddProduct pro) 
 	{
+		System.out.println("login Id :- "+pro.getLoginId());
+		
 		Artist artist = artistservice.getArtist(pro.getLoginId());
 		
-		//System.out.println(artist);
+		System.out.println(artist);
 		
 		Category category = catservice.getCategoryByName(pro.getCategoryName());
 		
-//		System.out.println(category.getCategoryId());
+		System.out.println(category.getCategoryId());
 		
 		Product addProduct = new Product(artist, category, pro.getProductName(), pro.getProductDiscription(), pro.getPrice());
+		
+		// save product
+		return productserv.save(addProduct);
+	}
+	
+	
+	// add product image
+	@PostMapping(value="/addimage/{loginId}/{productId}" ,consumes = "multipart/form-data")
+	public int addProductImage(@PathVariable("loginId") int loginId,@PathVariable("productId") int productId,@RequestBody MultipartFile file)
+	{
+		System.out.println("hi");
+		
+		Artist artist = artistservice.getArtist(loginId);
+		
+		System.out.println(artist);
+		
+//		Category category = catservice.getCategoryByName(pro.getCategoryName());
+//		
+//		System.out.println(category.getCategoryId());
+//		
+//		Product addProduct = new Product(artist, category, pro.getProductName(), pro.getProductDiscription(), pro.getPrice());
+		
+		Product addedProduct = productserv.getProduct(productId);
+		
+		System.out.println("Product Id :- "+addedProduct.getProductId()+"\tProduct Name :- "+addedProduct.getProductName());
+		
 		
 		boolean flag = true;
 		
@@ -81,12 +112,12 @@ public class ArtistController {
 			try 
 			{
 				// save product
-				productserv.save(addProduct);
+		//		productserv.save(addProduct);
 				
 				
 				byte[] data = file.getBytes();
 				
-				Path path = Paths.get("images//"+artist.getArtistId()+"_"+addProduct.getProductId()+".jpg");
+				Path path = Paths.get("F:/cdac2022/Frontend/onlineartgallary/src/images/"+artist.getArtistId()+"_"+addedProduct.getProductId()+".jpg");
 				
 				Files.write(path, data);
 			
@@ -110,6 +141,8 @@ public class ArtistController {
 			return 0;
 		}
 	}
+	
+	
 	
 
 }

@@ -43,7 +43,7 @@ let Login = () => {
             }
             else if(response.data.role == "Customer")
             {
-                localStorage.setItem("user",response.data);
+                localStorage.setItem("customer",JSON.stringify(response.data));
             
                 nav('/customerhome');
             }
