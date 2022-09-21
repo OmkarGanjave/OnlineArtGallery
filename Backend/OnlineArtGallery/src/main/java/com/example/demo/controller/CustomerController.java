@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.Artist;
@@ -230,6 +231,17 @@ public class CustomerController {
 			return categoryWiseProduct;
 		}
 		
+		@GetMapping("/viewcart/{loginId}")
+		public List<CartDetails> getCartofCustomer(@PathVariable("loginId") int loginId)
+		{
+			Customer customer = cs.getCustomer(loginId);
+			
+			Cart cart = customer.getCart();
+			
+			List<CartDetails> cartdetails = cart.getCartdetails();
+			
+			return cartdetails;
+		}
 	}
 
 
