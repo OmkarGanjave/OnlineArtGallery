@@ -14,7 +14,7 @@ let SearchProduct = () => {
         return images;
     }
 
-    const images = importAll(require.context('F:/cdac2022/Frontend/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
+    const images = importAll(require.context('C:/Users/omkar/OneDrive/Documents/OMKAR/C-DAC/March2022/Project/Online Art Gallary/ProjectOnlineArtGallery/OnlineArtGallery/Frontend/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
 
     let user =JSON.parse(localStorage.getItem('user'));
 
@@ -33,6 +33,45 @@ let SearchProduct = () => {
         // console.log(res.artist.loginId.loginId);
     },[]);
     
+
+    // -------------------------------------------------------
+
+
+
+const[product,setProduct] = useState({  
+    userId:user.user_id,
+        productId:0,
+        productName:"",
+        productDiscription:"",
+        price:0,
+        categoryName:" ",
+        });
+
+        const{  
+           customerId,
+            productId,
+            productName,
+            productDiscription,
+            price,
+            categoryName,
+            } = product;
+
+            const onInputChange = (e) => {
+                setProduct({...product,[e.target.name]:e.target.value});
+                
+            }; 
+    
+    let updateProduct=(e)=>{
+        let pid=product.productId;
+       
+        localStorage.setItem('product',JSON.stringify(e));
+        console.log(e);
+        console.log(e.productId);
+        nav('/updateproduct');
+    }
+
+
+
 
     
     return(
@@ -70,7 +109,7 @@ let SearchProduct = () => {
                         <p><b>Product Details :-</b>{v.productDiscription}</p>
                         <br/>
                         <p><b>Product Price :-</b>{v.price} </p>
-                        <button className="btn btn-primary btn-sm" >Update</button>
+                        <button className="btn btn-primary btn-sm" onClick={()=>{updateProduct(v)}} >Update</button>
 
                         <button className="btn btn-secondary btn-sm" >Delete</button>
                         </div>

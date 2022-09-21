@@ -8,7 +8,7 @@ import Artisthome from './Artist/ArtistHome';
 import AddProduct from './Artist/AddProduct';
 import SearchProduct from './Artist/SearchProduct';
 import UploadImage from "./Artist/UploadImage";
-
+import UpdateProduct from "./Artist/UpdateProduct";
 import Customerhome from './Cutomer/CustomerHome';
 import Logout from './Home/Logout';
 
@@ -46,6 +46,7 @@ let Navigates = ()=>{
           <Route path="/addproduct" element={<AddProduct/>}/>
           <Route path="/uploadImage" element={<UploadImage/>}/>
           <Route path="/searchproduct" element={<SearchProduct/>}/>
+          <Route path="/updateproduct" element={<UpdateProduct/>}/>
 
           <Route path="/customerhome" element={<Customerhome/>}/>
           <Route path='/logout' element={<Logout/>}/>

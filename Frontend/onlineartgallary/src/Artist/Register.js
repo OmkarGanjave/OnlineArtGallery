@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useReducer, useState  } from "react";
-import Header from 'F:/cdac2022/Frontend/onlineartgallary/src/Home/Header.js';
+
 // const init = {
 //     firstName:{value:0, hasError: true,touched: false, error:""},
 //     lastName:{value:0, hasError: true,touched: false, error:""},
