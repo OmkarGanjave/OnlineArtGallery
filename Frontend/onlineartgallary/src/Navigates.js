@@ -11,6 +11,7 @@ import UploadImage from "./Artist/UploadImage";
 
 import Customerhome from './Cutomer/CustomerHome';
 import Logout from './Home/Logout';
+import ViewCart from './Cutomer/Viewcart';
 
 let Navigates = ()=>{
     return(
@@ -31,6 +32,8 @@ let Navigates = ()=>{
         <Link to="/customerhome"></Link>
 
         <Link to="/uploadImage"></Link>
+        
+        <Link to="/viewCar"/>
 
         <Link to="logout"></Link>
 
@@ -48,7 +51,11 @@ let Navigates = ()=>{
           <Route path="/searchproduct" element={<SearchProduct/>}/>
 
           <Route path="/customerhome" element={<Customerhome/>}/>
+          <Route path="/viewcart" element={<ViewCart/>}/>
+          
           <Route path='/logout' element={<Logout/>}/>
+
+          
         </Routes>
         </div>
     )
