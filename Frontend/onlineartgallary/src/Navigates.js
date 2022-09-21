@@ -1,6 +1,4 @@
 import {Link,Route,Routes} from 'react-router-dom';
-import Register from './Artist/Register';
-import Login from './Artist/login';
 import Home from './Home/Home';
 import ContactUs from './Home/ContactUs';
 import AboutUs from './Home/AboutUs';
@@ -8,11 +6,12 @@ import Artisthome from './Artist/ArtistHome';
 import AddProduct from './Artist/AddProduct';
 import SearchProduct from './Artist/SearchProduct';
 import UploadImage from "./Artist/UploadImage";
-import UpdateProduct from "./Artist/UpdateProduct";
+import Register from "./RegisterLogin/Register";
+import Login from "./RegisterLogin/Login"
 import Customerhome from './Cutomer/CustomerHome';
 import Logout from './Home/Logout';
 import ViewCart from './Cutomer/Viewcart';
-
+import PlaceOrder from './Cutomer/PlaceOrder'
 let Navigates = ()=>{
     return(
         <div>
@@ -33,8 +32,8 @@ let Navigates = ()=>{
 
         <Link to="/uploadImage"></Link>
         
-        <Link to="/viewCar"/>
-
+        <Link to="/viewCart"></Link>
+        <Link to="placeOrder"></Link>
         <Link to="logout"></Link>
 
         <Routes>
@@ -49,11 +48,10 @@ let Navigates = ()=>{
           <Route path="/addproduct" element={<AddProduct/>}/>
           <Route path="/uploadImage" element={<UploadImage/>}/>
           <Route path="/searchproduct" element={<SearchProduct/>}/>
-          <Route path="/updateproduct" element={<UpdateProduct/>}/>
 
           <Route path="/customerhome" element={<Customerhome/>}/>
-          <Route path="/viewcart" element={<ViewCart/>}/>
-          
+          <Route path="/viewCart" element={<ViewCart/>}/>
+          <Route path="/placeOrder" element={<PlaceOrder/>}/>
           <Route path='/logout' element={<Logout/>}/>
 
           

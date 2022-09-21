@@ -19,6 +19,8 @@ let Customerhome = () => {
     },[])
 
     
+  
+    
 
     function importAll(r) 
     {
@@ -28,13 +30,13 @@ let Customerhome = () => {
         return images;
     }
 
-    const images = importAll(require.context('F:/cdac2022/Frontend/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
+    const images = importAll(require.context('E:/CDAC/WP Programming/React Programming/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
 
     
     return(
       
         <div className='container-fluid'  >
-          
+           <button type="submit"  class="btn btn-primary mt-4" onClick={()=>{nav('/viewCart')}}>View Cart</button>
           <div className='container'>
             <br/>
             <div className="row">
@@ -44,8 +46,6 @@ let Customerhome = () => {
 
                       var pid = v.productId;
                       var imgName = v.artist.artistId+'_'+pid;
-                      
-                      // console.log(imgName);
                 return(
                       
                   <div className="col-sm-4">
@@ -66,27 +66,30 @@ let Customerhome = () => {
                         console.log("select Product id "+pid);
                         console.log("Loged customer login id "+loginId);
                         var url = "http://localhost:8080/addTocart/"+loginId+"/"+pid;
+                        //localStorage.setItem('product',JSON.stringify(v));
                         console.log(url); 
                         fetch(url)
                         .then(resp => resp.json())
                         .then(data=>console.log(data))
-
-                        nav("/viewCart");
+                        alert("Product Added Succesfully");
+                        //nav("/viewCart");
                         
                       }}>Add to Cart</button>
                     </div>
-                    </div>
-                    <br/><br/>
-                    
+                    </div>   
+                            
                   </div>
                   
+                    
                 )
+                
                 
               })
               
             }
             </div>
             </div>
+           
         </div>
        
     )

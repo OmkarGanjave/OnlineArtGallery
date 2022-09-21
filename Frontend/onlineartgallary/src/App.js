@@ -1,8 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import Register from './Artist/Register';
 import {Link,Route,Routes} from 'react-router-dom';
-import Login from './Artist/login';
 import Home from './Home/Home';
 import ContactUs from './Home/ContactUs';
 import AboutUs from './Home/AboutUs';
