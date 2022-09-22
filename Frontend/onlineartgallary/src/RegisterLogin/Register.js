@@ -1,208 +1,199 @@
 import axios from "axios";
 import { useReducer, useState  } from "react";
 import { Navigate, useNavigate} from 'react-router-dom';
-// const init = {
-//     firstName:{value:0, hasError: true,touched: false, error:""},
-//     lastName:{value:0, hasError: true,touched: false, error:""},
-//     emailId:{value:0, hasError: true,touched: false, error:""},
-//     contactNo:{value:0, hasError: true,touched: false, error:""},
-//     address:{value:0, hasError: true,touched: false, error:""},
-//     userId:{value:0, hasError: true,touched: false, error:""},
-//     password:{value:0, hasError: true,touched: false, error:""},
-//     role:{value:0, hasError: true,touched: false, error:""},
-//     status:{value:0, hasError: true,touched: false, error:""},
-//     isFormValid: false
-// }
+const init = {
+    firstName:{value:"", hasError: true,touched: false, error:""},
+    lastName:{value:"", hasError: true,touched: false, error:""},
+    emailId:{value:"", hasError: true,touched: false, error:""},
+    contactNo:{value:"", hasError: true,touched: false, error:""},
+    address:{value:"", hasError: true,touched: false, error:""},
+    userId:{value:"", hasError: true,touched: false, error:""},
+    password:{value:"", hasError: true,touched: false, error:""},
+    role:{value:"", hasError: true,touched: false, error:""},
+    status:{value:"", hasError: true,touched: false, error:""},
+    isFormValid: false
+}
 
-// const reducer = (state,action) => {
-    
-//     switch(action.type){
-//         case 'update' : {
-//             const {name,value,hasError, error, touched, isFormValid} = action.data;
-//             return { 
-//                 ...state,
-//                 [name]: { ...state[name],value, hasError, error, touched},
-//                 isFormValid
-//             }   
-//         }
+
+const validateData = (name, value) => {
+    let hasError = false, error = "";
+    switch (name) {
+        case "userId":
+            let uname = /^[a-zA-Z0-9]+$/;
+            // /^[a-z]+[0-9]+@[a-z]+\.[a-z]+$/
+            if (!uname.test(value)) {
+                hasError = true;
+                error = "Username is like Emailid"
+            }
+            break;
+
+            case "firstName":
+                let fname = /^[A-Z][a-z]{2,15}$/;
+                if (!fname.test(value)) {
+                    hasError = true;
+                    error = "First letter capital rest small"
+                }
+                break;
+
+            case "lastName":
+                let lname =  /^[A-Z][a-z]{2,15}$/;
+                if (!lname.test(value)) {
+                    hasError = true;
+                    error = "First letter capital rest small"
+                }
+                break;
+
+            case "emailId":
+                    let email = /^[a-z]+[0-9]+@[a-z]+\.[a-z]+$/;
+                    if (!email.test(value)) {
+                        hasError = true;
+                        error = "email ex:- abcd123@xyz.pqr"
+                    }
+                    break;
+
+            case "address" :
+                    let regex5 =  /^[a-zA-Z\s,]{2,8}$/;
+                    if(!regex5.test(value))
+                    {
+                        hasError = true;
+                        error = "Invalied address"
+                    }
+                break;
+
+
+
+            case "password":
+                 let pass =/^[a-z]+@+[0-9]{3}$/;
+                    if (!pass.test(value)) {
+                    hasError = true;
+                    error = "Password should be ex:- abc@123 in this form "
+                    }
+                break;
+
+            case "contactNo":
+                let contact = /^[0-9]{10}$/;
+                    if (!contact.test(value)) {
+                        hasError = true;
+                        error = "contact number should of 10 digits"
+                    }
+                break;
+
+            }
+            return { hasError, error }
         
-//     }
-// }
+} 
 
-// const validateData = (name,value) => {
-//     let hasError = false, error= "";
-//     switch(name){
-//         case "firstName" :
-//             let regex1 = /^[A-Z][a-z]{2,15}$/;
-//             if(!regex1.test(value))
-//             {
-//                 hasError = true;
-//                 error = "*First name - first letter should be capital"
-//             }
-//         break;
+    const reducer = (state,action) => {
+    
+            switch(action.type){
+                case 'update' : {
+                    const {name,value,hasError, error, touched, isFormValid} = action.data;
+                return { 
+                        ...state,
+                        [name]: { ...state[name],value, hasError, error, touched},
+                        isFormValid
+            }   
+        }
+        
+    }
+}
 
-//         case "lastName" :
-//             let regex2 = /^[A-Z][a-z]{2,15}$/;
-//             if(!regex2.test(value))
-//             {
-//                 hasError = true;
-//                 error = "*Last name - first letter should be capital"
-//             }
-//         break;
 
-//         case "contactNo" :
-//             let regex3 = /^[0-9]{10}$/;
-//             if(!regex3.test(value))
-//             {
-//                 hasError = true;
-//                 error = "*Contact number should be 10 digits"
-//             }
-//         break;
-
-//         case "emailId" :
-//             let regex4 =  /^[a-zA-Z0-9]+@[a-zA-Z0-9.]+$/;
-//             if(!regex4.test(value))
-//             {
-//                 hasError = true;
-//                 error = "*Invailed email id "
-//             }
-//         break;
-
-//         case "address" :
-//             let regex5 =  /^[0-9a-zA-Z\s,]{2,10}$/;
-//             if(!regex5.test(value))
-//             {
-//                 hasError = true;
-//                 error = "*Invailed address"
-//             }
-//         break;
-
-//         case "userId" :
-//             let regex6 =  /^[a-zA-Z0-9]{3,8}[a-zA-Z0-9]$/;
-//             if(!regex6.test(value))
-//             {
-//                 hasError = true;
-//                 error = "*Invailed user id"
-//             }
-//         break;
-
-//         case "password" :
-//             let regex7 =  /^[a-zA-Z0-9]{3,8}[a-zA-Z0-9]$/;
-//             if(!regex6.test(value))
-//             {
-//                 hasError = true;
-//                 error = "*Invailed user id"
-//             }
-//         break;
-                 
-
-//     }
-//     return {hasError, error}
-
-// } 
 
 let Register = () => {
-    // const [flag,setFalg] = useState(false);
-    // const [state,dispatch] = useReducer(reducer, init);
+    const [flag,setFlag] = useState(false);
+    const [state,dispatch] = useReducer(reducer, init);
 
-    // const onInChange = (name,value,dispatch) => {
+    const onInputChange = (name,value,dispatch) => {
         
-    //     const {hasError, error} = validateData(name,value); 
+        const {hasError, error} = validateData(name,value); 
 
-    //     let isFormValid = true;
-    //     for(const key in state)
-    //     {
-    //         let item = state[key];
+        let isFormValid = true;
+        for(const key in state)
+        {
+            let item = state[key];
             
-    //         if(item.hasError)
-    //         {
-    //             isFormValid = false;
-    //             break;
-    //         }
-    //     } 
+            if(item.hasError)
+            {
+                isFormValid = false;
+                break;
+            }
+        } 
        
-    //     dispatch({type: 'update', data: {name,value,hasError,error, touched: true, isFormValid }})
+        dispatch({type: 'update', data: {name,value,hasError,error, touched: true, isFormValid }})
 
-    // }
+    }
 
-    // const onFocusOut = (name, value, dispatch) => {
-    //     const { hasError, error } = validateData(name, value)
-    //     let isFormValid = true
-    //     for (const key in state) {
-    //       const item = state[key]
-    //       if (key === name && hasError) {
-    //         isFormValid = false
-    //         break
-    //       } else if (key !== name && item.hasError) {
-    //         isFormValid = false
-    //         break
-    //       }
-    //     }
-    //     dispatch({
-    //       type: "update",
-    //       data: { name, value, hasError, error, touched: true, isFormValid },
-    //     })
-    //   }
+    const onFocusOut = (name, value, dispatch) => {
+        const { hasError, error } = validateData(name, value)
+        let isFormValid = true
+        for (const key in state) {
+          const item = state[key]
+          if (key === name && hasError) {
+            isFormValid = false
+            break
+          } else if (key !== name && item.hasError) {
+            isFormValid = false
+            break
+          }
+        }
+        dispatch({
+          type: "update",
+          data: { name, value, hasError, error, touched: true, isFormValid },
+        })
+      }
 
     let nav = useNavigate();
     const[resData,setResdata] = useState([]);
     
-    const[artist,setArtist] = useState({
-        firstName:"",
-        lastName:"",
-        emailId:"",
-        contactNo:"",
-        address:"",
-        userId:"",
-        password:"",
-        role:"",
+ 
+    const artist={  
+        firstName:state.firstName.value,
+        lastName:state.lastName.value,
+        emailId:state.emailId.value,
+        contactNo:state.contactNo.value,
+        address:state.address.value,
+        userId:state.userId.value,
+        password:state.password.value,
+        role:state.role.value,
         status:1
-    });
-
-    const{  
-            firstName,
-            lastName,
-            emailId,
-            contactNo,
-            address,
-            userId,
-            password,
-            role,
-            status} = artist ;
+    }
+    
 
            
 
-    const onInputChange = (e) => {
-        setArtist({...artist,[e.target.name]:e.target.value});
-
-
-    }; 
-
    
+    const handleChange = (e) => {
+        const nm = e.target.name;
+        const val = e.target.value;
+        this.setState({ [nm]: val });
+    };
      
 
     var sandData = (e) => {
         e.preventDefault();
-        console.log(artist.role);
-        console.log(artist);
+        
+        
+        console.log(state)
+
+        console.log(state.role)
+        console.log(artist)
+       
        if(artist.role=="Artist")
        {
         
         axios.post("http://localhost:8080/reg",artist).then(response=>setResdata(response.data)).catch(error=>console.log(error));
         console.log(resData);
+        alert("Registration Successfully!!!!")
        }
        if(artist.role=="Customer")
        {
         axios.post("http://localhost:8080/register",artist).then(response=>setResdata(response.data)).catch(error=>console.log(error));
         console.log(resData);
+        alert("Registration Successfully!!!!")
        }
     }
 
-    // var sendData = (e) => {
-    //     e.preventDefault();    
-           
-    //         nav('/login');       
-    // }
 
     return(
         <div class="container mt-3" >
@@ -213,18 +204,22 @@ let Register = () => {
                 <div class="col">
                    
                     <input type="text" name="firstName" class="form-control" placeholder="First Name"
-                    onChange={(e)=>onInputChange(e)}
-                     
+                    onChange={(e) => { onInputChange("firstName",e.target.value, dispatch) }}
+                    onBlur={(e) => { onFocusOut("firstName", e.target.value, dispatch) }} 
                     />
+                    <br/>
+                    <p style={{ display: state.firstName.touched && state.firstName.hasError ? "inline" : "none", color: "red" }}>{state.firstName.error}</p>
                     
-
                 </div>
                 <div class="col">
                    
                     <input type="text" name="lastName" class="form-control" placeholder="Last Name"
-                    onChange={(e)=>onInputChange(e)}
+                   onChange={(e) => { onInputChange("lastName",e.target.value, dispatch) }}
+                   onBlur={(e) => { onFocusOut("lastName", e.target.value, dispatch) }} 
                     />
-
+                    <br/>
+                    <p style={{ display:state.lastName.touched && state.lastName.hasError ? "inline" : "none", color: "red" }}>{state.lastName.error}</p>
+                   
                 </div>
             </div>
             <br/><br/>
@@ -232,14 +227,22 @@ let Register = () => {
                 <div class="col">
                     
                     <input type="text" name="emailId" class="form-control" placeholder="Email Address"
-                    onChange={(e)=>onInputChange(e)}
+                    onChange={(e) => { onInputChange("emailId",e.target.value, dispatch) }}
+                    onBlur={(e) => { onFocusOut("emailId", e.target.value, dispatch) }} 
                     />
+                    <br/>
+                    <p style={{ display: state.emailId.touched && state.emailId.hasError ? "inline" : "none", color: "red" }}>{state.emailId.error}</p>
+                  
                 </div>
                 <div class="col">
                    
                     <input type="text" name="contactNo" class="form-control" placeholder="Contact Number"
-                    onChange={(e)=>onInputChange(e)}
+                    onChange={(e) => { onInputChange("contactNo",e.target.value, dispatch) }}
+                    onBlur={(e) => { onFocusOut("contactNo", e.target.value, dispatch) }} 
                     />
+                    <br/>
+                    <p style={{ display: state.contactNo.touched && state.contactNo.hasError ? "inline" : "none", color: "red" }}>{state.contactNo.error}</p>
+                    
                 </div>
             </div>
             <br/><br/>
@@ -247,16 +250,20 @@ let Register = () => {
                 <div class="col">
                     
                     <input type="text" name="address" class="form-control" placeholder="Address"
-                    onChange={(e)=>onInputChange(e)}
+                    onChange={(e) => { onInputChange("address",e.target.value, dispatch) }}
+                    onBlur={(e) => { onFocusOut("address", e.target.value, dispatch) }} 
                     />
+                    <br/>
+                    <p style={{ display: state.address.touched && state.address.hasError ? "inline" : "none", color: "red" }}>{state.address.error}</p>
+   
                 </div>
                 <div class="col">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="role" id="Artist" value="Artist"  onChange={(e)=>onInputChange(e)} />
+                    <input class="form-check-input" type="radio" name="role" id="Artist" value="Artist"  onChange={(e) => { onInputChange("role",e.target.value, dispatch) }} />
                     <label class="form-check-label" for="Artist">Artist</label>
                 </div>
               <div class="form-check">
-                    < input class="form-check-input" type="radio" name="role" id="Customer"  value="Customer"  onChange={(e)=>onInputChange(e)}/>
+                    < input class="form-check-input" type="radio" name="role" id="Customer"  value="Customer"  onChange={(e) => { onInputChange("role",e.target.value, dispatch) }}/>
                     <label class="form-check-label" for="Customer">Customer</label>
                 </div>
                 </div> 
@@ -267,21 +274,31 @@ let Register = () => {
                 <div class="col">
                     
                     <input type="text" name="userId" class="form-control" placeholder="User ID"
-                    onChange={(e)=>onInputChange(e)}
+                   onChange={(e) => { onInputChange("userId",e.target.value, dispatch) }}
+                   onBlur={(e) => { onFocusOut("userId", e.target.value, dispatch) }} 
                     />
+                    <br/>
+                    <p style={{ display: state.userId.touched &&  state.userId.hasError ? "inline" : "none", color: "red" }}>{ state.userId.error}</p>
+                    
+
                 </div>
                 <div class="col">
                    
                     <input type="text" name="password" class="form-control" placeholder="Password"
-                    onChange={(e)=>onInputChange(e)}
+                  onChange={(e) => { onInputChange("password",e.target.value, dispatch) }}
+                  onBlur={(e) => { onFocusOut("password", e.target.value, dispatch) }} 
                     />
+                    <br/>
+                    <p style={{ display:state.password.touched && state.password.hasError ? "inline" : "none", color: "red" }}>{state.password.error}</p>
+                   
                 </div>
             </div>
 
             <br/><br/>
             <div class="row">
                 <div class="col">
-                    <button type="submit"  class="btn btn-primary" onClick={(v)=>{sandData(v)}}>Register</button>
+                    <button type="submit"  class="btn btn-primary" onClick={(v)=>{sandData(v)}                  
+                }>Register</button>
                 </div>
                
                 <div class="col">
@@ -296,7 +313,7 @@ let Register = () => {
             </form>
 
            
-            {/* // <h4>{resData.role}</h4> */}
+         
         </div>     
         
             
