@@ -1,13 +1,15 @@
 import { useEffect,useState } from "react";
-import img from './user.png';
-let PersnoalInfo = () => {
+import img from 'F:/cdac2022/Frontend/onlineartgallary/src/Artist/user.png';
+let CustPersnoalInfo = () => {
 
-    let user =JSON.parse(localStorage.getItem('artist'));
+    let cust =JSON.parse(localStorage.getItem("customer"));
+
+    let loginId = cust.loginId;
 
     const[persnoalInfo,setPersnoalInfo] = useState([]);
 
     useEffect(()=>{
-        var url = "http://localhost:8080/profile/"+user.loginId;
+        var url = "http://localhost:8080/custprofile/"+loginId;
 
         console.log(url);
 
@@ -27,7 +29,7 @@ let PersnoalInfo = () => {
                 <img  src={img} style={{width:"150%"}}/>
             </div>
             <div className="col-md-3 text-start">
-                <h4><b>Artist Id</b> </h4>
+                
                 <br/>
                 <h4><b>First Name </b></h4>
                 <br/>
@@ -41,7 +43,7 @@ let PersnoalInfo = () => {
                 <br/>
             </div>
             <div className="col-md-3 text-start" style={{width:"250px"}}>
-            <h4><b >{persnoalInfo.artistId}</b></h4>
+            {/* <h4><b >{persnoalInfo.artistId}</b></h4> */}
             <br/>
             <h4><b> {persnoalInfo.firstName}</b></h4>
             <br/>
@@ -60,4 +62,4 @@ let PersnoalInfo = () => {
     )
 }
 
-export default PersnoalInfo;
+export default CustPersnoalInfo;

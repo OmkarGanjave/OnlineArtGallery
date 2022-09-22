@@ -32,6 +32,6 @@ public interface UDProductRepository extends JpaRepository<UDProduct,Integer> {
 	
 	// delete product
 	@Modifying
-	@Query(value="delete from product where product_id = ?1",nativeQuery = true)
-	public int deleteByproductId(int productId);
+	@Query(value="update product set status = ?2 where product_id = ?1",nativeQuery = true)
+	public int deleteByproductId(int productId,int status);
 }

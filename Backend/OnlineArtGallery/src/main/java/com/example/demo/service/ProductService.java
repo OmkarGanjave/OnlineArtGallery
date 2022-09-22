@@ -41,11 +41,22 @@ public class ProductService {
 	//serach product's
 	public List<Product> searchProduct(String artistId)
 	{
+		List<Product> activeplist = new ArrayList<Product>();
+		
 		List<Object[]> loginId = productrepo.getLoginId(artistId);
 		
 		List<Object[]> artist= productrepo.getArtistId((int)loginId.get(0)[0]);
 		
-		return productrepo.getProductById((int)artist.get(0)[0]);
+		List<Product> plist = productrepo.getProductById((int)artist.get(0)[0]);
+		
+		for (Product product : plist) {
+			if(product.getStatus() == 1) 
+			{
+				activeplist.add(product);
+			}
+		}
+		
+		return activeplist;
 	}
 	
 	public Product getProduct(int pid)

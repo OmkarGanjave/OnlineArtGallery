@@ -76,7 +76,11 @@ let  AddProduct = () => {
     
 
     return(
-        <div>
+        <div className='container ' style={ {
+            width: "3600px",
+            padding: "10% 0 0",
+            margin: "auto"
+          }}>
            <h2>Add Product</h2>
             <br/>
                 <form>
@@ -88,11 +92,7 @@ let  AddProduct = () => {
                         </div>
                         <br/><br/>
                         <div className="col-sm-6 offset-sm-3">
-                           {/* <select name="categoryName" id="categoryName" className='dropdown'>
-                                <option value="painting">painting</option>
-                                <option value="sclupture">sclupture</option>
-                                <option value="sketche">sketche</option>
-                            </select> */}
+                           
                             <input type="text" name="categoryName" class="form-control" placeholder="Product category"
                             onChange={(e)=>onInputChange(e)}
                         />   

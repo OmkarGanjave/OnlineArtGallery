@@ -131,7 +131,7 @@ public class CustomerController {
 			//boolean flag = false;
 			// 1
 			// get customer
-			Customer customer = cs.getCustomerById(loginid);
+			Customer customer = cs.getCustomer(loginid);
 			
 			// 2
 			// get cart
@@ -140,6 +140,11 @@ public class CustomerController {
 			// 5
 			// List of Product
 			List<OrderProduct> oplist = new ArrayList<OrderProduct>();
+			
+			// get order list
+			List<Order> odr = customer.getOrder();
+			
+			//System.out.println(odr.get(0));
 			
 			if(cart == null) 
 			{
@@ -164,7 +169,7 @@ public class CustomerController {
 					
 					total_price += ol.getProduct().getPrice();
 					
-					OrderProduct op = new OrderProduct(product.getProductId(), product.getProductName(), product.getPrice());
+					OrderProduct op = new OrderProduct(product.getProductId(), product.getArtist().getArtistId(),product.getProductName(), product.getPrice());
 //					
 					oplist.add(op);
 					
@@ -174,9 +179,19 @@ public class CustomerController {
 			}
 			
 			// save data in orders table 
-			Order order = new Order(total_price, customer);
-			Order o = oserv.saveOrder(order);
 			
+			
+			
+			if(odr == null) 
+			{
+				Order order = new Order();
+				order.setCustomer(customer);
+				order.setTotalPrice(total_price);
+				odr.add(order);
+				customer.setOrder(odr);
+				//Order o = oserv.saveOrder(order);
+				
+			}
 			return oplist;
 //			return flag;
 			
@@ -241,6 +256,18 @@ public class CustomerController {
 			List<CartDetails> cartdetails = cart.getCartdetails();
 			
 			return cartdetails;
+		}
+		
+		@GetMapping("/removecart/{cartId}")
+		public boolean removeFromCart(@PathVariable("cartId") int cartId) 
+		{
+			return cartServ.removecart(cartId);
+		}
+		
+		@GetMapping("/custprofile/{loginId}")
+		public Customer getProfile(@PathVariable("loginId") int loginId) 
+		{
+			return cs.getCustomer(loginId);
 		}
 	}
 

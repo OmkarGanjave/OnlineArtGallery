@@ -1,44 +1,33 @@
 package com.example.demo.model;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name="product")
-public class OrderProduct {
-
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+public class UpdateProduct {
+	
 	private int productId;
-
-	@Column
-	private String productName;
 	
-	@Column
-	private String productDiscription;
-	
-	@Column
-	private double price;
-	
-	@Column
 	private int artistId;
 	
-	@Column
-	private int categoryId;
+	private String categoryName;
+	
+	private String productName;
+	
+	private String productDiscription;
+	
+	private double price;
 
-	public OrderProduct() {
+	public UpdateProduct() {
 		super();
 	}
 
-	public OrderProduct(int productId, int artistId,String productName, double price) {
+	public UpdateProduct(int productId, int artistId, String categoryName, String productName,
+			String productDiscription, double price) {
 		super();
 		this.productId = productId;
-		this.artistId=artistId;
+		this.artistId = artistId;
+		this.categoryName = categoryName;
 		this.productName = productName;
+		this.productDiscription = productDiscription;
 		this.price = price;
 	}
 
@@ -48,6 +37,22 @@ public class OrderProduct {
 
 	public void setProductId(int productId) {
 		this.productId = productId;
+	}
+
+	public int getArtistId() {
+		return artistId;
+	}
+
+	public void setArtistId(int artistId) {
+		this.artistId = artistId;
+	}
+
+	public String getCategoryName() {
+		return categoryName;
+	}
+
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
 	}
 
 	public String getProductName() {
@@ -72,22 +77,6 @@ public class OrderProduct {
 
 	public void setPrice(double price) {
 		this.price = price;
-	}
-
-	public int getArtistId() {
-		return artistId;
-	}
-
-	public void setArtistId(int artistId) {
-		this.artistId = artistId;
-	}
-
-	public int getCategoryId() {
-		return categoryId;
-	}
-
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
 	}
 	
 	

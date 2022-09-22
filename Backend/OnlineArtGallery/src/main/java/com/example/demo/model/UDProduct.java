@@ -31,8 +31,13 @@ public class UDProduct {
 	
 	@Column
 	private double price;
+	
+	@Column
+	private int status;
+	
 	public UDProduct() {
 		super();
+		this.status = 1;
 		// TODO Auto-generated constructor stub
 	}
 	public UDProduct(int artistId, int categoryId, String productName, String productDiscription, double price) {
@@ -42,7 +47,16 @@ public class UDProduct {
 		this.productName = productName;
 		this.productDiscription = productDiscription;
 		this.price = price;
+		this.status = 1;
 	}
+	
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
+	}
+	
 	public int getProductId() {
 		return productId;
 	}

@@ -70,43 +70,74 @@ let SearchProduct = () => {
     
     return(
         <div className="container">
-            
-            <br/><br/>
-           {/* <h4>{user.user_id}</h4> */}
-           <h3><b> Products </b></h3>
-            
-            <button class="btn btn-primary" onClick={()=>{nav('/addproduct')}}>AddProduct</button>
-            <br/><br/>
+           <nav className="navbar navbar-expand-sm nav-tabs justify-content-center">
+                <ul className="navbar-nav">
+                    <li className="nav-item">
+                        <a className="nav-link" href="/persnoalinfo">Profile</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="/addproduct">Add New Product</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="#">Review Rating</a>
+                    </li>
+                 </ul>
+            </nav>
+            <br/>
+           
             <div className="row">
             
-            {/* <table className="table ">
-                <tr>
-                    <th>Product Image</th>
-                    <th>Product ID</th>
-                    <th>Product  Name</th>
-                    <th>Product Discription</th>
-                    <th>Category</th>
-                    <th>price</th>                 
-                </tr> */}
+            
                 {
                     
                     res.map((v)=>{
                         var pid = v.productId;
                         var imgName = artistId+'_'+pid;
-                        // console.log(imgName);
+                        
                         return(
-                                <div className="col-sm-4">
+                                <div className="col-sm-3 text-start">
                         <div className="card" style={{width:"250px"}}>
-                        <img src={images[imgName+'.jpg']} width="250" height="250"/>
+                            <img src={images[imgName+'.jpg']} width="250" height="250"/>
                         <div className="card-body">
-                        <p><b>{v.productName}</b></p>
-                        <br/>
-                        <p><b>Product Details :-</b>{v.productDiscription}</p>
-                        <br/>
-                        <p><b>Product Price :-</b>{v.price} </p>
+                        <p><b >{v.productName}</b></p>
+                        
+                        <dl>
+                            <dt>Product Details </dt> 
+                            <dd>{v.productDiscription}</dd>
+                        </dl>
+                        
+                        <p><b>Price </b> {v.price} </p>
                         <button className="btn btn-primary btn-sm" onClick={()=>{updateProduct(v)}}>Update</button>
 
-                        <button className="btn btn-secondary btn-sm" >Delete</button>
+                        <button className="btn btn-danger btn-sm" 
+                        onClick={()=>{
+                            console.log("selected product is for deletion "+v.productId);
+
+                            var url = "http://localhost:8080/deleteproduct/"+v.productId+"/0";
+
+                            console.log(url);
+
+                            fetch(url).then(resp =>{ resp.json()
+                                console.log(resp);
+                            
+                            
+
+                                //console.log(data);
+                                if(resp.ok == true)
+                                {
+                                    
+                                    alert("Product deleted succesfully !!! ");
+                                    window.location.reload();
+                                    nav('/searchproduct');
+                                }    
+                                else
+                                {
+                                    alert("Failed to Product deleted Try again !!! ");
+                                    nav('/searchproduct');
+                                }
+                            })
+                        }}
+                        >Delete</button>
                         </div>
                         </div>
                         <br/><br/>

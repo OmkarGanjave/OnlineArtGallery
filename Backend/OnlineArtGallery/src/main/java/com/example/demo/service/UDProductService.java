@@ -33,12 +33,12 @@ public class UDProductService {
 	
 	//delete
 	//delete product
-		public boolean deleteProduct(int productId)
+		public int deleteProduct(int productId,int status)
 		{
 			boolean flag=false;
 			int res = 0;
 			try {
-			res = urepo.deleteByproductId(productId);
+				res = urepo.deleteByproductId(productId,status);
 			}
 			catch(Exception e)
 			{
@@ -51,6 +51,6 @@ public class UDProductService {
 			else {
 				flag = false;
 			}
-			return flag;
+			return res;
 		}
 }

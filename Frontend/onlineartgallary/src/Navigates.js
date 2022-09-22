@@ -14,6 +14,12 @@ import ViewCart from './Cutomer/Viewcart';
 import PlaceOrder from './Cutomer/PlaceOrder'
 import UpdateProduct from './Artist/UpdateProduct';
 import UpdateImage from './Artist/UpdateImage';
+import PersnoalInfo from './Artist/PersnoalInfo';
+import CustPersnoalInfo from './Cutomer/CustomerPersnoalProfile';
+import ComfirmOrder from './Cutomer/ComfirmOrder';
+import Painting from './Cutomer/Painting';
+import Sclupture from './Cutomer/Sclupture';
+import Sketch from './Cutomer/Sketch';
 let Navigates = ()=>{
     return(
         <div>
@@ -35,7 +41,12 @@ let Navigates = ()=>{
         <Link to="/uploadImage"></Link>
         <Link to="/searchproduct"/>
         <Link to="/viewCart"></Link>
-        <Link to="placeOrder"></Link>
+        <Link to="/placeOrder"></Link>
+        <Link to="/comfirmOrder"/>
+        <Link to="/custpersnoalinfo"> </Link>
+        <Link to="/painting" />
+        <Link to="/sclupture"/>
+        <Link to="/sketch"/>
         <Link to="logout"></Link>
 
         <Routes>
@@ -52,10 +63,17 @@ let Navigates = ()=>{
           <Route path="/updateproduct" element={<UpdateProduct/>}/>
           <Route path="/updateImage" element={<UpdateImage/>}/>
           <Route path="/searchproduct" element={<SearchProduct/>}/>
-
+          <Route path="/persnoalinfo" element={<PersnoalInfo/>}/>
           <Route path="/customerhome" element={<Customerhome/>}/>
           <Route path="/viewCart" element={<ViewCart/>}/>
           <Route path="/placeOrder" element={<PlaceOrder/>}/>
+
+          <Route path="/painting" element={<Painting/>}/>
+          <Route path='/sclupture' element={<Sclupture/>}/>
+          <Route path='/comfirmOrder' element={<ComfirmOrder/>}/>
+          <Route path="/custpersnoalinfo" element={<CustPersnoalInfo/>}/>
+          <Route path='/sketch' element={<Sketch/>}/>
+         
           <Route path='/logout' element={<Logout/>}/>
 
           

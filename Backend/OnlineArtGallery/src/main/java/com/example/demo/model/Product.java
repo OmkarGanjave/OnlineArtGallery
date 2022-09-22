@@ -25,6 +25,7 @@ public class Product {
 	
 //	@JsonIgnoreProperties("product")
 //	@OneToMany(mappedBy = "productId", cascade = CascadeType.ALL)
+	//cascade 
 //	private Set<CartDetails> products;
 	
 	@JsonIgnoreProperties("products")//@JsonIgnoreProperties("products")   -----in customer product
@@ -37,8 +38,11 @@ public class Product {
 	@JoinColumn(name="artistId")
 	private Artist artist;
 	
+	@Column
+	private int status;
 	public Product() {
 		super();
+		this.status = 1;
 	}
 
 	public Product( Artist artist, Category category, String productName, String productDiscription,
@@ -49,6 +53,7 @@ public class Product {
 		this.productName = productName;
 		this.productDiscription = productDiscription;
 		this.price = price;
+		this.status = 1;
 	}
 	
 //	public Product(int productId, Set<CartDetails> p, String productName, String productDiscription, double price,
@@ -117,6 +122,14 @@ public class Product {
 				+ productDiscription + ", price=" + price + "]";
 	}
 
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 	
 
 	
@@ -127,11 +140,11 @@ public class Product {
 //	public void setP(Set<CartDetails> p) {
 //		for(CartDetails product : p)
 //		{
-//			product.setProductId(this);
+//			product.setProduct(this);
 //		}
 //		this.products = p;
 //	}
-	
+//	
 	
 	
 }

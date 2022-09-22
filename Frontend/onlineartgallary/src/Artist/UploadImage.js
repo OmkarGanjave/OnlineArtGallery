@@ -62,7 +62,11 @@ let UploadImage = ()=>{
     }
 
     return(
-        <div className="container">
+        <div className="container" style={ {
+            width: "3600px",
+            padding: "10% 0 0",
+            margin: "auto"
+          }}>
             <div className="row">
                 <div className="col-sm-6 offset-sm-3">
                             Upload image : 

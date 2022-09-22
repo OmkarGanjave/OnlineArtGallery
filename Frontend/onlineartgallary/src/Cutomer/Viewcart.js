@@ -15,13 +15,26 @@ let ViewCart = ()=>{
         fetch(url)
         .then(resp => resp.json())
        // .then(data=>console.log(data))
-       .then(data=>setProduct(data))
+       .then(data=>{
+        setProduct(data)
+        if(data == null)
+            {
+                alert("cart is empty !!! ");
+                nav('/customerhome');
+            }
+    })
         //console.log(products)
-       .then(d=>{
-        setResdata(d)
-        setArtistid(d[0].products.artist.artistId)
-       console.log(d[0].products.artist.artistId)
-       })
+    //    .then(d=>{
+    //     setResdata(d)
+    //     setArtistid(d[0].products.artist.artistId)
+    //    console.log(d[0].products.artist.artistId)
+
+            // if(d == null)
+            // {
+            //     alert("cart is empty !!! ");
+            //     nav('/customerhome');
+            // }
+       //})
     
     },[]);
     
@@ -33,7 +46,7 @@ let ViewCart = ()=>{
         return images;
     }
 
-    const images = importAll(require.context('E:/CDAC/WP Programming/React Programming/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
+    const images = importAll(require.context('F:/cdac2022/Frontend/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
     
     return(
          
@@ -59,10 +72,11 @@ let ViewCart = ()=>{
 
             <div class='row'>
                 <div className="col md-4">
-                <button type="submit"  class="btn btn-primary mt-4" onClick={()=>{nav('/placeOrder')}}>Place Order</button></div>
+                {/* <button type="submit"  class="btn btn-primary mt-4" onClick={()=>{nav('/placeOrder')}}>Place Order</button> */}
+                </div>
             </div>
 
-            <table className="table ">
+            <table className="table  ">
                 <tr>
                     <th>Product Image</th>
                     <th>Product ID</th>
@@ -88,8 +102,8 @@ let ViewCart = ()=>{
                                 <td>{v.product.productDiscription}</td>
                                 <td>{v.product.category.categoryName}</td>
                                 <td>{v.product.price}</td>
-                                <td><button class="btn btn-primary btn-sm" >Update</button></td>
-                                <td><button class="btn btn-secondary btn-sm" >Delete</button></td> 
+                                {/* <td><button class="btn btn-primary btn-sm" >Update</button></td>
+                                <td><button class="btn btn-secondary btn-sm" >Delete</button></td>  */}
                             </tr>
                         )
                     })

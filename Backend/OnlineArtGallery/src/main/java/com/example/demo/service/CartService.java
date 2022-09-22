@@ -43,6 +43,17 @@ public class CartService {
 //		
 //	}
 
-	
+	public boolean removecart(int cartId) 
+	{
+		boolean flag = true;
+		try {
+		cartrepo.deleteById(cartId);
+		}
+		catch (Exception e) {
+			// TODO: handle exception
+			flag = false;
+		}
+		return flag;
+	}
 	
 }

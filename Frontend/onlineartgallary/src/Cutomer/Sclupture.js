@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 // import Dropdown from 'react-bootstrap/Dropdown';
 import Dropdown from 'react-bootstrap/Dropdown';
 
-let Customerhome = () => {
+let Sclupture = () => {
     let nav = useNavigate();
 
     let cust =JSON.parse(localStorage.getItem("customer"));
@@ -13,7 +13,8 @@ let Customerhome = () => {
     const[allProducts,setProduct] = useState([]);
 
     useEffect(()=>{
-      fetch("http://localhost:8080/allproducts")
+        //var url = "http://localhost:8080/categoryproduct/painting";
+      fetch("http://localhost:8080/categoryproduct/sclupture")
       .then(resp => resp.json())
       .then(data=>setProduct(data))
       // console.log(allProducts);
@@ -54,6 +55,7 @@ let Customerhome = () => {
                         <Dropdown.Item href="/painting">painting</Dropdown.Item>
                         <Dropdown.Item href="/sclupture">sclupture</Dropdown.Item>
                         <Dropdown.Item href="/sketch">sketch</Dropdown.Item>
+                        <Dropdown.Item href="/customerhome">All</Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>
                     </li>
@@ -93,7 +95,7 @@ let Customerhome = () => {
                       
                       <p><b>Product Price :-</b> {v.price} </p>
                       
-                      <button className="btn btn-success" onClick={(v)=>{
+                      <button class="btn btn-success" onClick={(v)=>{
                         console.log("select Product id "+pid);
                         console.log("Loged customer login id "+loginId);
                         var url = "http://localhost:8080/addTocart/"+loginId+"/"+pid;
@@ -128,4 +130,4 @@ let Customerhome = () => {
 
 }
 
-export default Customerhome;
+export default Sclupture;

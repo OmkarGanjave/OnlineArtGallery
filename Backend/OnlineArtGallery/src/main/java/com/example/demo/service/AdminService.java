@@ -24,7 +24,7 @@ public class AdminService {
 		List<Product> plist = pserv.getAll();
 		
 		for (Product product : plist) {
-			if(product.getArtist().getLoginId().getStatus() == 1) 
+			if(product.getArtist().getLoginId().getStatus() == 1 && product.getStatus() == 1) 
 			{
 				activeProducts.add(product);
 			}

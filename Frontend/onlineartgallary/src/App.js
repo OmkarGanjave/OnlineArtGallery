@@ -11,10 +11,14 @@ import SearchProduct from './Artist/SearchProduct';
 import Customerhome from './Cutomer/CustomerHome';
 import Navigates from './Navigates';
 import Header from './Home/Header';
+import Navbar from './Home/navbar';
+import { Rating } from './Cutomer/RatingStyle';
 function App() {
   return (
     <div className="App">
-      <Header/>
+      {/* <Header/> */}
+      <Navbar/>
+      <Rating/>
         <Navigates/>
         
     </div>

@@ -34,8 +34,12 @@ let Login = () => {
 
             console.log(response.data);
 
-            if(response.data.role == "Artist")
+            
+            console.log(response.data.role);
+
+            if(response.data.role === "Artist")
             {
+                console.log("in artist login");
 
                 localStorage.setItem("artist",JSON.stringify(response.data));
 
@@ -44,7 +48,7 @@ let Login = () => {
           
             
             }
-            else if(response.data.role == "Customer")
+            else if(response.data.role === "Customer")
             {
                 localStorage.setItem("customer",JSON.stringify(response.data));
             

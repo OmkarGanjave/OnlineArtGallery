@@ -1,11 +1,12 @@
 import { useEffect,useState } from "react";
-
+import {useNavigate} from 'react-router-dom'
 let PlaceOrder = ()=>{
+
+    let nav = useNavigate();
 
     let cust =JSON.parse(localStorage.getItem("customer"));
     const[res,setResdata]=useState([]);
-    // const[products,setProduct] = useState([]);
-    // const[artistId,setArtistid]=useState();
+    
     let totalPrice=0;
 
     useEffect(()=>{
@@ -28,24 +29,38 @@ let PlaceOrder = ()=>{
         return images;
     }
 
-    const images = importAll(require.context('E:/CDAC/WP Programming/React Programming/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
+    const images = importAll(require.context('F:/cdac2022/Frontend/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
     
     return(
          
-        <div class="container-fluid ">
-            
-           <h3>Products in cart</h3>
-
-            <br/><br/>      
-            <table className="table  table-borderd ">
+        <div className="container-fluid ">
+            <br/>
+                <br/>
+                <nav className="navbar navbar-expand-sm nav-tabs justify-content-center">
+                <ul className="navbar-nav">
+                    
+                    <li className="nav-item">
+                        <a className="nav-link" href="/comfirmOrder">Confirm Order</a>
+                    </li>
+                   
+                 </ul>
+            </nav>
+            <br/>
+                <br/>
+            <div className="row">
+            <div className="col-sm-6 offset-sm-3">
+            <div className="table-responsive-sm">
+             <table className="table "> 
+            <thead className="table-danger">
                 <tr>
                     <th>Product Image</th>
                     <th>Product  Name</th>
-                    <th>price</th>                 
+                    <th>price</th>               
                 </tr>
+            </thead>
+            <tbody className="table-warning">
                 {
                     res.map((v)=>{
-                        
                         var pid = v.productId;
                         let img=v.artistId+"_"+pid;
                         totalPrice=totalPrice+v.price;
@@ -53,20 +68,31 @@ let PlaceOrder = ()=>{
                         return(
                                 
                              <tr>
-                            <td><img src={images[img+'.jpg']} width="100" height="100"/></td>                          
-                            {/* <td>{v.productId}</td> */}
-                                <td>{v.productName}</td>
-                                <td>{v.price}</td> 
+                            <td><img src={images[img+'.jpg']} width="100" height="120" className="rounded"/></td>                          
+                            {/* <td>{v.productId}</td>  */}
+                            <td ><b>{v.productName}</b></td>
+                            <td><b>{v.price}</b></td> 
 
                             </tr>
                         )
                     })
                    
                 }
+                </tbody>
+                <tfoot className="table-danger">
                  <tr>
-                        <th colSpan="3" align="right" >Total Price :{ totalPrice}</th>
+                    <th></th>
+                    <th>Total Price :</th>
+                    <th className="text-center" >{totalPrice}</th>
                 </tr>
-            </table>
+                </tfoot>
+            </table> 
+            </div>
+            
+            </div>
+            
+            </div>  
+
         </div>
 
        

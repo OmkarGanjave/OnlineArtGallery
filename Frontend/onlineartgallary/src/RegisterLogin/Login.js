@@ -40,7 +40,7 @@ let Login = () => {
             {
             localStorage.setItem("artist",JSON.stringify(response.data));
             
-            nav('/artisthome');
+            nav('/searchproduct');
             
             }
             else if(response.data.role == "Customer")
@@ -68,12 +68,16 @@ let Login = () => {
     return(
         
        
-        <div class="container mt-3"  >
+        <div class="container mt-3" style={ {
+            width: "360px",
+            padding: "8% 0 0",
+            margin: "auto"
+          }} >
             <h2>Login</h2>
             <br/>
             <form className='form-body'>
                 <div class="row">
-                    <div className="col-md-3">
+                    <div className="col">
                         <input type="text" name="user_id" class="form-control"
                         placeholder="LOGIN ID"
                         onChange={(e)=>onInputChange(e)}
@@ -82,7 +86,7 @@ let Login = () => {
                 </div>
                 <br/><br/>
                 <div class="row">
-                    <div className="col-md-3">
+                    <div className="col">
                         <input type="password" name="password" class="form-control"
                         placeholder="PASSWORD"
                         onChange={(e)=>onInputChange(e)}
@@ -91,11 +95,11 @@ let Login = () => {
                 </div>
             <br/><br/>
             <div class="row">
-               <div className="col-md-3">
-                        <button type="submit"  class="btn btn-primary mt-4" onClick={(v)=>{sandData(v)}}>Login</button>
+               <div className="col">
+                        <button type="submit" class="btn btn-primary" onClick={(v)=>{sandData(v)}}>Login</button>
                 </div>
           
-                <div className="col-md-3">
+                <div className="col">
                     <a href="#">Forgot password?</a>
                 </div>
             </div>

@@ -22,6 +22,8 @@ import com.example.demo.model.Artist;
 import com.example.demo.model.ArtistRegister;
 import com.example.demo.model.Category;
 import com.example.demo.model.Product;
+import com.example.demo.model.UDProduct;
+import com.example.demo.model.UpdateProduct;
 import com.example.demo.model.User;
 import com.example.demo.service.ArtistService;
 import com.example.demo.service.CategoryService;
@@ -51,7 +53,7 @@ public class ArtistController {
 		
 		userservice.add(artistUser);
 		
-		Artist artistinfo = new Artist(artist.getFirstName(), artist.getLastName(), artist.getEmailId(), artist.getContactNo(), artist.getAddress(), artistUser);
+		Artist artistinfo = new Artist(artist.getFirstName(), artist.getLastName(), artist.getContactNo(),artist.getEmailId(), artist.getAddress(), artistUser);
 
 		return artistservice.regArtist(artistinfo);
 	}
@@ -61,6 +63,13 @@ public class ArtistController {
 	{
 		return artistservice.getAll();
 	}
+	
+	@GetMapping("/profile/{loginId}")
+	public Artist artistUser(@PathVariable("loginId") int loginId) 
+	{
+		return artistservice.getArtist(loginId);
+	}
+	
 	
 	//add product info
 	@PostMapping("/addProduct")
@@ -142,8 +151,20 @@ public class ArtistController {
 		}
 	}
 	
-
-
+	//Update Product
+	//update only pname,pdesc,pprice
+		@PostMapping("/updateproduct")
+		public Product updateProduct(@RequestBody UpdateProduct uproduct )
+		{
+			Product product=productserv.getProduct(uproduct.getProductId());
+			product.setProductName(uproduct.getProductName());
+			product.setProductDiscription(uproduct.getProductDiscription());
+			Category category=catservice.getCategoryByName(uproduct.getCategoryName());
+			product.setCategory(category);
+			product.setPrice(uproduct.getPrice());
+			Product updatedproduct=productserv.save(product);
+			return updatedproduct;
+		}
 	
 	
 
