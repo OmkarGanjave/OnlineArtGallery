@@ -1,6 +1,9 @@
 import { useEffect,useState } from "react";
 import {useNavigate} from 'react-router-dom'
 import  CustomerNavBar from './customernavbar';
+
+import './rating.css';
+// import StarRating from './starrating';
 //import "E:/CDAC/WP Programming/React Programming/onlineartgallary/src/style.css";
 let PlaceOrder = ()=>{
 
@@ -8,7 +11,8 @@ let PlaceOrder = ()=>{
 
     let cust =JSON.parse(localStorage.getItem("customer"));
     const[res,setResdata]=useState([]);
-    
+    const [rating, setRating] = useState(0);
+    const [hover, setHover] = useState(0);
     let totalPrice=0;
 
     useEffect(()=>{
@@ -43,15 +47,8 @@ let PlaceOrder = ()=>{
          <div className="container-fluid ">
              <br/>
                  <br/>
-                 <nav className="navbar navbar-expand-sm nav-tabs justify-content-center">
-                 <ul className="navbar-nav">
-                     
-                     <li className="nav-item">
-                         <a className="nav-link" href="/comfirmOrder"><b>Confirm Order</b></a>
-                     </li>
-                    
-                  </ul>
-             </nav>
+                 <h2><b>Your order place successfully ... !</b></h2>
+            <h4><b> Thank You ... !</b></h4>
              <br/>
                  <br/>
              <div className="row">
@@ -62,7 +59,8 @@ let PlaceOrder = ()=>{
                  <tr>
                      <th>Product Image</th>
                      <th>Product  Name</th>
-                     <th>price</th>               
+                     <th>price</th>    
+                     <th>Rating</th>           
                  </tr>
              </thead>
              <tbody className="table-light">
@@ -79,7 +77,12 @@ let PlaceOrder = ()=>{
                              {/* <td>{v.productId}</td>  */}
                              <td ><b>{v.productName}</b></td>
                              <td><b>{v.price}</b></td> 
- 
+                            <td><button className="btn btn-warning" onClick={()=>{
+                                localStorage.setItem("ratingpid",JSON.stringify(pid))
+                                localStorage.setItem("aid",JSON.stringify(v.artistId))
+                                
+                                nav('/comfirmOrder');
+                            }}>Rating</button></td>
                              </tr>
                          )
                      })
@@ -91,6 +94,7 @@ let PlaceOrder = ()=>{
                      <th></th>
                      <th>Total Price :</th>
                      <th className="text-center" >{totalPrice}</th>
+                     <th></th>
                  </tr>
                  </tfoot>
              </table> 

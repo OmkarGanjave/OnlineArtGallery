@@ -49,4 +49,18 @@ public class CartDetailsService {
 		return flag;
 	} 
 	
+	
+	public void saveCartDetails(CartDetails cartdetails)
+	{
+		 cartDetailsRepo.save(cartdetails);
+	}
+	
+	
+	//remove from cart  update status
+	public int removeProductFromCart(int pid)
+	{
+		
+		return cartDetailsRepo.removeProductFromCart(pid);
+	}
+	
 }

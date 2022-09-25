@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.Cart;
+import com.example.demo.model.CartDetails;
 import com.example.demo.repository.CartRepository;
 
 @Service
@@ -36,6 +37,8 @@ public class CartService {
 		
 	}
 	
+	
+	
 ////	 checks if cart is present for customer or not and retutn cartId 
 ////	if cart is present or null if no cart is present 
 //	public int checkCartStatus(int customerId)
@@ -47,7 +50,14 @@ public class CartService {
 	{
 		boolean flag = true;
 		try {
-		cartrepo.deleteById(cartId);
+		Cart cart=cartrepo.findById(cartId).get();
+		System.out.println(cart.toString());
+		List<CartDetails> cdlist=cart.getCartdetails();
+		for (CartDetails cd : cdlist) {
+			System.out.println(cd.getProduct().getProductName());
+			
+		}
+		//cartrepo.deleteById(cartId);
 		}
 		catch (Exception e) {
 			// TODO: handle exception

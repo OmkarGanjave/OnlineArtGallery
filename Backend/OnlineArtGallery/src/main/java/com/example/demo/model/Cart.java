@@ -28,7 +28,7 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cartId;
 	
-	@OneToOne(cascade = CascadeType.DETACH)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name="customer_id")
 	private Customer customerID;
 	
@@ -75,6 +75,11 @@ public class Cart {
 	public void setCartdetails(List<CartDetails> cartdetails) {
 		// for loop
 		this.cartdetails = cartdetails;
+	}
+
+	@Override
+	public String toString() {
+		return "Cart [cartId=" + cartId + ", customerID=" + customerID + ", cartdetails=" + cartdetails + "]";
 	}
 	
 	

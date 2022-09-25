@@ -30,6 +30,7 @@ let AddCategory=()=>{
         .then(response=>{
             setResdata(response.data);
             console.log(response.data);
+            alert("category added");
             nav('/adminhome');
         })
         .catch(error=>{

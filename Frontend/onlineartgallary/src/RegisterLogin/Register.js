@@ -45,10 +45,10 @@ const validateData = (name, value) => {
                 break;
 
             case "emailId":
-                    let email = /^[a-z]+[0-9]+@[a-z]+\.[a-z]+$/;
+                    let email = /^[a-z0-9]+@[a-z]+\.[a-z]+$/;
                     if (!email.test(value)) {
                         hasError = true;
-                        error = "email ex:- abcd123@xyz.pqr"
+                        error = "email ex:- abcd@xyz.pqr"
                     }
                     break;
 

@@ -40,6 +40,9 @@ let PersnoalInfo = () => {
             <br/>
             <h4><b>Address </b></h4>
             <br/>
+            <h4><b>Rating </b></h4>
+            
+            <br/>
         </div>
         <div className="col-md-8 text-start" style={{width:"250px"}}>
         <h4><b >{persnoalInfo.artistId}</b></h4>
@@ -53,6 +56,8 @@ let PersnoalInfo = () => {
         <h4><b>{persnoalInfo.contactNo}</b></h4>
         <br/>
         <h4><b>{persnoalInfo.address}</b></h4>
+        <br/>
+        <h4><b>{persnoalInfo.rating}</b></h4>
         </div>
         <div className="col" >
             <img  src={img} style={{width:"50%"}}/>

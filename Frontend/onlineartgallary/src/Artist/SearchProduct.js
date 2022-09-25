@@ -94,7 +94,7 @@ let SearchProduct = () => {
                         <a className="nav-link" href="/addproduct">Add New Product</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#">Review Rating</a>
+                        {/* <a className="nav-link" href="#">Review Rating</a> */}
                     </li>
                     
                  </ul>

@@ -128,7 +128,7 @@ let Login = () => {
             </div>
             <br/>
             
-            <h4>{err}</h4>
+            <h4 className="text-white">{err}</h4>
         </div>
         </div>
     );

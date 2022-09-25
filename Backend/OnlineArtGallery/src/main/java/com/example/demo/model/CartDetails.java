@@ -39,6 +39,7 @@ public class CartDetails {
 	public CartDetails() {
 		super();
 		// TODO Auto-generated constructor stub
+		
 	}
 
 
@@ -46,6 +47,7 @@ public class CartDetails {
 		super();
 		this.cart = cart;
 		this.product = productId;
+		
 	}
 
 	public int getCartDetailsId() {
@@ -76,6 +78,9 @@ public class CartDetails {
 	public void setProduct(Product productId) {
 		this.product = productId;
 	}
+
+
+
 
 	
 

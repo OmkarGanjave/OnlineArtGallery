@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -58,12 +60,32 @@ public class CustomerController {
 		@Autowired
 		private AdminService adminserv;
 		
+		@Autowired
+		JavaMailSender mailsender;
+		
 		@PostMapping("/register")
 		public Customer saveCustomer(@RequestBody CustomerRegister cr) 
 		{
 			User user=new User(cr.getUserId(),cr.getRole(),cr.getPassword());
 			User inserted=us.add(user);
 			Customer customer=new Customer( cr.getFirstName(), cr.getLastName(),cr.getEmailId(),cr.getContactNo(),cr.getAddress(), inserted);
+			
+			try {
+				SimpleMailMessage mailmsg=new SimpleMailMessage();
+				mailmsg.setFrom("onlineartgallery10@gmail.com");
+				mailmsg.setTo(cr.getEmailId());
+				mailmsg.setSubject("Registration successful");
+				mailmsg.setText("Welcome "+cr.getFirstName()+" your registraion for Online Art Gallery is Done Successfully.");
+				mailsender.send(mailmsg);
+				}
+				catch (Exception e) {
+					// TODO: handle exception
+					System.out.println("Error in sending mail"+e);
+					return null;
+				}
+			
+			
+			
 			return cs.saveCustomer(customer);
 		}
 		
@@ -128,24 +150,18 @@ public class CustomerController {
 		public List<OrderProduct> placeOrder(@PathVariable("loginid") int loginid) 
 		{
 			double total_price = 00.0;
+			int oid;
+			List<OrderProduct> oplist = new ArrayList<OrderProduct>();
 			//boolean flag = false;
 			// 1
-			// get customer
-			Customer customer = cs.getCustomer(loginid);
-			
+			// get customer			
+			Customer customer = cs.getCustomer(loginid);	
 			// 2
 			// get cart
 			Cart cart = customer.getCart();
-			
-			// 5
-			// List of Product
-			List<OrderProduct> oplist = new ArrayList<OrderProduct>();
-			
 			// get order list
 			List<Order> odr = customer.getOrder();
-			
-			//System.out.println(odr.get(0));
-			
+	
 			if(cart == null) 
 			{
 				return null;
@@ -157,54 +173,57 @@ public class CustomerController {
 				
 				for (CartDetails ol : orderlist)
 				{
-//					System.out.println("Cartdetails iD :- "+ol.getCartDetailsId());
-//					
-//					System.out.println("Cart iD :- "+ol.getCart().getCartId());
-//					
-//					System.out.println("Product Id  :- "+ol.getProduct().getProductId());
-
+	
 					Product product = pservice.getProduct(ol.getProduct().getProductId());
-					
-//					System.out.println("Product :- "+product.toString());
-					
 					total_price += ol.getProduct().getPrice();
-					
 					OrderProduct op = new OrderProduct(product.getProductId(), product.getArtist().getArtistId(),product.getProductName(), product.getPrice());
-//					
-					oplist.add(op);
-					
+					oplist.add(op);	
 				}
-				//flag = true;
-				System.out.println("Total Price :- "+total_price);
-			}
-			
-			// save data in orders table 
-			
-			
-			
-			if(odr == null) 
-			{
-				Order order = new Order();
-				order.setCustomer(customer);
-				order.setTotalPrice(total_price);
-				odr.add(order);
-				customer.setOrder(odr);
-				//customer.getOrder();
-				System.out.println("cart:"+customer.getOrder());
 				
+					Order order = new Order();
+					order.setCustomer(customer);
+					order.setTotalPrice(total_price);
+					odr.add(order);
+					customer.setOrder(odr);
+					//customer.getOrder();
+					System.out.println(odr.toString());
+					System.out.println("cart:"+customer.getOrder());
+					oserv.saveOrder(order);
 			}
-			//System.out.println(cartServ.removecart( customer.getCart().getCartId()));
+			String msg=customer.getFirstName()+"\r\n"
+					+ "Thank you for ordering from Online Art Gallery.\r\n"
+					+ "\r\n"
+					+ "Your order has been Placed.\r\n"
+					+ "\r\n"
+					+ "\r\n"
+					+ "Any orders placed within an hour of each other may be shipped together."
+					+" Your order will be shipped at youe  Address :"+customer.getAddress()
+					+"\n\nWe hope you enjoyed your shopping experience with us and that you will visit us again soon.";
+			// save data in orders table 
+			try {
+				SimpleMailMessage mailmsg=new SimpleMailMessage();
+				mailmsg.setFrom("onlineartgallery10@gmail.com");
+				mailmsg.setTo(customer.getEmailId());
+				mailmsg.setSubject("Order placed");
+				mailmsg.setText(msg);
+				mailsender.send(mailmsg);
+				}
+				catch (Exception e) {
+					// TODO: handle exception
+					System.out.println("Error in sending mail"+e);
+					return null;
+				}
 			return oplist;
-//			return flag;
-			
+//			return flag;	
 			// order --> toatl_price , customerId
 		}
 		
 		
 		//artist Rating
-		@GetMapping("/rating/{productId}/{rating}")
+		@GetMapping("/artistrating/{productId}/{rating}")
 		public boolean artistRating(@PathVariable("productId") int productId,@PathVariable("rating") double rating) 
 		{
+			System.out.println("hii..............");
 			boolean flag = true;
 			
 			// pid --> product
@@ -218,7 +237,7 @@ public class CustomerController {
 			Artist artist =  artistserv.getArtistById(product.getArtist().getArtistId());
 			
 			System.out.println(artist.getFirstName()+"\t"+artist.getLastName());
-			
+		
 			artist.setRating(rating);
 			
 			System.out.println("Artist rating :- "+artist.getRating());
@@ -248,9 +267,12 @@ public class CustomerController {
 			return categoryWiseProduct;
 		}
 		
+		//view cart
 		@GetMapping("/viewcart/{loginId}")
 		public List<CartDetails> getCartofCustomer(@PathVariable("loginId") int loginId)
 		{
+			 
+		
 			Customer customer = cs.getCustomer(loginId);
 			
 			Cart cart = customer.getCart();
@@ -260,10 +282,11 @@ public class CustomerController {
 			return cartdetails;
 		}
 		
-		@GetMapping("/removecart/{cartId}")
-		public boolean removeFromCart(@PathVariable("cartId") int cartId) 
+		@GetMapping("/removeproductfromcart/{productid}")
+		public int removeFromCart(@PathVariable("productid") int productId)
 		{
-			return cartServ.removecart(cartId);
+			
+			return cdserv.removeProductFromCart(productId); 
 		}
 		
 		@GetMapping("/custprofile/{loginId}")

@@ -21,7 +21,7 @@ let Adminthome = () => {
                         <a className="nav-link" href="/addcategory"><b>Add New Category</b></a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="#"><b>Review Rating</b></a>
+                        {/* <a className="nav-link" href="#"><b>Review Rating</b></a> */}
                     </li>
                  </ul>
             </nav>

@@ -4,6 +4,8 @@ import Navbar from './Home/NavBar';
 import Demo from './demo';
 import AboutUs from './Home/AboutUs';
 import ContactUs from './Home/ContactUs';
+
+
 function App() {
   return (
     <div className="App">
@@ -11,7 +13,7 @@ function App() {
         <Navigates/>
         <AboutUs/>
         <ContactUs/>
-        {/* <Demo/> */}
+       
     </div>
   );
 }

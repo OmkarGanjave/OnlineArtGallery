@@ -6,6 +6,8 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -45,6 +47,10 @@ public class ArtistController {
 	@Autowired
 	private ProductService productserv;
 	
+	@Autowired
+	JavaMailSender mailsender;
+	
+	
 	@PostMapping("/reg")
 	public Artist regArtist(@RequestBody ArtistRegister artist) 
 	{
@@ -55,6 +61,22 @@ public class ArtistController {
 		
 		Artist artistinfo = new Artist(artist.getFirstName(), artist.getLastName(), artist.getContactNo(),artist.getEmailId(), artist.getAddress(), artistUser);
 
+		
+		try {
+			SimpleMailMessage mailmsg=new SimpleMailMessage();
+			mailmsg.setFrom("onlineartgallery10@gmail.com");
+			mailmsg.setTo(artist.getEmailId());
+			mailmsg.setSubject("Registration successful");
+			mailmsg.setText("Welcome "+artistinfo.getFirstName()+" your registraion for Online Art Gallery is Done Successfully.");
+			mailsender.send(mailmsg);
+			}
+			catch (Exception e) {
+				// TODO: handle exception
+				System.out.println("Error in sending mail"+e);
+				return null;
+			}
+		
+		
 		return artistservice.regArtist(artistinfo);
 	}
 	

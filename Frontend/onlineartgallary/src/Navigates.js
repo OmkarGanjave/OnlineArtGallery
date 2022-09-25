@@ -22,6 +22,7 @@ import Sketch from './Cutomer/Sketch';
 import Adminthome from './Admin/AdminHome';
 import AddRemoveUser from './Admin/AddRemoveUser';
 import AddCategory from './Admin/AddCategory';
+import StarRating from './Cutomer/starrating';
 let Navigates = ()=>{
     return(
         <div>
@@ -50,7 +51,7 @@ let Navigates = ()=>{
         <Link to="/sketch"/>
         <Link to="/logout"></Link>
         <Link to="/addcategory"></Link>
-        
+        <Link to="/rating"></Link>
 
         <Routes>
           <Route path="/" element={<MainHome/>}/>
@@ -71,6 +72,7 @@ let Navigates = ()=>{
           <Route path="/customerhome" element={<Customerhome/>}/>
           <Route path="/viewCart" element={<ViewCart/>}/>
           <Route path="/placeOrder" element={<PlaceOrder/>}/>
+          <Route path="/rating" element={<StarRating/>}/>
 
           <Route path="/painting" element={<Painting/>}/>
           <Route path='/sclupture' element={<Sclupture/>}/>

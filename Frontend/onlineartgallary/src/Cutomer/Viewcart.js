@@ -18,11 +18,14 @@ let ViewCart = ()=>{
       
        .then(data=>{
         setProduct(data)
+        console.log(data);
         if(data == null)
             {
+
                 alert("cart is empty !!! ");
                 nav('/customerhome');
             }
+
     })
     },[]);
     
@@ -63,6 +66,7 @@ let ViewCart = ()=>{
                     <th>Product Discription</th>
                     <th>Category</th>
                     <th>price</th>    
+                    <th>Remove product</th>
                                  
                 </tr>
             </thead>
@@ -71,6 +75,7 @@ let ViewCart = ()=>{
                        
                         var pid = v.product.productId;
                         var imgName = v.product.artist.artistId+'_'+pid;
+                        var cartdetailsid=v.cartDetailsId;
                         console.log(imgName)
                         return( 
                              <tr>
@@ -79,6 +84,19 @@ let ViewCart = ()=>{
                                 <td><b>{v.product.productDiscription}</b></td>
                                 <td><b>{v.product.category.categoryName}</b></td>
                                 <td><b>{v.product.price}</b></td>
+                                <td><div ><button  type="submit" className="btn btn-danger"  onClick={()=>{
+                                    var url="http://localhost:8080/removeproductfromcart/"+pid;
+                                    fetch(url).then(resp=>resp.json()).then(data=>{
+                                        console.log(data);
+                                    if(data==1)
+                                    {
+                                        window.location.reload();
+                                       
+                                    }
+                                    }
+                                    );
+                                    
+                                }}>Remove</button></div></td>
                             </tr>
                         )
                     })
