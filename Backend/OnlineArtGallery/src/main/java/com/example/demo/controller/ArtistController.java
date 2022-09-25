@@ -126,7 +126,7 @@ public class ArtistController {
 				
 				byte[] data = file.getBytes();
 				
-				Path path = Paths.get("F:/cdac2022/Frontend/onlineartgallary/src/images/"+artist.getArtistId()+"_"+addedProduct.getProductId()+".jpg");
+				Path path = Paths.get("C:/Users/omkar/OneDrive/Documents/OMKAR/C-DAC/March2022/Project/Online Art Gallary/ProjectOnlineArtGallery/onlineartgallary/src/images/"+artist.getArtistId()+"_"+addedProduct.getProductId()+".jpg");
 				
 				Files.write(path, data);
 			

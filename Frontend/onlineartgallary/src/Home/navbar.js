@@ -1,42 +1,42 @@
 import {Link,useResolvedPath,useMatch} from 'react-router-dom';
-// import {login,logout} from "./loggedSlice";
-//import {useDispatch,useSelector  } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import {login,logout,} from "./loggedSlice";
+import {useDispatch,useSelector  } from 'react-redux';
+
 
 
 export default function Navbar() {
 
-  let nav = useNavigate();
- 
-  // const dispatch = useDispatch();
-  // const mystate = useSelector((state)=>state.myreducer);
+  const mystate = useSelector((state)=>state.myreducer);
 
+  const dispatch = useDispatch();
+ 
     return (
       <div >
-      <nav className="nav">
-      {/* {mystore.login?"block":"none"}
-      {mystore.logout?"block":"none"} */}
-      
-      
-        <h2 onClick={()=>{nav('/')}}>Online Art Gallery</h2>
-      
-      <ul>
-        <CustomLink to="/">Home</CustomLink>
-        <CustomLink to="/aboutus">About Us</CustomLink>
-        <CustomLink to="/contactus">Contact Us</CustomLink>
-        <div className="nav" >
-        <CustomLink to="/login" >Login</CustomLink>
-       
-        </div >
-        <div className="nav" >
-        <CustomLink to="/register" >Register</CustomLink>
-        </div>
-        <div className="nav" >
-        <CustomLink to="/logout" >Logout</CustomLink>
-        </div>
-        
+      <nav className="nav bg-dark">
+
+      <a href="/"><h2 >Online Art Gallery</h2></a>
      
+      <ul>
+        <div>
+        <a className='nav' href="/">Home</a>
+        </div>
+        <div>
+        <a className='nav' href="/aboutus">About Us</a>
+        </div>
+        <div>
+        <a className='nav' href="/contactus">Contact Us</a>
+        </div>
+        <div className="nav" style={{display: mystate.loggedIn?"none":"block"}}>
+        <a className='nav' href="/login" onClick={()=> {dispatch(login())}}>Login</a>
+        </div >
        
+        <div className="nav" style={{display: mystate.loggedIn?"none":"block"}}>
+        <a className='nav' href="/register" onClick={()=> {dispatch(login())}}>Register</a>
+        </div>
+       
+        <div className="nav" style={{display: mystate.loggedIn?"block":"none"}}>
+        <a className='nav' href="/" onClick={()=> {dispatch(logout())}}>Logout</a>
+        </div>
       </ul>
       </nav>
       </div>

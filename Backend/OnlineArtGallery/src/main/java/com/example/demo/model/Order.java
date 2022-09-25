@@ -21,6 +21,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @Entity
 @Table(name="orders")
 public class Order {
+	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int orderId;
@@ -97,6 +99,9 @@ public class Order {
 //		this.product = product;
 //	}
 	
-	
+	@Override
+	public String toString() {
+		return "Order [orderId=" + orderId + ", totalPrice=" + totalPrice + ", customer=" + customer + "]";
+	}
 	
 }

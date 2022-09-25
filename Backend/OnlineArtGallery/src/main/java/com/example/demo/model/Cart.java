@@ -28,7 +28,7 @@ public class Cart {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int cartId;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.DETACH)
 	@JoinColumn(name="customer_id")
 	private Customer customerID;
 	

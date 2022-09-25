@@ -1,8 +1,10 @@
 import {Link,Route,Routes} from 'react-router-dom';
 import axios from "axios";
 import { useState,useEffect } from "react";
-
+import {useDispatch, useSelector }from 'react-redux';
+import  {login} from '../Home/loggedSlice';
 import { Navigate, useNavigate} from 'react-router-dom';
+import ArtistNavBar from './artistnavbar';
 
 let  AddProduct = () => {
 
@@ -17,6 +19,11 @@ let  AddProduct = () => {
     // },[])
 
     let nav = useNavigate();
+
+    const mystate = useSelector((state)=>state.myreducer);
+
+  const dispatch = useDispatch();
+
 
     let user =JSON.parse(localStorage.getItem('artist'));
 
@@ -48,12 +55,13 @@ let  AddProduct = () => {
 
     var addProduct = (e) => {
         e.preventDefault();
-        
+        console.log(mystate.loggedIn);
+        dispatch(login());
         console.log(product);
 
         axios.post("http://localhost:8080/addProduct",product)
         .then(response=>{setAddedProduct(response.data)
-
+           
             alert("Product detials uploaded successfully.")
 
             console.log(response.data.productId)
@@ -76,11 +84,14 @@ let  AddProduct = () => {
     
 
     return(
+        <div>
+        <div><ArtistNavBar/></div>
         <div className='container ' style={ {
             width: "3600px",
             padding: "10% 0 0",
             margin: "auto"
           }}>
+              
            <h2>Add Product</h2>
             <br/>
                 <form>
@@ -119,6 +130,7 @@ let  AddProduct = () => {
                 </form>
               
                 
+        </div>
         </div>
     );
 } 

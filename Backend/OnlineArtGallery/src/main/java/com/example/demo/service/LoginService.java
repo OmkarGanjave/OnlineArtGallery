@@ -20,7 +20,7 @@ public class LoginService {
 	{
 	
 		Login u = loginRepository.findByUid(uid, pwd);
-		String role="undefined";
+	
 		if((u.getRole().equals("Artist")||u.getRole().equals("Customer")||u.getRole().equals("Admin")) && (u.getStatus()==1)) 
 			return u;
 		else

@@ -1,15 +1,14 @@
 import {Link,Route,Routes} from 'react-router-dom';
-import Home from './Home/Home';
+import MainHome from './Home/MainHome';
 import ContactUs from './Home/ContactUs';
 import AboutUs from './Home/AboutUs';
-import Artisthome from './Artist/ArtistHome';
 import AddProduct from './Artist/AddProduct';
 import SearchProduct from './Artist/SearchProduct';
 import UploadImage from "./Artist/UploadImage";
 import Register from "./RegisterLogin/Register";
-import Login from "./RegisterLogin/Login"
+import Login from "./RegisterLogin/login";
 import Customerhome from './Cutomer/CustomerHome';
-import Logout from './Home/Logout';
+import Logout from './RegisterLogin/Logout';
 import ViewCart from './Cutomer/Viewcart';
 import PlaceOrder from './Cutomer/PlaceOrder'
 import UpdateProduct from './Artist/UpdateProduct';
@@ -20,6 +19,9 @@ import ComfirmOrder from './Cutomer/ComfirmOrder';
 import Painting from './Cutomer/Painting';
 import Sclupture from './Cutomer/Sclupture';
 import Sketch from './Cutomer/Sketch';
+import Adminthome from './Admin/AdminHome';
+import AddRemoveUser from './Admin/AddRemoveUser';
+import AddCategory from './Admin/AddCategory';
 let Navigates = ()=>{
     return(
         <div>
@@ -34,8 +36,7 @@ let Navigates = ()=>{
             <Link to="/aboutus" className='nav-link'>About Us</Link>
           </li>
         </ul> */}
-
-        <Link to="/artisthome"></Link>
+        <Link to="/"></Link>
         <Link to="/customerhome"></Link>
 
         <Link to="/uploadImage"></Link>
@@ -47,17 +48,20 @@ let Navigates = ()=>{
         <Link to="/painting" />
         <Link to="/sclupture"/>
         <Link to="/sketch"/>
-        <Link to="logout"></Link>
+        <Link to="/logout"></Link>
+        <Link to="/addcategory"></Link>
+        
 
         <Routes>
-          <Route path="/" element={<Home/>}/>
+          <Route path="/" element={<MainHome/>}/>
           <Route path="/contactus" element={<ContactUs/>}/>
           <Route path="/aboutus" element={<AboutUs/>}/>
 
           <Route path="/register" element={<Register/>}/>
           <Route path="/login" element={<Login/>}/>
+          <Route path='/logout' element={<Logout/>}/>
 
-          <Route path="/artisthome" element={<Artisthome/>}/>
+        
           <Route path="/addproduct" element={<AddProduct/>}/>
           <Route path="/uploadImage" element={<UploadImage/>}/>
           <Route path="/updateproduct" element={<UpdateProduct/>}/>
@@ -74,7 +78,10 @@ let Navigates = ()=>{
           <Route path="/custpersnoalinfo" element={<CustPersnoalInfo/>}/>
           <Route path='/sketch' element={<Sketch/>}/>
          
-          <Route path='/logout' element={<Logout/>}/>
+          <Route path="/adminhome" element={<Adminthome/>}/>
+          <Route path="/updateuserstatus" element={<AddRemoveUser/>}/>
+          <Route path="/addcategory" element={<AddCategory/>}/>
+
 
           
         </Routes>

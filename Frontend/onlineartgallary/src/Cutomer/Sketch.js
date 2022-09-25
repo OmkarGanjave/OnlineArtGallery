@@ -1,5 +1,6 @@
 import {useNavigate} from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import  CustomerNavBar from './customernavbar';
 // import Dropdown from 'react-bootstrap/Dropdown';
 import Dropdown from 'react-bootstrap/Dropdown';
 
@@ -33,11 +34,12 @@ let Sketch = () => {
         return images;
     }
 
-    const images = importAll(require.context('F:/cdac2022/Frontend/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
+    const images = importAll(require.context('C:/Users/omkar/OneDrive/Documents/OMKAR/C-DAC/March2022/Project/Online Art Gallary/ProjectOnlineArtGallery/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
 
     
     return(
-      
+      <div>
+      <div><CustomerNavBar/></div>
         <div className='container-fluid' >
           <br/>
           <nav className="navbar navbar-expand-sm nav-tabs justify-content-center">
@@ -125,7 +127,7 @@ let Sketch = () => {
             </div>
            
         </div>
-       
+        </div>
     )
 
 }

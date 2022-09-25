@@ -1,13 +1,18 @@
 import { Navigate, useNavigate} from 'react-router-dom';
-
+import {useDispatch, useSelector }from 'react-redux';
+import  {login} from '../Home/loggedSlice';
 import axios from "axios";
 import {  useState  } from "react";
-let Login = () => {
+import LoginNavBar from "./LoginNavBar";
 
-    
+let Login = () => {
+  
+ 
     
     let nav = useNavigate();
-
+    
+    const mystate = useSelector((state)=>state.myreducer)
+    const dispatch = useDispatch();
     const[resData,setResdata] = useState([]);
     const[err,setErr] = useState("");
 
@@ -28,10 +33,13 @@ let Login = () => {
     var sandData = (e) => {
         e.preventDefault();
 
+        dispatch(login());
+        console.log("state modified");
+
+
         axios.post("http://localhost:8080/login",user)
         .then(response=>{
 
-            console.log(response.data.role);
             setResdata(response.data);
 
             console.log(response.data);
@@ -48,6 +56,12 @@ let Login = () => {
                 localStorage.setItem("customer",JSON.stringify(response.data));
             
                 nav('/customerhome');
+            }
+            else if(response.data.role == "Admin")
+            {
+                localStorage.setItem("admin",JSON.stringify(response.data));
+            
+                nav('/adminhome');
             }
             
 
@@ -66,16 +80,22 @@ let Login = () => {
     }
 
     return(
-        
+        <div>
+        <div>
+            <LoginNavBar/>
+        </div>
        
-        <div class="container mt-3" style={ {
+        <div class="bg-img" >
+           
+            <div style={ {
             width: "360px",
+            height:"500px",
             padding: "8% 0 0",
             margin: "auto"
           }} >
-            <h2>Login</h2>
+            <form className="container  ">
+            <h2 className="text-white">Login</h2>
             <br/>
-            <form className='form-body'>
                 <div class="row">
                     <div className="col">
                         <input type="text" name="user_id" class="form-control"
@@ -86,30 +106,34 @@ let Login = () => {
                 </div>
                 <br/><br/>
                 <div class="row">
-                    <div className="col">
+                    <div className="">
                         <input type="password" name="password" class="form-control"
                         placeholder="PASSWORD"
                         onChange={(e)=>onInputChange(e)}
                         />
                     </div>
                 </div>
-            <br/><br/>
+            <br/>
             <div class="row">
-               <div className="col">
-                        <button type="submit" class="btn btn-primary" onClick={(v)=>{sandData(v)}}>Login</button>
+                    <div className="w3-button w3-block w3-teal">
+                        <button type="submit"  class="btn btn-primary mt-4" onClick={(v)=>{sandData(v)}}>Login</button>
                 </div>
-          
-                <div className="col">
-                    <a href="#">Forgot password?</a>
+                <br/>
+                <div>
+                   <a href="/register"> <h4 className="text-white">Register</h4></a>
                 </div>
+                <br/>
             </div>
             </form>
-           
-            <br/><br/>
+            </div>
+            <br/>
             
             <h4>{err}</h4>
         </div>
+        </div>
     );
+
+    
 }
 
 export default Login;

@@ -1,6 +1,6 @@
 import { useEffect,useState } from "react";
 import {useNavigate} from 'react-router-dom'
-import { Rating } from "./RatingStyle";
+import  CustomerNavBar from './customernavbar';
 let ComfirmOrder = () => {
     let cust =JSON.parse(localStorage.getItem("customer"));
 
@@ -26,31 +26,40 @@ let ComfirmOrder = () => {
         return images;
     }
 
-    const images = importAll(require.context('F:/cdac2022/Frontend/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
+    const images = importAll(require.context('C:/Users/omkar/OneDrive/Documents/OMKAR/C-DAC/March2022/Project/Online Art Gallary/ProjectOnlineArtGallery/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
     
 
     return(
-        <div className="container">
+        <div>
+        <div><CustomerNavBar/></div>
+        <div className="jumbotron">
             <h2><b>Your order place successfully ... !</b></h2>
             <h4><b> Thank You ... !</b></h4>
             <br/>
-            <Rating/>
-            <div className="row">
+            
+            {/* <div className="row"> */}
+            <ul>
             {
                 res.map((v)=>{
                     var pid = v.productId;
                     let img=v.artistId+"_"+pid;
                     return(
                     <div className="col-md-4 text-center p-5">
+                       <ul>
+                           <li>
                         <a href="#" >
-                        <img src={images[img+'.jpg']} width="200" height="200" className="rounded"/>
+                        <img src={images[img+'.jpg']} width="100" height="100" className="rounded"/>
                         </a>
                         <br/>
                         <h4>{v.productName}</h4>
+                        </li>
+                        </ul>
                     </div>)
                 })
             }
-            </div>
+            {/* </div> */}
+            </ul>
+        </div>
         </div>
     )
 }

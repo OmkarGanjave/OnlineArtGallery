@@ -1,6 +1,9 @@
 import { useEffect,user, useState } from "react";
 import {useNavigate} from 'react-router-dom'
-
+import addp from '../Artist/addp.jpeg';
+import {useDispatch, useSelector }from 'react-redux';
+import  {login,logout} from '../Home/loggedSlice';
+import ArtistNavBar from './artistnavbar';
 let SearchProduct = () => {
 
     let nav = useNavigate();
@@ -13,12 +16,15 @@ let SearchProduct = () => {
         return images;
     }
 
-    const images = importAll(require.context('F:/cdac2022/Frontend/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
+    const images = importAll(require.context('C:/Users/omkar/OneDrive/Documents/OMKAR/C-DAC/March2022/Project/Online Art Gallary/ProjectOnlineArtGallery/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
 
     let user =JSON.parse(localStorage.getItem('artist'));
 
     const[res,setResdata]=useState([]);
     const[artistId,setArtistid]=useState();
+    const dispatch = useDispatch();
+    const mystate = useSelector((state)=>state.myreducer)
+   
 
     useEffect(()=>{
         console.log(user.user_id);
@@ -29,6 +35,7 @@ let SearchProduct = () => {
             
             setResdata(data)
             setArtistid(data[0].artist.artistId)
+      
             // console.log(data[0].artist.artistId)    
         })
        
@@ -69,11 +76,19 @@ let SearchProduct = () => {
     }
     
     return(
-        <div className="container">
+        <div>
+        <div><ArtistNavBar/></div>
+        <div className="container-fluid justify-content-center" >
+            
+      
+            
+
+          
            <nav className="navbar navbar-expand-sm nav-tabs justify-content-center">
+                <div className='topnav'>
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        <a className="nav-link" href="/persnoalinfo">Profile</a>
+                        <a className="nav-link" href="/persnoalinfo"><b>{user.user_id}</b></a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="/addproduct">Add New Product</a>
@@ -81,7 +96,9 @@ let SearchProduct = () => {
                     <li className="nav-item">
                         <a className="nav-link" href="#">Review Rating</a>
                     </li>
+                    
                  </ul>
+                 </div>
             </nav>
             <br/>
            
@@ -98,7 +115,7 @@ let SearchProduct = () => {
                                 <div className="col-sm-3 text-start">
                         <div className="card" style={{width:"250px"}}>
                             <img src={images[imgName+'.jpg']} width="250" height="250"/>
-                        <div className="card-body">
+                        <div className="card-body bg-dark text-white">
                         <p><b >{v.productName}</b></p>
                         
                         <dl>
@@ -147,9 +164,21 @@ let SearchProduct = () => {
                             
                         </div>
                         )
+
                     })
                 }
+                <div className="col-sm-3 text-start">
+                        <div className="card" style={{width:"250px", height:"250px" }}> 
+                        <a href="/addproduct">
+                                <img src={addp} width="250" height="250"/>
+                        </a>
+                            <div className="card-body text-center pt-5" >
+                                <h4> Add New Product </h4>
+                            </div>
+                        </div>
+                </div>
             </div>
+        </div>
         </div>
     );
 }

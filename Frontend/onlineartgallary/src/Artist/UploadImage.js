@@ -1,5 +1,5 @@
 
-
+import ArtistNavBar from './artistnavbar';
 import { Navigate, useNavigate} from 'react-router-dom';
 import { useState } from "react";
 
@@ -62,6 +62,8 @@ let UploadImage = ()=>{
     }
 
     return(
+        <div>
+        <div><ArtistNavBar/></div>
         <div className="container" style={ {
             width: "3600px",
             padding: "10% 0 0",
@@ -81,6 +83,7 @@ let UploadImage = ()=>{
             
                 </div>
             </div>
+        </div>
         </div>
     )
 }

@@ -1,21 +1,27 @@
 import { useEffect, useState } from 'react';
+import {Link,useResolvedPath,useMatch} from 'react-router-dom';
 import {useNavigate} from 'react-router-dom'
-import homeimg from 'F:/cdac2022/Frontend/onlineartgallary/src/cssimg/home.jpeg';
-
+import {login,logout,} from "./loggedSlice";
+import {useDispatch,useSelector  } from 'react-redux';
+import NavBar from './NavBar';
+import MainHome from './MainHome';
 let Home = () => {
-
+ 
   
 
     let nav = useNavigate();
 
     const[allProducts,setProduct] = useState([]);
+    const mystate = useSelector((state)=>state.myreducer);
+
+    const dispatch = useDispatch();
 
     useEffect(()=>{
       fetch("http://localhost:8080/allproducts")
       .then(resp => resp.json())
       .then(data=>setProduct(data))
       // console.log(allProducts);
-      console.log(allProducts)
+      console.log(allProducts);
     },[])
 
     
@@ -28,11 +34,14 @@ let Home = () => {
         return images;
     }
 
-    const images = importAll(require.context('F:/cdac2022/Frontend/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
+    const images = importAll(require.context('C:/Users/omkar/OneDrive/Documents/OMKAR/C-DAC/March2022/Project/Online Art Gallary/ProjectOnlineArtGallery/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
 
-    return(
-          <div className='container-fuild'>
-            {/* <div className='container'> */}
+  return(
+        
+   
+      <div className="bg-img-home">
+    <div><NavBar/></div>
+ 
             <div className="row">
             {
               allProducts.map((v)=>{
@@ -40,24 +49,10 @@ let Home = () => {
                       var imgName = v.artist.artistId+'_'+pid;
                       // console.log(imgName);
                 return(
-                      
-                  <div className="col-sm-3 text-start p-5">
-
-                    <div className="card" style={{width:"250px"}}>
-                    <img src={images[imgName+'.jpg']} width="250" height="250"/>
-                    <div className="card-body ">
-                      <p><b >{v.productName}</b></p>
-
-                      <dl>
-                        <dt>Product Details </dt> 
-                        <dd>{v.productDiscription}</dd>
-                      </dl>
-                      <p><b>Price </b> {v.price} </p>
-                      <button className="btn btn-success" onClick={()=>{nav('/login')}}>Add to Cart</button>
-                    </div>
-                    </div>
-                    <br/><br/>
-                    
+              
+                  <div >
+                      <MainHome/>
+                
                   </div>
                 )
                 
@@ -65,16 +60,11 @@ let Home = () => {
             }
             </div>
             </div>
-          // </div>
+          
+           
+           
     )
 
 }
-
-
-
-
-  
-  
-
 
 export default Home;

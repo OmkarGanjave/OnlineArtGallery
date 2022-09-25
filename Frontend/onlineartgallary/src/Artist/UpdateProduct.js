@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect,useState } from "react";
 import {useNavigate} from "react-router-dom";
+import ArtistNavBar from './artistnavbar';
 
 let UpdateProduct=()=>{
 
@@ -9,7 +10,8 @@ let UpdateProduct=()=>{
 
     let product1 =JSON.parse(localStorage.getItem('product'));
    // const[productid,setProductid] = useState();
-   
+
+ 
    function importAll(r) 
    {
        // array 
@@ -18,7 +20,7 @@ let UpdateProduct=()=>{
        return images;
    }
 
-   const images = importAll(require.context('F:/cdac2022/Frontend/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
+   const images = importAll(require.context('C:/Users/omkar/OneDrive/Documents/OMKAR/C-DAC/March2022/Project/Online Art Gallary/ProjectOnlineArtGallery/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
 
     const[product,setProduct] = useState({  
 
@@ -45,6 +47,7 @@ let UpdateProduct=()=>{
    let update=(e)=>
    {
     e.preventDefault();
+
     console.log("Update Product"+product.productName);
     let updateProduct = {
 
@@ -85,7 +88,10 @@ let UpdateProduct=()=>{
     console.log("Image Name = "+imageNAme)
     
     return (
-        <div className='container'>
+        
+  <div  className='container-fluid justify-content-center'>
+  <div><ArtistNavBar/></div>
+        <div className='container-fluid justify-content-center' >
             <br/>
         <div className='row'>
         {/* <div className="col-sm-4">   
@@ -138,6 +144,7 @@ let UpdateProduct=()=>{
             </div>
         </form>
         </div>
+    </div>
     </div>
     </div>
     );

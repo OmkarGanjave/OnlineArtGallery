@@ -1,11 +1,14 @@
 
 import { Navigate, useNavigate} from 'react-router-dom';
 import { useState } from "react";
-
+import {useDispatch, useSelector }from 'react-redux';
+import  {login} from '../Home/loggedSlice';
+import ArtistNavBar from './artistnavbar';
 let UpdateImage = ()=>{
 
     let nav = useNavigate();
-
+    const dispatch = useDispatch();
+    const mystate = useSelector((state)=>state.myreducer)
     let user =JSON.parse(localStorage.getItem('artist'));
 
     let product1 =JSON.parse(localStorage.getItem('product'));
@@ -18,7 +21,7 @@ let UpdateImage = ()=>{
     const submitData = (e) => 
     {
         e.preventDefault();
-        
+        // dispatch(login());
         
         // let artistId = user.loginId;
 
@@ -49,7 +52,7 @@ let UpdateImage = ()=>{
         fetch(url,reqData)
         .then(resp => resp.json())
         .then(data =>{ console.log(JSON.stringify(data))
-
+          
             
         if(data == 1)
         {
@@ -59,7 +62,7 @@ let UpdateImage = ()=>{
         else
         {
             alert("failed to update Product Image Try again...")
-            nav('/uploadImage');
+            nav('/updateImage');
         }
 
         })
@@ -67,6 +70,9 @@ let UpdateImage = ()=>{
     }
 
     return(
+        
+  <div>
+  <div><ArtistNavBar/></div>
         <div className="container">
             <div className="row">
                 <div className="col-sm-6 offset-sm-3">
@@ -82,6 +88,7 @@ let UpdateImage = ()=>{
             
                 </div>
             </div>
+        </div>
         </div>
     )
 }

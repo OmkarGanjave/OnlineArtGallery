@@ -59,4 +59,6 @@ public class AdminController {
 		return adminserv.getActiveArtist();
 		
 	}
+	
+	
 }

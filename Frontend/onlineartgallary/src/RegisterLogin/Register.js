@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useReducer, useState  } from "react";
 import { Navigate, useNavigate} from 'react-router-dom';
+import LoginNavBar from "./LoginNavBar";
 const init = {
     firstName:{value:"", hasError: true,touched: false, error:""},
     lastName:{value:"", hasError: true,touched: false, error:""},
@@ -52,7 +53,7 @@ const validateData = (name, value) => {
                     break;
 
             case "address" :
-                    let regex5 =  /^[a-zA-Z\s,]{2,8}$/;
+                    let regex5 =  /^[a-zA-Z\s,]{2,15}$/;
                     if(!regex5.test(value))
                     {
                         hasError = true;
@@ -192,18 +193,26 @@ let Register = () => {
         console.log(resData);
         alert("Registration Successfully!!!!")
        }
+       nav('/login');
     }
 
 
     return(
-        <div class="container mt-3" >
-            <h2>Registration form</h2>
+        <div>
+        <div>
+            <LoginNavBar/>
+        </div>
+        <div className="bg-img" >
+        
+            <h2 className="text-white">Registration</h2>
             <br/>
-            <form >
+            <form className="container ">
+           
             <div class="row" >
-                <div class="col">
+            <div class="col col-sm-3 "></div>
+                <div class="col col-sm-3">
                    
-                    <input type="text" name="firstName" class="form-control" placeholder="First Name"
+                    <input type="text" name="firstName" class="form-control " size="20" placeholder="First Name"
                     onChange={(e) => { onInputChange("firstName",e.target.value, dispatch) }}
                     onBlur={(e) => { onFocusOut("firstName", e.target.value, dispatch) }} 
                     />
@@ -211,7 +220,7 @@ let Register = () => {
                     <p style={{ display: state.firstName.touched && state.firstName.hasError ? "inline" : "none", color: "red" }}>{state.firstName.error}</p>
                     
                 </div>
-                <div class="col">
+                <div class="col col-sm-3">
                    
                     <input type="text" name="lastName" class="form-control" placeholder="Last Name"
                    onChange={(e) => { onInputChange("lastName",e.target.value, dispatch) }}
@@ -224,7 +233,8 @@ let Register = () => {
             </div>
             <br/><br/>
             <div class="row">
-                <div class="col">
+            <div class="col col-sm-3 "></div>
+                <div class="col col-sm-3">
                     
                     <input type="text" name="emailId" class="form-control" placeholder="Email Address"
                     onChange={(e) => { onInputChange("emailId",e.target.value, dispatch) }}
@@ -234,7 +244,7 @@ let Register = () => {
                     <p style={{ display: state.emailId.touched && state.emailId.hasError ? "inline" : "none", color: "red" }}>{state.emailId.error}</p>
                   
                 </div>
-                <div class="col">
+                <div class="col col-sm-3">
                    
                     <input type="text" name="contactNo" class="form-control" placeholder="Contact Number"
                     onChange={(e) => { onInputChange("contactNo",e.target.value, dispatch) }}
@@ -247,7 +257,8 @@ let Register = () => {
             </div>
             <br/><br/>
             <div class="row">
-                <div class="col">
+            <div class="col col-sm-3 "></div>
+                <div class="col col-sm-3">
                     
                     <input type="text" name="address" class="form-control" placeholder="Address"
                     onChange={(e) => { onInputChange("address",e.target.value, dispatch) }}
@@ -257,21 +268,22 @@ let Register = () => {
                     <p style={{ display: state.address.touched && state.address.hasError ? "inline" : "none", color: "red" }}>{state.address.error}</p>
    
                 </div>
-                <div class="col">
+                <div class="col col-sm-3">
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="role" id="Artist" value="Artist"  onChange={(e) => { onInputChange("role",e.target.value, dispatch) }} />
-                    <label class="form-check-label" for="Artist">Artist</label>
+                    <input class="form-check-input "  type="radio" name="role" id="Artist" value="Artist"  onChange={(e) => { onInputChange("role",e.target.value, dispatch) }} />
+                    <label class="form-check-label text-light" for="Artist">Artist</label>
                 </div>
               <div class="form-check">
                     < input class="form-check-input" type="radio" name="role" id="Customer"  value="Customer"  onChange={(e) => { onInputChange("role",e.target.value, dispatch) }}/>
-                    <label class="form-check-label" for="Customer">Customer</label>
+                    <label class="form-check-label text-light text-start" for="Customer">Customer</label>
                 </div>
                 </div> 
             </div>
             
             <br/><br/>
             <div class="row">
-                <div class="col">
+            <div class="col col-sm-3 "></div>
+                <div class="col col-sm-3">
                     
                     <input type="text" name="userId" class="form-control" placeholder="User ID"
                    onChange={(e) => { onInputChange("userId",e.target.value, dispatch) }}
@@ -282,7 +294,7 @@ let Register = () => {
                     
 
                 </div>
-                <div class="col">
+                <div class="col col-sm-3">
                    
                     <input type="text" name="password" class="form-control" placeholder="Password"
                   onChange={(e) => { onInputChange("password",e.target.value, dispatch) }}
@@ -293,30 +305,21 @@ let Register = () => {
                    
                 </div>
             </div>
-
+    
+            </form>
             <br/><br/>
             <div class="row">
-                <div class="col">
-                    <button type="submit"  class="btn btn-primary" onClick={(v)=>{sandData(v)}                  
+            <div class="col col-sm-3 "></div>
+                <div class="col col-sm-3 ">
+                    <button type="submit"  className="btn btn-primary text-dark " onClick={(v)=>{sandData(v)}                  
                 }>Register</button>
-                </div>
-               
-                <div class="col">
-                    <button type="submit"  class="btn btn-primary" onClick={()=>{nav('/login')}}>Login</button>
-                </div>
-           
-                <div class="col">
-                    <button type="reset" className="btn btn-primary">Clear</button>
+                </div>          
+                <div class="col col-sm-3">
+                    <button type="reset"  className="btn btn-primary "  >Clear</button>
                 </div>
             </div>
-            
-            </form>
-
-           
-         
-        </div>     
-        
-            
+            </div>
+        </div>           
     );
 }
 

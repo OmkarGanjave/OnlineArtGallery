@@ -189,9 +189,11 @@ public class CustomerController {
 				order.setTotalPrice(total_price);
 				odr.add(order);
 				customer.setOrder(odr);
-				//Order o = oserv.saveOrder(order);
+				//customer.getOrder();
+				System.out.println("cart:"+customer.getOrder());
 				
 			}
+			//System.out.println(cartServ.removecart( customer.getCart().getCartId()));
 			return oplist;
 //			return flag;
 			

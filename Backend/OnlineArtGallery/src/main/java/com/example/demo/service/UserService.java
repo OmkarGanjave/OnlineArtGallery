@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +22,15 @@ public class UserService {
 	
 	public List<User> getUser() 
 	{
-		return userepo.findAll();
+		List<User> list=userepo.findAll();
+		List<User> newlist=new ArrayList<User>();
+		for (User u : list) {
+			
+			if(!u.getRole().equals("Admin"))
+				newlist.add(u);
+		}
+		
+		return newlist;
 	}
 	
 	public User saveUser(User u) 

@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  background-image: url("./images/bg4.jpg");
+  background-repeat: repeat;
+  background-size: cover;
+  position: relative;
+ min-height: 800px;
+  
 }
 
 .App-logo {

@@ -20,8 +20,9 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/userproduct")
-	public List<User> getAll()
+	
+	@GetMapping("/getallusers")
+	public List<User> getAllUsers()
 	{
 		return userService.getUser();
 	};

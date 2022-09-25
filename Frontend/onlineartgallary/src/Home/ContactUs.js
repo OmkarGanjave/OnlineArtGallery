@@ -1,12 +1,22 @@
-import Header from "./Header";
+
+import NavBar from './NavBar'
 
 let ContactUs = () => {
     
     return(
+      <div>
+      {/* <div><NavBar/></div> */}
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      <br/>
+      
         <div className='container-fluid'>
             
            <div className='container'>
-            <h1>Project Members</h1>
+            <h4>Contact Us</h4>
             <br/><br/>
              <div className="row">
                 <div className="col">
@@ -62,7 +72,7 @@ let ContactUs = () => {
               </div>
              </div>
            </div>
-        
+           </div>
         </div>
     )
 

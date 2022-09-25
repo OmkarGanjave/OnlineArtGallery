@@ -1,7 +1,7 @@
 import {useNavigate} from 'react-router-dom';
 import { useEffect, useState } from 'react';
-// import Dropdown from 'react-bootstrap/Dropdown';
 import Dropdown from 'react-bootstrap/Dropdown';
+import  CustomerNavBar from './customernavbar';
 
 let Customerhome = () => {
     let nav = useNavigate();
@@ -32,21 +32,23 @@ let Customerhome = () => {
         return images;
     }
 
-    const images = importAll(require.context('F:/cdac2022/Frontend/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
+    const images = importAll(require.context('C:/Users/omkar/OneDrive/Documents/OMKAR/C-DAC/March2022/Project/Online Art Gallary/ProjectOnlineArtGallery/onlineartgallary/src/images', false, /\.(png|jpe?g|svg)$/));
 
     
     return(
       
-        <div className='container-fluid' >
-          <br/>
-          <nav className="navbar navbar-expand-sm nav-tabs justify-content-center">
-                <ul className="navbar-nav">
+      <div>
+      <div><CustomerNavBar/></div>
+        <div className='container-fluid '  >
+        
+          <nav className="navbar navbar-expand-sm nav-tabs justify-content-center opacity-100 " >
+                <ul className="navbar-nav ">
                     <li className="nav-item">
-                        <a className="nav-link text-black" href="/custpersnoalinfo">Profile</a>
+                        <a className="nav-link text-black" href="/custpersnoalinfo"><b>{cust.user_id}</b></a>
                     </li>
                     <li>
                     <Dropdown>
-                      <Dropdown.Toggle className='nav-link btn  btn-link btn-light text-black ' >
+                      <Dropdown.Toggle className='nav-link btn  btn-link btn-light text-dark ' >
                         Category
                       </Dropdown.Toggle >
 
@@ -66,9 +68,9 @@ let Customerhome = () => {
                  </ul>
             </nav>
            
-           {/* <button type="submit"  class="btn btn-primary mt-4" onClick={()=>{nav('/viewCart')}}>View Cart</button> */}
-          <div className='container'> 
+            <div className='container'> 
             <div className="row">
+            
             {
                 
               allProducts.map((v)=>{
@@ -83,7 +85,7 @@ let Customerhome = () => {
 
                     <img src={images[imgName+'.jpg']} width="250" height="250"/>
 
-                    <div className="card-body">
+                    <div className="card-body  bg-dark text-white"  >
                       <p><b>{v.productName}</b></p>
 
                       <dl>
@@ -123,7 +125,7 @@ let Customerhome = () => {
             </div>
            
         </div>
-       
+        </div>
     )
 
 }

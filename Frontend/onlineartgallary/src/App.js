@@ -1,26 +1,17 @@
-import logo from './logo.svg';
 import './App.css';
-import {Link,Route,Routes} from 'react-router-dom';
-import Home from './Home/Home';
-import ContactUs from './Home/ContactUs';
-import AboutUs from './Home/AboutUs';
-import Artisthome from './Artist/ArtistHome';
-import AddProduct from './Artist/AddProduct';
-import SearchProduct from './Artist/SearchProduct';
-
-import Customerhome from './Cutomer/CustomerHome';
 import Navigates from './Navigates';
-import Header from './Home/Header';
-import Navbar from './Home/navbar';
-import { Rating } from './Cutomer/RatingStyle';
+import Navbar from './Home/NavBar';
+import Demo from './demo';
+import AboutUs from './Home/AboutUs';
+import ContactUs from './Home/ContactUs';
 function App() {
   return (
     <div className="App">
-      {/* <Header/> */}
-      <Navbar/>
-      <Rating/>
+      {/* <Navbar/> */}
         <Navigates/>
-        
+        <AboutUs/>
+        <ContactUs/>
+        {/* <Demo/> */}
     </div>
   );
 }
